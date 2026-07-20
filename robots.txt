@@ -1,0 +1,5 @@
+# Allow all crawlers. Update the sitemap URL if you move to a custom domain.
+User-agent: *
+Allow: /
+
+Sitemap: https://coinupbtc.github.io/sitemap.xml
