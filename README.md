@@ -1,30 +1,37 @@
 # Coinupbtc — Portfolio Site
 
-A fast, single-page personal portfolio. No build step, no frameworks, no
-trackers, no cookies, no third-party requests. Open `index.html` in a browser
-or serve the folder with any static host.
+| | |
+|---|---|
+| **What it is** | A single-page pseudonymous portfolio for Coinupbtc. |
+| **What it’s for** | Show GitHub + X and public builds when hiring asks for a website — no real name. |
+| **How to use it** | Open https://coinupbtc.com/ — or `./setup.sh` for a local preview. |
 
-- **Design**: dark cinematic default, electric cobalt accent, light theme toggle.
-- **Stack**: one HTML file, one CSS file, one JS file. System fonts only.
-- **Privacy**: theme choice only in the visitor's `localStorage`. **No email,
-  school, city, employer, or phone** is published. Contact is GitHub only.
+Identity on this site is the handle **Coinupbtc** only. Live at **https://coinupbtc.com/** (GitHub Pages).
 
-Identity on this site is the handle **Coinupbtc** only. Live at
-**https://coinupbtc.github.io/**.
+## Try it
+
+```bash
+git clone https://github.com/Coinupbtc/Coinupbtc.github.io.git
+cd Coinupbtc.github.io
+./setup.sh
+# → http://127.0.0.1:8765/
+```
+
+Or open `index.html` in a browser (no build step).
 
 ## Contact policy
 
-Do not add a personal email, real name, employer, school, or city to this
-repo. Prefer GitHub issues / profile for inbound contact.
+Do **not** add a personal email, real name, employer, school, phone, or street address.
+Inbound: [GitHub](https://github.com/Coinupbtc) · [X @Notcoinupbtc](https://x.com/Notcoinupbtc).
 
-## Publishing
+## Stack
 
-Any static host works — GitHub Pages is configured on `main`. After editing:
+One HTML + one CSS file. Fraunces + IBM Plex Mono via Google Fonts. No trackers, no cookies, no analytics.
 
-1. Confirm a privacy grep is clean:
-   `rg -i '(personal email|phone number|street address|employer name|school name)' . --glob '!.git/**'`
-2. Push to `main`; Pages rebuilds from the root.
+## Custom domain
+
+`CNAME` file → `coinupbtc.com`. At Porkbun, point apex A records to GitHub Pages IPs and `www` CNAME to `Coinupbtc.github.io`.
 
 ## License
 
-MIT — see `LICENSE`. Your content is yours.
+MIT — see `LICENSE`.

@@ -1,444 +1,99 @@
 <!doctype html>
 <html lang="en">
 <!--
-  ============================================================
-  COINUPBTC — PORTFOLIO
-  ============================================================
-  Pseudonymous by design: no real name, email, school, city,
-  employers, phone, or street address anywhere in this site.
-
-  No trackers, no analytics, no cookies, no third-party
-  requests. The only stored value is the visitor's own theme
-  choice (localStorage, on their device).
-  ============================================================
+  Coinupbtc portfolio — pseudonymous by design.
+  No real name, phone, employer, school, or street address.
+  Contact: GitHub + X only.
 -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coinupbtc — local AI &amp; open builds</title>
+  <meta name="description" content="Portfolio of Coinupbtc — local AI infrastructure, measured open projects. Pseudonymous; contact via GitHub or X.">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#e8e4dc">
 
-  <title>Coinupbtc — AI Systems Builder</title>
-
-  <meta name="description" content="Portfolio of Coinupbtc — local AI infrastructure, automation, and open projects. Pseudonymous; contact via GitHub only.">
-
-  <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0b0d12">
-
-  <!-- Open Graph / social sharing. og:image goes live after you export
-       assets/og-image.svg to a 1200x630 PNG (see README). -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Coinupbtc — AI Systems Builder">
-  <meta property="og:description" content="Local AI infrastructure, automation, and open projects. Pseudonymous; contact via GitHub.">
-  <meta property="og:url" content="https://coinupbtc.github.io/">
-  <meta property="og:image" content="https://coinupbtc.github.io/assets/og-image.png">
+  <meta property="og:title" content="Coinupbtc">
+  <meta property="og:description" content="I don’t rent intelligence — I host it. Local AI, measured builds, open repos.">
+  <meta property="og:url" content="https://coinupbtc.com/">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Notcoinupbtc">
 
-  <link rel="canonical" href="https://coinupbtc.github.io/">
+  <link rel="canonical" href="https://coinupbtc.com/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312141a'/%3E%3Crect x='4' y='22' width='24' height='6' fill='%23c8f54a'/%3E%3C/svg%3E">
 
-  <!-- REPLACE: favicon — drop a real favicon.svg / favicon.ico in the root.
-       This inline one is a cobalt square placeholder so the tab isn't blank. -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233d63ff'/%3E%3C/svg%3E">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Structured data: helps search engines show you as a person, not a page. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Coinupbtc",
-    "jobTitle": "AI Systems Builder",
-    "url": "https://coinupbtc.github.io/",
+    "url": "https://coinupbtc.com/",
     "sameAs": [
-      "https://github.com/coinupbtc"
+      "https://github.com/Coinupbtc",
+      "https://x.com/Notcoinupbtc"
     ]
   }
   </script>
 </head>
-
 <body>
-  <!-- Keyboard users hit Tab once and can jump straight past the nav -->
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Thin cobalt reading-progress line under the header -->
-  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-
-  <!-- Ambient background: gradient aurora + film grain + cursor-reactive
-       dust. Purely decorative, hidden from assistive tech, and frozen when
-       the visitor prefers reduced motion. -->
-  <div class="backdrop" aria-hidden="true">
-    <div class="aurora aurora-a"></div>
-    <div class="aurora aurora-b"></div>
-    <canvas id="dust"></canvas>
-    <div class="grain"></div>
-  </div>
-
-  <header class="site-head">
-    <a class="monogram" href="#top" aria-label="Back to top">C&#8383;</a>
-
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#lab">Lab</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
-      <span class="theme-toggle-dot" aria-hidden="true"></span>
-      <span class="theme-toggle-label">Light</span>
-    </button>
-  </header>
-
   <main id="main">
-
-    <!-- ================= HERO ================= -->
-    <section class="hero" id="top" aria-labelledby="hero-name">
-      <p class="eyebrow stagger-1">
-        <span class="accent-text">Open-source projects &amp; local AI infrastructure</span>
-      </p>
-
-      <h1 class="hero-name stagger-2" id="hero-name">
-        <span class="hero-line">Coinup<em>btc</em></span>
-      </h1>
-
-      <p class="hero-motto stagger-3 mono">&ldquo;Prove it, don&rsquo;t claim it.&rdquo;</p>
-
-      <p class="hero-lede stagger-3">
-        <strong>Systems builder</strong> focused on local AI infrastructure,
-        automation, and projects you can run yourself. The stack below is
-        self-hosted, benchmarked, and kept alive as a product &mdash; not a demo.
-      </p>
-
-      <div class="hero-cta stagger-4">
-        <a class="btn btn-solid magnetic" href="#work">Selected work</a>
-        <a class="btn btn-ghost magnetic" href="#contact">Get in touch</a>
+    <section class="hero" id="top" aria-label="Introduction">
+      <div class="hero-field" aria-hidden="true"></div>
+      <div class="top">
+        <strong>Coinupbtc</strong>
+        <span>portfolio · proof over claim</span>
       </div>
-
-      <!-- Every number here is measured, not estimated. Sources: the
-           cluster's benchmark harness and quality gate. -->
-      <dl class="stat-strip stagger-5" aria-label="Measured results">
-        <div class="stat">
-          <dt>Inference speedup, hand-tuned</dt>
-          <dd><span class="stat-num" data-count="4.7" data-decimals="1">0.0</span><span class="stat-unit">&times;</span></dd>
+      <div class="stage">
+        <h1 class="brand"><mark>Coinupbtc</mark></h1>
+        <p class="lede">I don’t rent intelligence — I host it. Local AI, measured builds, open repos.</p>
+        <div class="ctas">
+          <a class="primary" href="https://github.com/Coinupbtc">GitHub</a>
+          <a href="https://x.com/Notcoinupbtc">X · @Notcoinupbtc</a>
         </div>
-        <div class="stat">
-          <dt>Tokens/sec, 35B model coding</dt>
-          <dd><span class="stat-num" data-count="169">0</span><span class="stat-unit">t/s</span></dd>
-        </div>
-        <div class="stat">
-          <dt>GPU nodes, 200-gig fabric</dt>
-          <dd><span class="stat-num" data-count="2">0</span><span class="stat-unit">&times; DGX</span></dd>
-        </div>
-        <div class="stat">
-          <dt>Quality gate, machine-graded</dt>
-          <dd><span class="stat-num" data-count="19">0</span><span class="stat-unit">/19</span></dd>
-        </div>
-      </dl>
-
-      <p class="scroll-hint" aria-hidden="true">Scroll</p>
+      </div>
+      <div class="foot-meta">
+        <span>Pseudonymous · hiring-friendly</span>
+        <span>coinupbtc.com</span>
+      </div>
     </section>
 
-    <!-- ================= ABOUT ================= -->
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="section-rule">
-        <h2 class="section-label" id="about-title">About</h2>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-copy">
-          <p class="about-lead reveal">
-            Compliance taught me rigor. The homelab taught me speed. The
-            problems I want live where those two meet.
-          </p>
-          <p class="about-body reveal">
-            After hours (and often during): a multi-node GPU lab running
-            self-hosted language models, scheduled agents, and the projects
-            below &mdash; built, benchmarked, and kept alive by one person.
-            Background in quality systems and manufacturing engineering;
-            the public work is the infrastructure and tools.
-          </p>
-        </div>
-
-        <div class="about-facts reveal">
-          <dl>
-            <div class="fact">
-              <dt>Focus</dt>
-              <dd>Local AI infrastructure &middot; automation &middot; open tools</dd>
-            </div>
-            <div class="fact">
-              <dt>Currently</dt>
-              <dd>Building and operating a self-hosted AI lab</dd>
-            </div>
-            <div class="fact">
-              <dt>Public work</dt>
-              <dd>Repos, scripts, and write-ups under the Coinupbtc handle</dd>
-            </div>
-            <div class="fact">
-              <dt>Contact</dt>
-              <dd>GitHub only &mdash; no email on this site</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-
-      <!-- Career timeline: an actual sequence, so the years carry meaning.
-           Employers deliberately generalized — this site is pseudonymous. -->
-      <ol class="timeline reveal" aria-label="Project timeline">
-        <li class="tl-item">
-          <span class="tl-year mono">Earlier</span>
-          <div class="tl-body">
-            <h3 class="tl-title">Quality systems &amp; manufacturing engineering</h3>
-            <p class="tl-desc">ISO-oriented quality work, metrology, and production engineering background &mdash; no employers or schools named here on purpose.</p>
-          </div>
+    <section class="proof" aria-labelledby="proof-h">
+      <h2 id="proof-h">Selected public work</h2>
+      <ul>
+        <li>
+          <a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a>
+          <span>measured Spark serving</span>
         </li>
-        <li class="tl-item">
-          <span class="tl-year mono">2026</span>
-          <div class="tl-body">
-            <h3 class="tl-title">Built the lab</h3>
-            <p class="tl-desc">Multi-node GPU cluster, self-hosted language models, always-on agents &mdash; documented and benchmarked like a product.</p>
-          </div>
+        <li>
+          <a href="https://github.com/Coinupbtc/zwell-bench">zwell-bench</a>
+          <span>local model bakeoffs</span>
         </li>
-        <li class="tl-item">
-          <span class="tl-year mono">2026</span>
-          <div class="tl-body">
-            <h3 class="tl-title">Shipped public tools</h3>
-            <p class="tl-desc">Bitcoin Blockfield, STL Sandbox, and other open projects under this handle.</p>
-          </div>
+        <li>
+          <a href="https://github.com/Coinupbtc/spark-console">spark-console</a>
+          <span>fleet / GPU dashboard</span>
         </li>
-      </ol>
-    </section>
-
-    <!-- ================= SELECTED WORK ================= -->
-    <section class="section" id="work" aria-labelledby="work-title">
-      <div class="section-rule">
-        <h2 class="section-label" id="work-title">Selected work</h2>
-        <p class="section-note">Personal projects, running in production at home. Open a row for the full story.</p>
-      </div>
-
-      <!-- Each row expands into a case study: problem → build → proven.
-           REPLACE: the link line in each row when a repo/demo goes public. -->
-      <ul class="work-index">
-        <li class="work-row reveal">
-          <details class="work-details">
-            <summary class="work-summary">
-              <h3 class="work-title">Dual-node local AI cluster</h3>
-              <p class="work-desc">Self-hosted language models and always-on agents on two NVIDIA DGX Spark machines.</p>
-              <p class="work-meta mono">AI infrastructure &middot; 2026</p>
-              <span class="work-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="work-body">
-              <div class="case-grid">
-                <div class="case-col">
-                  <h4 class="case-head mono">Problem</h4>
-                  <p>Always-on AI agents with full data privacy and zero per-token cost &mdash; which ruled out cloud APIs entirely.</p>
-                </div>
-                <div class="case-col">
-                  <h4 class="case-head mono">Build</h4>
-                  <p>Two DGX Spark nodes on a 200-gig fabric running llama.cpp inference servers; agent gateways with cron scheduling, Telegram delivery, failure-paging watchdogs, and nightly off-site backups. Tuned with speculative decoding, quantization A/Bs, and engine rebuilds &mdash; every change gated by a 19-check quality benchmark.</p>
-                </div>
-                <div class="case-col">
-                  <h4 class="case-head mono">Proven</h4>
-                  <ul class="proof-list">
-                    <li>36 &rarr; 169 tokens/sec (4.7&times;) on a 35B model</li>
-                    <li>NVFP4 quantization benchmarked to parity with Q8, then adopted &mdash; freeing 24GB of RAM</li>
-                    <li>19/19 on a machine-graded eval harness built from my own real workload</li>
-                    <li>1M-context model served tensor-parallel across both nodes over the 200-gig fabric</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </details>
+        <li>
+          <a href="https://github.com/Coinupbtc/bitcoin-blockfield">bitcoin-blockfield</a>
+          <span>mempool visualizer</span>
         </li>
-
-        <li class="work-row reveal">
-          <details class="work-details">
-            <summary class="work-summary">
-              <h3 class="work-title">Bitcoin Blockfield</h3>
-              <p class="work-desc">The Bitcoin mempool as a watchable, live arena.</p>
-              <p class="work-meta mono">Creative systems &middot; 2026</p>
-              <span class="work-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="work-body">
-              <div class="case-grid">
-                <div class="case-col">
-                  <h4 class="case-head mono">Problem</h4>
-                  <p>Mempool data is rich but unreadable. The next block is a real contest &mdash; it deserved to look like one.</p>
-                </div>
-                <div class="case-col">
-                  <h4 class="case-head mono">Build</h4>
-                  <p>Projected block contenders rendered as fighters, live fee-band routing as transactions shift, and an inscription radar that decodes images straight out of raw witness data.</p>
-                </div>
-                <div class="case-col">
-                  <h4 class="case-head mono">Proven</h4>
-                  <ul class="proof-list">
-                    <li>Runs live against public Bitcoin APIs</li>
-                    <li>Smoke-tested on desktop and 500px mobile</li>
-                  </ul>
-                </div>
-              </div>
-              <p class="case-link mono"><a href="https://github.com/coinupbtc/bitcoin-blockfield">View the code on GitHub &rarr;</a></p>
-            </div>
-          </details>
-        </li>
-
-        <li class="work-row reveal">
-          <details class="work-details">
-            <summary class="work-summary">
-              <h3 class="work-title">Trading-card arbitrage scanner</h3>
-              <p class="work-desc">Automated price-gap hunting across card markets, delivered to my phone.</p>
-              <p class="work-meta mono">Automation &middot; 2026</p>
-              <span class="work-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="work-body">
-              <div class="case-grid">
-                <div class="case-col">
-                  <h4 class="case-head mono">Problem</h4>
-                  <p>Real spreads exist between card marketplaces, but finding them by hand doesn&rsquo;t scale past a hobby.</p>
-                </div>
-                <div class="case-col">
-                  <h4 class="case-head mono">Build</h4>
-                  <p>Scheduled scans with embedding-based card-identity matching, a price cache and match ledger, strict verifier gates before anything is called a hit, and a top-10 digest pushed to my phone &mdash; iOS companion viewer included.</p>
-                </div>
-                <div class="case-col">
-                  <h4 class="case-head mono">Proven</h4>
-                  <ul class="proof-list">
-                    <li>Runs every 3 hours, unattended</li>
-                    <li>Failures page me &mdash; silent breakage isn&rsquo;t allowed</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </details>
-        </li>
-
-        <li class="work-row reveal">
-          <details class="work-details">
-            <summary class="work-summary">
-              <h3 class="work-title">Prompt-to-3D-print sandbox</h3>
-              <p class="work-desc">Plain English in, printable STL/STEP out.</p>
-              <p class="work-meta mono">Tooling &middot; 2026</p>
-              <span class="work-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="work-body">
-              <div class="case-grid">
-                <div class="case-col">
-                  <h4 class="case-head mono">Problem</h4>
-                  <p>Going from &ldquo;I need a bracket&rdquo; to a printable file usually means CAD skills and an afternoon.</p>
-                </div>
-                <div class="case-col">
-                  <h4 class="case-head mono">Build</h4>
-                  <p>A web app where a language model writes parametric CAD code behind an AST safety guard, with an automatic retry loop, printer bed-fit checks, and slicer recommendations.</p>
-                </div>
-                <div class="case-col">
-                  <h4 class="case-head mono">Proven</h4>
-                  <ul class="proof-list">
-                    <li>End-to-end: prompt &rarr; model &rarr; sliced &rarr; printed part</li>
-                    <li>Survives bad generations &mdash; the retry loop earns its keep</li>
-                  </ul>
-                </div>
-              </div>
-              <p class="case-link mono"><a href="https://github.com/coinupbtc/stl-sandbox">View the code on GitHub &rarr;</a></p>
-            </div>
-          </details>
+        <li>
+          <a href="https://github.com/Coinupbtc/stl-sandbox">stl-sandbox</a>
+          <span>prompt → printable CAD</span>
         </li>
       </ul>
-    </section>
-
-    <!-- ================= CAPABILITIES ================= -->
-    <section class="section" id="capabilities" aria-labelledby="cap-title">
-      <div class="section-rule">
-        <h2 class="section-label" id="cap-title">Capabilities</h2>
-      </div>
-
-      <div class="cap-grid">
-        <div class="cap-col reveal">
-          <h3 class="cap-head">Quality &amp; compliance</h3>
-          <ul class="cap-list">
-            <li>ISO 13485 / ISO 9001:2015 QMS administration</li>
-            <li>CAPA, nonconformance &amp; root cause analysis</li>
-            <li>Internal audit coordination &amp; regulated-industry audit readiness</li>
-            <li>ISO/IEC 17025 supplier certification verification</li>
-            <li>NIST-traceable metrology documentation</li>
-            <li>Quality training development &amp; delivery</li>
-          </ul>
-        </div>
-        <div class="cap-col reveal">
-          <h3 class="cap-head">Engineering &amp; manufacturing</h3>
-          <ul class="cap-list">
-            <li>Marine electrical systems: power distribution, battery management</li>
-            <li>BOM ownership, prototype to production</li>
-            <li>AutoCAD &middot; SolidWorks (working knowledge)</li>
-            <li>Wire harness &amp; control panel production support</li>
-            <li>Incoming/outgoing inspection to engineering drawings</li>
-            <li>High-mix, just-in-time manufacturing environments</li>
-          </ul>
-        </div>
-        <div class="cap-col reveal">
-          <h3 class="cap-head">AI &amp; automation, self-built</h3>
-          <ul class="cap-list">
-            <li>Local LLM inference: llama.cpp, Ollama, speculative decoding</li>
-            <li>Python &amp; FastAPI internal tooling</li>
-            <li>Agent workflows, cron pipelines &amp; alerting</li>
-            <li>Benchmark-driven model tuning on ARM64/GPU</li>
-            <li>Smart home / IoT: ESPHome, Zigbee</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= THE LAB ================= -->
-    <section class="section" id="lab" aria-labelledby="lab-title">
-      <div class="section-rule">
-        <h2 class="section-label" id="lab-title">The lab</h2>
-        <p class="section-note">A snapshot, not live telemetry &mdash; this site makes no network requests.</p>
-      </div>
-
-      <div class="terminal reveal" role="img" aria-label="Home lab status snapshot: two DGX Spark nodes, self-tuned 35B model at 169 tokens per second, agents on three scheduler layers with alerting, 24/7 uptime with watchdogs and nightly off-site backups.">
-        <div class="terminal-bar" aria-hidden="true">
-          <span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span>
-          <span class="terminal-title mono">lab &mdash; snapshot 2026-07</span>
-        </div>
-        <pre class="terminal-body mono" aria-hidden="true"><span class="t-prompt">$</span> lab status
-<span class="t-key">nodes</span>      2&times; NVIDIA DGX Spark &middot; 200G fabric &middot; 121GB unified memory each
-<span class="t-key">inference</span>  35B model, self-tuned llama.cpp &mdash; <span class="t-hot">169 tok/s</span> coding workloads
-<span class="t-key">agents</span>     scheduled jobs across 3 scheduler layers &middot; results to Telegram
-<span class="t-key">uptime</span>     24/7 &middot; watchdogs page on failure &middot; nightly off-site backups
-<span class="t-prompt">$</span> <span class="t-cursor"></span></pre>
-      </div>
-    </section>
-
-    <!-- ================= CONTACT ================= -->
-    <section class="section section-contact" id="contact" aria-labelledby="contact-title">
-      <div class="section-rule">
-        <h2 class="section-label" id="contact-title">Contact</h2>
-      </div>
-
-      <h3 class="contact-line">
-        Let&rsquo;s make <em>something.</em>
-      </h3>
-
-      <div class="contact-grid">
-        <div class="contact-direct reveal">
-          <p class="about-body" style="margin-bottom:1.25rem">
-            No email address is published on this site. Reach out via GitHub
-            (issues or profile) under the handle below.
-          </p>
-          <a class="btn btn-solid magnetic" href="https://github.com/coinupbtc" rel="me">GitHub &mdash; coinupbtc</a>
-          <ul class="social-list" aria-label="Elsewhere">
-            <li><a href="https://github.com/Coinupbtc/Coinupbtc.github.io" rel="me">This site&rsquo;s source</a></li>
-          </ul>
-        </div>
-      </div>
     </section>
   </main>
 
   <footer class="site-foot">
-    <p>&copy; <span id="year">2026</span> Coinupbtc</p>
-    <p class="foot-note">Designed and built by hand &mdash; no frameworks, no trackers, no cookies. Every number on this page was measured, not estimated.</p>
-    <a class="foot-top" href="#top">Back to top &uarr;</a>
+    <p>© Coinupbtc · <a href="https://github.com/Coinupbtc">GitHub</a> · <a href="https://x.com/Notcoinupbtc">X</a></p>
   </footer>
-
-  <script src="js/main.js" defer></script>
 </body>
 </html>
