@@ -95,7 +95,9 @@ a:hover { color: #3a4a12; }
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: clamp(1rem, 4vh, 3rem);
-  max-width: 18ch;
+  /* Wide enough that the lede reads in 2–3 lines and the CTAs sit on one row.
+     Capped at 92vw so narrow phones still get the tight editorial column. */
+  max-width: min(92vw, 42ch);
 }
 
 .brand {
@@ -144,6 +146,9 @@ a:hover { color: #3a4a12; }
   margin-top: 1.75rem;
   display: flex;
   flex-wrap: wrap;
+  /* center, not stretch — otherwise the text link's underline is dragged
+     to the bottom of the taller .primary button and floats free of the text */
+  align-items: center;
   gap: 0.75rem 1.25rem;
   opacity: 0;
   animation: rise 0.7s ease 0.5s forwards;
@@ -237,10 +242,147 @@ a:hover { color: #3a4a12; }
 .site-foot a { color: var(--mute); }
 .site-foot a:hover { color: var(--ink); }
 
+/* Coded generative motif — two ring sets interfering = moiré. No JS, no image. */
+.hero-moire {
+  position: absolute;
+  inset: -25%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.14;
+  -webkit-mask-image: radial-gradient(65% 55% at 80% 16%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(65% 55% at 80% 16%, #000 0%, transparent 72%);
+}
+
+.hero-moire::before,
+.hero-moire::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(
+    circle at 80% 16%,
+    var(--ink) 0 1px,
+    transparent 1px 10px
+  );
+}
+
+.hero-moire::after {
+  background: repeating-radial-gradient(
+    circle at 80% 16%,
+    var(--ink) 0 1px,
+    transparent 1px 10.6px
+  );
+  animation: moireDrift 34s linear infinite;
+}
+
+@keyframes moireDrift {
+  from { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.04); }
+  to   { transform: rotate(360deg) scale(1); }
+}
+
+/* Link hub */
+.hub {
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 3vw, 2rem);
+  border-top: 1px solid var(--line);
+}
+
+.hub h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.hub-list {
+  list-style: none;
+  max-width: 42rem;
+}
+
+.hub-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.hub-list a {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.hub-list a:hover { border-bottom-color: var(--acid); }
+
+.hub-list span {
+  color: var(--mute);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+/* Art */
+.gallery {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 3vw, 2rem);
+  border-top: 1px solid var(--line);
+}
+
+.gallery h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 500;
+  max-width: 16ch;
+}
+
+.section-note {
+  margin: 0.85rem 0 2rem;
+  max-width: 52ch;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--mute);
+}
+
+.art-grid {
+  list-style: none;
+  display: grid;
+  /* 3 across on desktop so the six studies land as two clean rows
+     rather than five-plus-an-orphan */
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  max-width: 68rem;
+}
+
+.art-grid li { margin: 0; }
+.art-grid li.wide { grid-column: 1 / -1; }
+
+.art-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1216 / 832;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  filter: saturate(0.94);
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+.art-grid img:hover {
+  filter: saturate(1.06);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-moire::after { animation: none !important; }
+  .art-grid img { transition: none !important; }
+}
+
 @media (max-width: 520px) {
-  .proof li {
+  .proof li,
+  .hub-list li {
     grid-template-columns: 1fr;
     gap: 0.25rem;
   }
-  .proof li span { text-align: left; }
+  .proof li span,
+  .hub-list span { text-align: left; }
 }

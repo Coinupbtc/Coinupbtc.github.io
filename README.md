@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| **What it is** | A single-page pseudonymous portfolio for Coinupbtc. |
-| **What it’s for** | Show GitHub + X and public builds when hiring asks for a website — no real name. |
+| **What it is** | A single-page pseudonymous landing site for Coinupbtc. |
+| **What it’s for** | The one link to hand out: GitHub, X, art made on my own hardware, public builds — no real name. |
 | **How to use it** | Open https://coinupbtc.com/ — or `./setup.sh` for a local preview. |
 
 Identity on this site is the handle **Coinupbtc** only. Live at **https://coinupbtc.com/** (GitHub Pages).
@@ -22,11 +22,18 @@ Or open `index.html` in a browser (no build step).
 ## Contact policy
 
 Do **not** add a personal email, real name, employer, school, phone, or street address.
-Inbound: [GitHub](https://github.com/Coinupbtc) · [X @Notcoinupbtc](https://x.com/Notcoinupbtc).
+Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/coinupbtc).
 
 ## Stack
 
 One HTML + one CSS file. Fraunces + IBM Plex Mono via Google Fonts. No trackers, no cookies, no analytics.
+The hero motif is pure CSS (two interfering ring sets — no image, no JS).
+
+## Art
+
+`assets/art/` holds WebP exports of stills generated locally on the DGX Spark (ComfyUI).
+Curation is **explicit and by-id** in the export script — never glob the ComfyUI output folder into
+this repo. It contains prompt tests, memes, and third-party characters that must not be published.
 
 ## Custom domain
 
