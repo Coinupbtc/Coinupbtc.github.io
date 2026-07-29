@@ -25,14 +25,33 @@ SRC = Path(os.environ.get("ART_SRC", Path.home() / "comfy" / "ComfyUI" / "output
 DST = REPO / "assets" / "art"
 
 # Source id -> (output slug, alt text). Add a line here to publish an image.
+#
+# Every id below was opened and looked at before being added. The source folder
+# also holds meme templates, real-person likenesses and third-party characters —
+# none of which may ever appear here. Reviewing by eye is the whole gate.
 PICKS = {
+    # Optics — ambiguous figures, interference, and impossible geometry.
     "00176": ("spiral", "Concentric black and white spiral, an optical figure-ground study"),
     "00177": ("penrose", "Impossible triangle rendered in brushed gold on white"),
+    "00178": ("rings", "Concentric rainbow rings resolving to a flat grey centre"),
     "00179": ("duckrabbit", "The duck-rabbit ambiguous figure in flat black on white"),
+    "00180": ("squares", "Grid of black squares on white, a scintillating-grid illusion"),
     "00181": ("vortex", "Black and white vortex of curved bands"),
+    "00182": ("checkers", "Checkerboard floor and green columns under raking light"),
+    "00183": ("cafewall", "Offset black and white tiles bending the mortar lines"),
+    "00184": ("tunnel", "Receding red concentric arches forming a tunnel"),
+    "00185": ("moire", "Black and white spiral banding with cyan and magenta fringing"),
+    "00186": ("dots", "Rows of black discs separated by faint grey nodes"),
     "00187": ("grid", "Grid of squares filled with hatching at alternating angles"),
     "00188": ("arcs", "Two thin black arcs on white, a study in identical curvature"),
+
+    # Systems — how the machine sees itself.
+    "00189": ("planes", "Overlapping blue planes lit at a shallow angle"),
     "00190": ("topology", "Node diagram of a local DGX Spark systems topology"),
+    "00192": ("neurons", "Constellation of light forming the profile of a brain"),
+    "00194": ("constellation", "Dense mesh of linked nodes spiralling around a bright core"),
+    "00196": ("highway", "Coloured data lanes converging on a lit structure at night"),
+    "00197": ("island", "Floating island with a great tree above a sea of cloud at dusk"),
 }
 
 WIDE = 1200
