@@ -1,16 +1,11 @@
 <!doctype html>
-<html lang="en">
-<!--
-  Coinupbtc landing — pseudonymous by design.
-  No real name, phone, employer, school, or street address.
-  Contact: GitHub, X, or coinupbtc@gmail.com (approved public inbound).
--->
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Coinupbtc — local AI &amp; open builds</title>
   <meta name="description" content="Coinupbtc — local AI infrastructure, measured open projects, and art generated on my own hardware. Pseudonymous; contact via GitHub, X, or email.">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#e8e4dc">
 
   <meta property="og:type" content="website">
@@ -20,14 +15,23 @@
   <meta property="og:image" content="https://coinupbtc.com/assets/art/spiral.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@coinupbtc">
-
   <link rel="canonical" href="https://coinupbtc.com/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312141a'/%3E%3Crect x='4' y='22' width='24' height='6' fill='%23c8f54a'/%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- set theme before first paint to avoid flash -->
+  <script>
+    (function () {
+      var t;
+      try { t = localStorage.getItem('coinupbtc-theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 
   <script type="application/ld+json">
   {
@@ -46,10 +50,17 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+    <span class="theme-sun" aria-hidden="true"></span>
+    <span class="theme-moon" aria-hidden="true"></span>
+  </button>
+
+  <div class="grain" aria-hidden="true"></div>
+
   <main id="main">
     <section class="hero" id="top" aria-label="Introduction">
-      <div class="hero-field" aria-hidden="true"></div>
-      <div class="hero-moire" aria-hidden="true"></div>
+      <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
+      <div class="hero-vignette" aria-hidden="true"></div>
       <div class="top">
         <strong>Coinupbtc</strong>
         <span>proof over claim</span>
@@ -58,15 +69,25 @@
         <h1 class="brand"><mark>Coinupbtc</mark></h1>
         <p class="lede">I don’t rent intelligence — I host it. Local AI, measured builds, open repos.</p>
         <div class="ctas">
-          <a class="primary" href="https://github.com/Coinupbtc">GitHub</a>
-          <a href="https://x.com/coinupbtc">X · @coinupbtc</a>
-          <a href="mailto:coinupbtc@gmail.com">Email</a>
+          <a class="primary" href="https://github.com/Coinupbtc" data-magnetic>GitHub</a>
+          <a href="https://x.com/coinupbtc" data-magnetic>X &middot; @coinupbtc</a>
+          <a href="mailto:coinupbtc@gmail.com" data-magnetic>Email</a>
         </div>
       </div>
       <div class="foot-meta">
-        <span>Pseudonymous · hiring-friendly</span>
+        <span>Pseudonymous &middot; hiring-friendly</span>
         <span>coinupbtc.com</span>
       </div>
+    </section>
+
+    <section class="systems" aria-labelledby="systems-h">
+      <h2 id="systems-h" class="visually-hidden">The hardware behind the proof</h2>
+      <dl class="sys-grid" id="sys-grid">
+        <div class="sys-cell"><dt>GPU memory</dt><dd class="num" data-count="121" data-suffix=" GB">121 GB</dd><dd class="sub">unified CPU+RAM, on-box</dd></div>
+        <div class="sys-cell"><dt>Storage</dt><dd class="num" data-count="3.7" data-decimals="1" data-suffix=" TB">3.7 TB</dd><dd class="sub">NVMe, local weights</dd></div>
+        <div class="sys-cell"><dt>Runtime</dt><dd>local&nbsp;LLM</dd><dd class="sub">DeepSeek-V4-Flash on DSpark</dd></div>
+        <div class="sys-cell"><dt>Art</dt><dd>on-metal</dd><dd class="sub">ComfyUI, no cloud API</dd></div>
+      </dl>
     </section>
 
     <section class="hub" aria-labelledby="hub-h">
@@ -77,7 +98,7 @@
           <span>code, in the open</span>
         </li>
         <li>
-          <a href="https://x.com/coinupbtc">X · @coinupbtc</a>
+          <a href="https://x.com/coinupbtc">X &middot; @coinupbtc</a>
           <span>build log, in public</span>
         </li>
         <li>
@@ -92,35 +113,57 @@
       <p class="section-note">
         Every image below was generated locally on my own DGX Spark — no cloud API, no rented GPU.
         Optical figure studies; the last image is a local systems topology diagram.
+        <span class="hint">click any image to view full-size</span>
       </p>
-      <ul class="art-grid">
-        <li>
-          <img src="assets/art/spiral-t.webp" width="640" height="438" loading="lazy" decoding="async"
-               alt="Concentric black and white spiral, an optical figure-ground study">
+      <ul class="art-grid" id="art-grid">
+        <li class="art-item">
+          <button class="art-btn" type="button" data-full="assets/art/spiral.webp"
+                  data-caption="Spiral — concentric figure-ground study in black and white">
+            <img src="assets/art/spiral-t.webp" width="640" height="438" loading="lazy" decoding="async"
+                 alt="Concentric black and white spiral, an optical figure-ground study">
+          </button>
         </li>
-        <li>
-          <img src="assets/art/vortex-t.webp" width="640" height="438" loading="lazy" decoding="async"
-               alt="Black and white vortex of curved bands">
+        <li class="art-item">
+          <button class="art-btn" type="button" data-full="assets/art/vortex.webp"
+                  data-caption="Vortex — curved bands of black and white flowing inward">
+            <img src="assets/art/vortex-t.webp" width="640" height="438" loading="lazy" decoding="async"
+                 alt="Black and white vortex of curved bands">
+          </button>
         </li>
-        <li>
-          <img src="assets/art/penrose-t.webp" width="640" height="438" loading="lazy" decoding="async"
-               alt="Impossible triangle rendered in brushed gold on white">
+        <li class="art-item">
+          <button class="art-btn" type="button" data-full="assets/art/penrose.webp"
+                  data-caption="Penrose triangle — impossible geometry in brushed gold on white">
+            <img src="assets/art/penrose-t.webp" width="640" height="438" loading="lazy" decoding="async"
+                 alt="Impossible triangle rendered in brushed gold on white">
+          </button>
         </li>
-        <li>
-          <img src="assets/art/duckrabbit-t.webp" width="640" height="438" loading="lazy" decoding="async"
-               alt="The duck-rabbit ambiguous figure in flat black on white">
+        <li class="art-item">
+          <button class="art-btn" type="button" data-full="assets/art/duckrabbit.webp"
+                  data-caption="Duck-rabbit — the ambiguous figure in flat black on white">
+            <img src="assets/art/duckrabbit-t.webp" width="640" height="438" loading="lazy" decoding="async"
+                 alt="The duck-rabbit ambiguous figure in flat black on white">
+          </button>
         </li>
-        <li>
-          <img src="assets/art/grid-t.webp" width="640" height="438" loading="lazy" decoding="async"
-               alt="Grid of squares filled with hatching at alternating angles">
+        <li class="art-item">
+          <button class="art-btn" type="button" data-full="assets/art/grid.webp"
+                  data-caption="Grid — squares of hatching alternating their angle">
+            <img src="assets/art/grid-t.webp" width="640" height="438" loading="lazy" decoding="async"
+                 alt="Grid of squares filled with hatching at alternating angles">
+          </button>
         </li>
-        <li>
-          <img src="assets/art/arcs-t.webp" width="640" height="438" loading="lazy" decoding="async"
-               alt="Two thin black arcs on white, a study in identical curvature">
+        <li class="art-item">
+          <button class="art-btn" type="button" data-full="assets/art/arcs.webp"
+                  data-caption="Arcs — two identical curvatures, a study in sameness">
+            <img src="assets/art/arcs-t.webp" width="640" height="438" loading="lazy" decoding="async"
+                 alt="Two thin black arcs on white, a study in identical curvature">
+          </button>
         </li>
-        <li class="wide">
-          <img src="assets/art/topology.webp" width="1200" height="821" loading="lazy" decoding="async"
-               alt="Node diagram of a local DGX Spark systems topology">
+        <li class="art-item wide">
+          <button class="art-btn" type="button" data-full="assets/art/topology.webp"
+                  data-caption="Topology — the local DGX Spark systems graph">
+            <img src="assets/art/topology.webp" width="1200" height="821" loading="lazy" decoding="async"
+                 alt="Node diagram of a local DGX Spark systems topology">
+          </button>
         </li>
       </ul>
     </section>
@@ -152,8 +195,21 @@
     </section>
   </main>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Artwork viewer" hidden>
+    <button class="lb-close" id="lb-close" type="button" aria-label="Close viewer">&times;</button>
+    <button class="lb-prev" id="lb-prev" type="button" aria-label="Previous image" aria-hidden="true">&larr;</button>
+    <figure class="lb-stage">
+      <img id="lb-img" src="" alt="">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button class="lb-next" id="lb-next" type="button" aria-label="Next image" aria-hidden="true">&rarr;</button>
+    <span class="lb-count" id="lb-count" aria-hidden="true"></span>
+  </div>
+
   <footer class="site-foot">
-    <p>© Coinupbtc · <a href="https://github.com/Coinupbtc">GitHub</a> · <a href="https://x.com/coinupbtc">X</a></p>
+    <p>&copy; Coinupbtc &middot; <a href="https://github.com/Coinupbtc">GitHub</a> &middot; <a href="https://x.com/coinupbtc">X</a></p>
   </footer>
+
+  <script src="js/main.js" defer></script>
 </body>
 </html>
