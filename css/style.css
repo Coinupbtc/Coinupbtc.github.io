@@ -527,3 +527,240 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
   .brand mark::after, .art-btn img { transform: none; }
   .art-btn:hover img { transform: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   VAST-IMPROVEMENT PASS (look + feel kinetics — standing direction)
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Selection + scrollbar craft ─────────────────────────── */
+::selection { background: var(--acid); color: var(--ink); }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 6px;
+  border: 3px solid var(--paper);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--acid); }
+
+/* ── Scroll progress bar ─────────────────────────────────── */
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--acid), color-mix(in srgb, var(--acid) 55%, var(--ink)));
+  z-index: 120;
+  pointer-events: none;
+  box-shadow: 0 0 12px var(--glow);
+}
+
+/* ── Back to top ─────────────────────────────────────────── */
+.to-top {
+  position: fixed;
+  right: clamp(0.9rem, 3vw, 1.5rem);
+  bottom: clamp(0.9rem, 3vw, 1.5rem);
+  z-index: 90;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--ink);
+  font-size: 1.15rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2,0.8,0.2,1), background 0.25s ease;
+}
+.to-top.show {
+  opacity: 1;
+  transform: none;
+}
+.to-top:hover { background: var(--acid); color: var(--ink); border-color: var(--acid); }
+.to-top[hidden] { display: none; }
+
+/* ── Telemetry readout (top bar) ─────────────────────────── */
+.telemetry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-variant-numeric: tabular-nums;
+}
+.telemetry::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow: 0 0 8px var(--acid);
+  animation: blip 2.4s ease-in-out infinite;
+}
+@keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+/* ── Link arrow micro-icon ───────────────────────────────── */
+.ctas .arr {
+  display: inline-block;
+  margin-left: 0.4em;
+  font-size: 0.8em;
+  transition: transform 0.25s cubic-bezier(0.2,0.8,0.2,1);
+}
+.ctas a:hover .arr { transform: translate(2px, -2px); }
+
+/* ── Hero 3D brand tilt ──────────────────────────────────── */
+.stage {
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+.hero.tilt .stage { transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+/* Generative cursor spark canvas sits above vignette, under text */
+.sparks {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── Marquee band ────────────────────────────────────────── */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--acid) 6%, transparent);
+  padding: 0.9rem 0;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  will-change: transform;
+  animation: marquee 26s linear infinite;
+}
+.marquee-track span {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3vw, 1.7rem);
+  font-style: italic;
+  letter-spacing: 0.01em;
+  padding: 0 1.1rem;
+}
+.marquee-track i {
+  color: var(--acid);
+  font-style: normal;
+  font-size: 0.9rem;
+}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── Art tile 3D tilt + glare + hover caption ────────────── */
+.art-item {
+  perspective: 900px;
+}
+.art-btn {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease;
+  background: var(--well);
+}
+.art-btn .tile-img {
+  will-change: transform;
+}
+.art-btn::before {  /* specular glare sweep */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.22) 45%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.art-btn:hover::before { transform: translateX(130%); }
+.art-btn:hover {
+  box-shadow: 0 22px 44px -20px rgba(0,0,0,0.45);
+}
+
+/* hover caption overlay (drawn over the thumb) */
+.art-cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 4;
+  padding: 1.1rem 1rem 0.9rem;
+  background: linear-gradient(to top, color-mix(in srgb, var(--ink) 88%, transparent), transparent);
+  color: var(--paper);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2,0.8,0.2,1);
+  pointer-events: none;
+}
+.art-btn:hover .art-cap { opacity: 1; transform: none; }
+
+/* ── Scroll-linked section scrim (headings deepen) ───────── */
+.reveal h2 { position: relative; }
+.reveal h2::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -0.12em;
+  height: 0.09em;
+  width: 100%;
+  background: var(--acid);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s;
+}
+.reveal.in h2::after { transform: scaleX(1); }
+
+/* ── Lightbox zoom + cinematic open ──────────────────────── */
+.lb-stage img {
+  cursor: zoom-in;
+  touch-action: manipulation;
+  transform-origin: 0 0;
+  user-select: none;
+  will-change: transform;
+}
+.lb-stage img.pan { cursor: grab; }
+.lb-stage img.pan.dragging { cursor: grabbing; }
+.lb-zoom {
+  position: absolute;
+  right: clamp(0.9rem, 3vw, 2rem);
+  bottom: clamp(0.9rem, 3vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  z-index: 6;
+}
+.lb-z {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 88%, transparent);
+  color: var(--paper);
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+}
+.lightbox.open .lb-z { opacity: 1; transform: none; }
+.lb-z:hover { background: var(--acid); color: var(--ink); }
+
+/* fade stage into place on open */
+.lightbox.open { animation: lbIn 0.18s ease; }
+.lightbox.open .lb-stage { animation: lbSettle 0.42s cubic-bezier(0.2, 0.9, 0.25, 1.15); }
+
+@media (max-width: 560px) {
+  .to-top { width: 40px; height: 40px; }
+  .lb-zoom { flex-direction: row; right: auto; left: 50%; transform: translateX(-50%); bottom: 5.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress { transform: none; width: 0; }
+  .marquee-track { animation: none; }
+  .telemetry::before { animation: none; }
+  .art-btn::before { display: none; }
+  .art-cap { opacity: 1; transform: none; }
+}

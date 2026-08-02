@@ -57,21 +57,24 @@
 
   <div class="grain" aria-hidden="true"></div>
 
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top" hidden>&uarr;</button>
+
   <main id="main">
     <section class="hero" id="top" aria-label="Introduction">
       <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
       <div class="hero-vignette" aria-hidden="true"></div>
       <div class="top">
         <strong>Coinupbtc</strong>
-        <span>proof over claim</span>
+        <span id="telemetry" class="telemetry" aria-hidden="true">proof over claim</span>
       </div>
-      <div class="stage">
+      <div class="stage" id="stage">
         <h1 class="brand"><mark>Coinupbtc</mark></h1>
         <p class="lede">I don’t rent intelligence — I host it. Local AI, measured builds, open repos.</p>
         <div class="ctas">
-          <a class="primary" href="https://github.com/Coinupbtc" data-magnetic>GitHub</a>
-          <a href="https://x.com/coinupbtc" data-magnetic>X &middot; @coinupbtc</a>
-          <a href="mailto:coinupbtc@gmail.com" data-magnetic>Email</a>
+          <a class="primary" href="https://github.com/Coinupbtc" data-magnetic>GitHub<span class="arr" aria-hidden="true">&#8599;</span></a>
+          <a href="https://x.com/coinupbtc" data-magnetic>X &middot; @coinupbtc<span class="arr" aria-hidden="true">&#8599;</span></a>
+          <a href="mailto:coinupbtc@gmail.com" data-magnetic>Email<span class="arr" aria-hidden="true">&#8599;</span></a>
         </div>
       </div>
       <div class="foot-meta">
@@ -168,6 +171,19 @@
       </ul>
     </section>
 
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Trained&nbsp;locally</span><i>&#10022;</i>
+        <span>Zero&nbsp;rented&nbsp;GPUs</span><i>&#10022;</i>
+        <span>measured&nbsp;builds</span><i>&#10022;</i>
+        <span>open&nbsp;repos</span><i>&#10022;</i>
+        <span>Trained&nbsp;locally</span><i>&#10022;</i>
+        <span>Zero&nbsp;rented&nbsp;GPUs</span><i>&#10022;</i>
+        <span>measured&nbsp;builds</span><i>&#10022;</i>
+        <span>open&nbsp;repos</span><i>&#10022;</i>
+      </div>
+    </div>
+
     <section class="proof" aria-labelledby="proof-h">
       <h2 id="proof-h">Selected public work</h2>
       <ul>
@@ -199,11 +215,15 @@
     <button class="lb-close" id="lb-close" type="button" aria-label="Close viewer">&times;</button>
     <button class="lb-prev" id="lb-prev" type="button" aria-label="Previous image" aria-hidden="true">&larr;</button>
     <figure class="lb-stage">
-      <img id="lb-img" src="" alt="">
+      <img id="lb-img" src="" alt="" draggable="false">
       <figcaption id="lb-cap"></figcaption>
     </figure>
     <button class="lb-next" id="lb-next" type="button" aria-label="Next image" aria-hidden="true">&rarr;</button>
     <span class="lb-count" id="lb-count" aria-hidden="true"></span>
+    <div class="lb-zoom" aria-hidden="true">
+      <button class="lb-z" id="lb-zoom-in" type="button" tabindex="-1">+</button>
+      <button class="lb-z" id="lb-zoom-out" type="button" tabindex="-1">&minus;</button>
+    </div>
   </div>
 
   <footer class="site-foot">

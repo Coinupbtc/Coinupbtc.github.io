@@ -371,4 +371,258 @@
     if (reduceMotion) { seedAndDraw(); } else { step(); }
     return { reskin };
   })();
+
+  /* ══════════════════════════════════════════════════════
+     VAST-IMPROVEMENT PASS — look + feel kinetics
+     ══════════════════════════════════════════════════════ */
+
+  /* ── Scroll progress + back to top ──────────────────── */
+  const progress = document.getElementById('progress');
+  const toTop = document.getElementById('to-top');
+  if (progress || toTop) {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progress && max > 0) progress.style.transform = `scaleX(${Math.min(1, y / max)})`;
+      if (toTop) {
+        const show = y > window.innerHeight * 0.6;
+        if (show) toTop.hidden = false;
+        requestAnimationFrame(() => toTop.classList.toggle('show', show));
+      }
+      lastY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+  toTop?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  /* ── Telemetry readout: live local time ─────────────── */
+  const tele = document.getElementById('telemetry');
+  if (tele) {
+    const base = 'coinupbtc / local';
+    const tickT = () => {
+      const d = new Date();
+      const hh = String(d.getHours()).padStart(2, '0');
+      const mm = String(d.getMinutes()).padStart(2, '0');
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      tele.textContent = `${base} · ${hh}:${mm}:${ss}`;
+    };
+    tickT();
+    setInterval(tickT, 1000);
+  }
+
+  /* ── Generative cursor spark trail ──────────────────── */
+  (function sparks() {
+    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    const cvs = document.createElement('canvas');
+    cvs.className = 'sparks';
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    hero.appendChild(cvs);
+    const ctx = cvs.getContext('2d');
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    let W = 0, H = 0, raf = null;
+    const parts = [];
+    const COL = { acid: '200,245,74', ink: '' };
+
+    function resize() {
+      const r = cvs.getBoundingClientRect();
+      W = r.width; H = r.height;
+      cvs.width = W * DPR; cvs.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    function color() {
+      const ink = getComputedStyle(root).getPropertyValue('--ink').trim();
+      const hex = ink.replace('#', '');
+      const n = parseInt(hex, 16);
+      COL.ink = `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`;
+    }
+    function spawn(x, y) {
+      const n = 3 + Math.floor(Math.random() * 3);
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const sp = 0.4 + Math.random() * 1.1;
+        parts.push({
+          x, y,
+          vx: Math.cos(a) * sp,
+          vy: Math.sin(a) * sp,
+          life: 1, dec: 0.012 + Math.random() * 0.02,
+          r: 0.6 + Math.random() * 1.4,
+          ink: Math.random() < 0.3,
+        });
+      }
+    }
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const p = parts[i];
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.96; p.vy *= 0.96;
+        p.life -= p.dec;
+        if (p.life <= 0) { parts.splice(i, 1); continue; }
+        const rgb = p.ink ? COL.ink : COL.acid;
+        ctx.fillStyle = `rgba(${rgb},${Math.max(0, p.life)})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      if (parts.length) raf = requestAnimationFrame(frame);
+      else raf = null;
+    }
+    const onMove = (e) => {
+      const r = cvs.getBoundingClientRect();
+      spawn(e.clientX - r.left, e.clientY - r.top);
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
+    cvs.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('resize', resize, { passive: true });
+    resize(); color();
+  })();
+
+  /* ── Hero 3D brand tilt (pointer-follow) ────────────── */
+  (function tilt() {
+    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    const hero = document.querySelector('.hero');
+    const stage = document.getElementById('stage');
+    if (!hero || !stage) return;
+    let raf = null;
+    hero.addEventListener('pointermove', (e) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const r = hero.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        const maxY = Math.max(2, Math.min(9, r.width * 0.004));
+        stage.style.transform = `perspective(900px) rotateY(${(nx * maxY).toFixed(2)}deg) rotateX(${(-ny * maxY).toFixed(2)}deg)`;
+      });
+    });
+    hero.addEventListener('pointerleave', () => {
+      hero.classList.add('tilt');
+      requestAnimationFrame(() => {
+        stage.style.transform = '';
+        setTimeout(() => hero.classList.remove('tilt'), 520);
+      });
+    });
+  })();
+
+  /* ── Art tiles: 3D tilt + glare + caption overlay ───── */
+  (function artTiles() {
+    const items = Array.from(document.querySelectorAll('.art-item'));
+    if (!items.length || reduceMotion || !window.matchMedia('(pointer: fine)').matches) {
+      // still add captions (no motion variant) so reduced-motion users see them
+      document.querySelectorAll('.art-btn').forEach((b) => {
+        if (!b.querySelector('.art-cap') && b.dataset.caption) {
+          const c = document.createElement('div');
+          c.className = 'art-cap';
+          c.textContent = b.dataset.caption;
+          b.appendChild(c);
+        }
+        const img = b.querySelector('img');
+        if (img) img.classList.add('tile-img');
+      });
+      return;
+    }
+    items.forEach((item) => {
+      const btn = item.querySelector('.art-btn');
+      const img = btn?.querySelector('img');
+      if (!btn || !img) return;
+      if (!btn.querySelector('.art-cap') && btn.dataset.caption) {
+        const c = document.createElement('div');
+        c.className = 'art-cap';
+        c.textContent = btn.dataset.caption;
+        btn.appendChild(c);
+      }
+      img.classList.add('tile-img');
+      let raf = null;
+      btn.addEventListener('pointermove', (e) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = null;
+          const r = btn.getBoundingClientRect();
+          const nx = (e.clientX - r.left) / r.width - 0.5;
+          const ny = (e.clientY - r.top) / r.height - 0.5;
+          const ry = nx * 10, rx = -ny * 10;
+          btn.style.transform = `rotateY(${ry.toFixed(2)}deg) rotateX(${rx.toFixed(2)}deg)`;
+          if (img) img.style.transform = `scale(1.06) translate(${(nx * -6).toFixed(2)}px, ${(ny * -6).toFixed(2)}px)`;
+        });
+      });
+      btn.addEventListener('pointerleave', () => {
+        btn.style.transform = '';
+        if (img) img.style.transform = '';
+      });
+    });
+  })();
+
+  /* ── Lightbox: zoom / pan / preload / .open class ───── */
+  (function lbZoom() {
+    const stageImg = document.getElementById('lb-img');
+    const zIn = document.getElementById('lb-zoom-in');
+    const zOut = document.getElementById('lb-zoom-out');
+    if (!stageImg) return;
+    let scale = 1, tx = 0, ty = 0;
+    let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+    function apply() {
+      stageImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      stageImg.classList.toggle('pan', scale > 1);
+      stageImg.classList.toggle('dragging', dragging);
+    }
+    function reset() {
+      scale = 1; tx = 0; ty = 0;
+      apply();
+    }
+    function zoomBy(f, cx, cy) {
+      const before = scale;
+      scale = Math.min(6, Math.max(1, scale * f));
+      if (cx !== undefined && cy !== undefined && before > 1) {
+        // zoom toward pointer
+        const k = scale / before;
+        tx = cx - (cx - tx) * k;
+        ty = cy - (cy - ty) * k;
+      }
+      apply();
+    }
+    zIn?.addEventListener('click', () => zoomBy(1.35));
+    zOut?.addEventListener('click', () => { zoomBy(1 / 1.35); if (scale === 1) reset(); });
+    stageImg.addEventListener('wheel', (e) => {
+      if (!lb.hidden) {
+        e.preventDefault();
+        const r = stageImg.getBoundingClientRect();
+        zoomBy(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - r.left, e.clientY - r.top);
+      }
+    }, { passive: false });
+    stageImg.addEventListener('pointerdown', (e) => {
+      if (scale <= 1) return;
+      dragging = true;
+      sx = e.clientX; sy = e.clientY; ox = tx; oy = ty;
+      stageImg.setPointerCapture(e.pointerId);
+    });
+    stageImg.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      tx = ox + (e.clientX - sx);
+      ty = oy + (e.clientY - sy);
+      apply();
+    });
+    stageImg.addEventListener('pointerup', () => { dragging = false; apply(); });
+    stageImg.addEventListener('pointercancel', () => { dragging = false; apply(); });
+    stageImg.addEventListener('dblclick', () => { if (scale > 1) reset(); else zoomBy(2); });
+
+    // preload neighbours so next/prev is instant
+    function preload(i) {
+      [i + 1, i - 1, i + 2, i - 2].forEach((n) => {
+        const b = artItems[((n % artItems.length) + artItems.length) % artItems.length];
+        if (b) { const im = new Image(); im.src = b.dataset.full; }
+      });
+    }
+
+    // hook open/close: add .open class, reset zoom, preload
+    const origOpen = window.__origOpenLb || openLb;
+    openLb = (i) => { origOpen(i); lb.classList.add('open'); reset(); preload(i); };
+    const origClose = closeLb;
+    closeLb = () => { origClose(); lb.classList.remove('open'); reset(); };
+  })();
 })();
