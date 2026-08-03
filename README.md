@@ -27,7 +27,8 @@ Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/
 ## Stack
 
 One HTML + one CSS file. Fraunces + IBM Plex Mono via Google Fonts. No trackers, no cookies, no analytics.
-The hero motif is pure CSS (two interfering ring sets — no image, no JS).
+The hero is an art-directed two-column composition: editorial display type + the local DGX Spark systems
+topology rendered as a framed centerpiece plate, over a lightweight generative node-field canvas.
 
 ## Art
 

@@ -10,9 +10,9 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Coinupbtc">
-  <meta property="og:description" content="I don’t rent intelligence — I host it. Local AI, measured builds, open repos.">
+  <meta property="og:description" content="I don't rent intelligence — I host it. Local AI, measured builds, open repos.">
   <meta property="og:url" content="https://coinupbtc.com/">
-  <meta property="og:image" content="https://coinupbtc.com/assets/art/spiral.webp">
+  <meta property="og:image" content="https://coinupbtc.com/assets/art/topology.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@coinupbtc">
   <link rel="canonical" href="https://coinupbtc.com/">
@@ -20,7 +20,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- set theme before first paint to avoid flash -->
@@ -69,13 +69,21 @@
         <span id="telemetry" class="telemetry" aria-hidden="true">proof over claim</span>
       </div>
       <div class="stage" id="stage">
-        <h1 class="brand"><mark>Coinupbtc</mark></h1>
-        <p class="lede">I don’t rent intelligence — I host it. Local AI, measured builds, open repos.</p>
-        <div class="ctas">
-          <a class="primary" href="https://github.com/Coinupbtc" data-magnetic>GitHub<span class="arr" aria-hidden="true">&#8599;</span></a>
-          <a href="https://x.com/coinupbtc" data-magnetic>X &middot; @coinupbtc<span class="arr" aria-hidden="true">&#8599;</span></a>
-          <a href="mailto:coinupbtc@gmail.com" data-magnetic>Email<span class="arr" aria-hidden="true">&#8599;</span></a>
+        <div class="stage-main">
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>local AI &middot; measured builds &middot; open repos</p>
+          <h1 class="brand"><mark>Coinupbtc</mark></h1>
+          <p class="lede">I don&#8217;t rent intelligence &#8212; I host it. <em>Local AI, measured builds, open repos.</em></p>
+          <div class="ctas">
+            <a class="primary" href="https://github.com/Coinupbtc" data-magnetic>GitHub<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a href="https://x.com/coinupbtc" data-magnetic>X &middot; @coinupbtc<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a href="mailto:coinupbtc@gmail.com" data-magnetic>Email<span class="arr" aria-hidden="true">&#8599;</span></a>
+          </div>
         </div>
+        <figure class="plate" role="img" aria-label="Local DGX Spark systems topology, generated on hardware">
+          <img src="assets/art/topology.webp" alt="The local DGX Spark systems topology — a node graph generated on my own hardware" width="1200" height="821" fetchpriority="high">
+          <figcaption class="plate-cap">the machine that renders this &#8212; <em>system topology, on-metal</em></figcaption>
+          <span class="plate-tag" aria-hidden="true">onmetal <i>&middot;</i> no cloud</span>
+        </figure>
       </div>
       <div class="foot-meta">
         <span>Pseudonymous &middot; hiring-friendly</span>
@@ -83,35 +91,100 @@
       </div>
     </section>
 
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Trained&nbsp;locally</span><i>&#10022;</i>
+        <span>169&nbsp;t/s&nbsp;measured</span><i>&#10022;</i>
+        <span>Zero&nbsp;rented&nbsp;GPUs</span><i>&#10022;</i>
+        <span>open&nbsp;repos</span><i>&#10022;</i>
+        <span>Trained&nbsp;locally</span><i>&#10022;</i>
+        <span>169&nbsp;t/s&nbsp;measured</span><i>&#10022;</i>
+        <span>Zero&nbsp;rented&nbsp;GPUs</span><i>&#10022;</i>
+        <span>open&nbsp;repos</span><i>&#10022;</i>
+      </div>
+    </div>
+
     <section class="systems" aria-labelledby="systems-h">
-      <h2 id="systems-h" class="visually-hidden">The hardware behind the proof</h2>
+      <p class="kicker">The machine</p>
+      <h2 id="systems-h">Hardware behind the proof</h2>
       <dl class="sys-grid" id="sys-grid">
         <div class="sys-cell"><dt>GPU memory</dt><dd class="num" data-count="121" data-suffix=" GB">121 GB</dd><dd class="sub">unified CPU+RAM, on-box</dd></div>
         <div class="sys-cell"><dt>Storage</dt><dd class="num" data-count="3.7" data-decimals="1" data-suffix=" TB">3.7 TB</dd><dd class="sub">NVMe, local weights</dd></div>
-        <div class="sys-cell"><dt>Runtime</dt><dd>local&nbsp;LLM</dd><dd class="sub">DeepSeek-V4-Flash on DSpark</dd></div>
+        <div class="sys-cell"><dt>Decode</dt><dd class="num" data-count="169" data-suffix=" t/s">169 t/s</dd><dd class="sub">measured coding throughput</dd></div>
         <div class="sys-cell"><dt>Art</dt><dd>on-metal</dd><dd class="sub">ComfyUI, no cloud API</dd></div>
       </dl>
     </section>
 
-    <section class="hub" aria-labelledby="hub-h">
-      <h2 id="hub-h">Elsewhere</h2>
-      <ul class="hub-list">
-        <li>
-          <a href="https://github.com/Coinupbtc">GitHub</a>
-          <span>code, in the open</span>
-        </li>
-        <li>
-          <a href="https://x.com/coinupbtc">X &middot; @coinupbtc</a>
-          <span>build log, in public</span>
-        </li>
-        <li>
-          <a href="mailto:coinupbtc@gmail.com">coinupbtc@gmail.com</a>
-          <span>inbound contact</span>
-        </li>
-      </ul>
+    <section class="proof" id="projects" aria-labelledby="proof-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Selected public work</p>
+          <h2 id="proof-h">Built here, shipped open</h2>
+        </div>
+        <a class="proof-all" href="https://github.com/Coinupbtc">all repos <span class="arr" aria-hidden="true">&#8599;</span></a>
+      </div>
+      <div class="card-grid" id="card-grid">
+
+        <article class="card">
+          <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune" aria-label="miaai35-tune on GitHub">
+            <img class="card-img" src="assets/art/arcs.webp" alt="" width="640" height="438" loading="lazy" decoding="async">
+            <span class="card-num" aria-hidden="true"><b>169</b> t/s</span>
+          </a>
+          <div class="card-body">
+            <h3><a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a></h3>
+            <p>Measured llama.cpp flag/profile bakeoff for Qwen3.6-35B on DGX Spark — pick serving settings with evidence, not vibes. Coding decode measured at <strong>169 t/s</strong>, quality 9/10.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-top" href="https://github.com/Coinupbtc/zwell-bench" aria-label="zwell-bench on GitHub">
+            <img class="card-img" src="assets/art/spiral.webp" alt="" width="640" height="438" loading="lazy" decoding="async">
+            <span class="card-num" aria-hidden="true"><b>95.0</b> /100</span>
+          </a>
+          <div class="card-body">
+            <h3><a href="https://github.com/Coinupbtc/zwell-bench">zwell-bench</a></h3>
+            <p>Endpoint-agnostic local-LLM bakeoff — executed coding, vision, tool &amp; agentic checks scored pass/fail. miaai35 baseline scored <strong>95.0</strong> objective.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-top" href="https://github.com/Coinupbtc/spark-console" aria-label="spark-console on GitHub">
+            <img class="card-img" src="assets/art/topology.webp" alt="" width="1200" height="821" loading="lazy" decoding="async">
+            <span class="card-num" aria-hidden="true"><b>121</b> GB</span>
+          </a>
+          <div class="card-body">
+            <h3><a href="https://github.com/Coinupbtc/spark-console">spark-console</a></h3>
+            <p>Local GPU &amp; fleet dashboard for DGX Spark and any NVIDIA box — graphs, model inventory, endpoint health, read-only service board. <strong>121 GB</strong> unified memory, nothing phones home.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-top" href="https://github.com/Coinupbtc/bitcoin-blockfield" aria-label="bitcoin-blockfield on GitHub">
+            <img class="card-img" src="assets/art/grid.webp" alt="" width="640" height="438" loading="lazy" decoding="async">
+            <span class="card-num" aria-hidden="true"><b>3</b> blocks</span>
+          </a>
+          <div class="card-body">
+            <h3><a href="https://github.com/Coinupbtc/bitcoin-blockfield">bitcoin-blockfield</a></h3>
+            <p>Live Bitcoin mempool visualizer — the next <strong>3 projected blocks</strong> full-size, fee bands, inscription radar, driven by mempool.space-compatible APIs.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-top" href="https://github.com/Coinupbtc/stl-sandbox" aria-label="stl-sandbox on GitHub">
+            <img class="card-img" src="assets/art/vortex.webp" alt="" width="640" height="438" loading="lazy" decoding="async">
+            <span class="card-num" aria-hidden="true"><b>0</b> cloud</span>
+          </a>
+          <div class="card-body">
+            <h3><a href="https://github.com/Coinupbtc/stl-sandbox">stl-sandbox</a></h3>
+            <p>Prompt &rarr; 3D-printable STL/STEP, fully local — CadQuery primitives + optional on-box LLM. <strong>Zero</strong> cloud CAD, bed-fit checks before you slice.</p>
+          </div>
+        </article>
+
+      </div>
     </section>
 
     <section class="gallery" aria-labelledby="art-h">
+      <p class="kicker">The art</p>
       <h2 id="art-h">Made on the machine</h2>
       <p class="section-note">
         Every image below was generated locally on my own DGX Spark — no cloud API, no rented GPU.
@@ -171,41 +244,21 @@
       </ul>
     </section>
 
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Trained&nbsp;locally</span><i>&#10022;</i>
-        <span>Zero&nbsp;rented&nbsp;GPUs</span><i>&#10022;</i>
-        <span>measured&nbsp;builds</span><i>&#10022;</i>
-        <span>open&nbsp;repos</span><i>&#10022;</i>
-        <span>Trained&nbsp;locally</span><i>&#10022;</i>
-        <span>Zero&nbsp;rented&nbsp;GPUs</span><i>&#10022;</i>
-        <span>measured&nbsp;builds</span><i>&#10022;</i>
-        <span>open&nbsp;repos</span><i>&#10022;</i>
-      </div>
-    </div>
-
-    <section class="proof" aria-labelledby="proof-h">
-      <h2 id="proof-h">Selected public work</h2>
-      <ul>
+    <section class="hub" aria-labelledby="hub-h">
+      <p class="kicker">Elsewhere</p>
+      <h2 id="hub-h">Find me in the open</h2>
+      <ul class="hub-list">
         <li>
-          <a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a>
-          <span>measured Spark serving</span>
+          <a href="https://github.com/Coinupbtc">GitHub</a>
+          <span>code, in the open</span>
         </li>
         <li>
-          <a href="https://github.com/Coinupbtc/zwell-bench">zwell-bench</a>
-          <span>local model bakeoffs</span>
+          <a href="https://x.com/coinupbtc">X &middot; @coinupbtc</a>
+          <span>build log, in public</span>
         </li>
         <li>
-          <a href="https://github.com/Coinupbtc/spark-console">spark-console</a>
-          <span>fleet / GPU dashboard</span>
-        </li>
-        <li>
-          <a href="https://github.com/Coinupbtc/bitcoin-blockfield">bitcoin-blockfield</a>
-          <span>mempool visualizer</span>
-        </li>
-        <li>
-          <a href="https://github.com/Coinupbtc/stl-sandbox">stl-sandbox</a>
-          <span>prompt → printable CAD</span>
+          <a href="mailto:coinupbtc@gmail.com">coinupbtc@gmail.com</a>
+          <span>inbound contact</span>
         </li>
       </ul>
     </section>
