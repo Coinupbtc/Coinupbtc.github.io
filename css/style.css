@@ -1053,3 +1053,88 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   .card:hover .card-img { transform: none; }
   .plate:hover img { transform: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   KINETIC PASS (2026-08-03) — signal trace / spotlight / spring
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Plate signal trace overlay (Dobby -> DGX Spark -> Freegle) ── */
+.plate-trace {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  aspect-ratio: 1200 / 821;
+  z-index: 2;
+  pointer-events: none;
+}
+.trace-ghost {
+  fill: none;
+  stroke: var(--acid);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.16;
+  stroke-dasharray: 2 10;   /* dotted route hint until scroll draws it */
+}
+.trace-line {
+  fill: none;
+  stroke: var(--acid);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.9;
+}
+.trace-pulse .trace-halo {
+  fill: none;
+  stroke: var(--acid);
+  stroke-width: 1.5;
+  opacity: 0.5;
+}
+.trace-pulse .trace-dot { fill: var(--acid); }
+.trace-node {
+  fill: none;
+  stroke: var(--acid);
+  stroke-width: 1.5;
+  opacity: 0.55;
+}
+
+/* ── Cursor-follow acid spotlight (cards + art tiles) ────────── */
+.spot {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%),
+              var(--acid-soft), transparent 62%);
+  border-radius: inherit;
+}
+.card .spot { z-index: 1; }            /* under the number badge (z2) */
+.art-btn .spot { z-index: 2; }         /* under glare (z3) + caption (z4) */
+.card.spot-on .spot, .art-btn.spot-on .spot { opacity: 1; }
+
+/* ── Spring magnetic: let the JS spring own transform ────────── */
+body.spring-mag .ctas a {
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ── Lightbox directional slide-in on next/prev ──────────────── */
+.lb-stage img.lb-swap {
+  animation: lbSwap 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes lbSwap {
+  from {
+    opacity: 0.1;
+    transform: translateX(calc(var(--dir, 1) * 26px)) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate-trace .trace-pulse { display: none; }
+  .spot { display: none; }
+}

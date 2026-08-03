@@ -81,6 +81,18 @@
         </div>
         <figure class="plate" role="img" aria-label="Local DGX Spark systems topology, generated on hardware">
           <img src="assets/art/topology.webp" alt="The local DGX Spark systems topology — a node graph generated on my own hardware" width="1200" height="821" fetchpriority="high">
+          <!-- kinetic pass: scroll-linked signal trace across the real node route (Dobby -> DGX Spark -> Freegle) -->
+          <svg class="plate-trace" viewBox="0 0 1200 821" aria-hidden="true" focusable="false">
+            <path class="trace-ghost" d="M300 205 L600 394 L900 616"/>
+            <path class="trace-line" d="M300 205 L600 394 L900 616"/>
+            <g class="trace-pulse" aria-hidden="true">
+              <circle class="trace-halo" cx="300" cy="205" r="11"/>
+              <circle class="trace-dot" cx="300" cy="205" r="4.5"/>
+            </g>
+            <circle class="trace-node" cx="300" cy="205" r="7"/>
+            <circle class="trace-node" cx="600" cy="394" r="7"/>
+            <circle class="trace-node" cx="900" cy="616" r="7"/>
+          </svg>
           <figcaption class="plate-cap">the machine that renders this &#8212; <em>system topology, on-metal</em></figcaption>
           <span class="plate-tag" aria-hidden="true">onmetal <i>&middot;</i> no cloud</span>
         </figure>
@@ -121,7 +133,7 @@
           <p class="kicker">Selected public work</p>
           <h2 id="proof-h">Built here, shipped open</h2>
         </div>
-        <a class="proof-all" href="https://github.com/Coinupbtc">all repos <span class="arr" aria-hidden="true">&#8599;</span></a>
+        <a class="proof-all" href="https://github.com/Coinupbtc" data-magnetic>all repos <span class="arr" aria-hidden="true">&#8599;</span></a>
       </div>
       <div class="card-grid" id="card-grid">
 

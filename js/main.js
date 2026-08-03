@@ -121,18 +121,45 @@
     } else start();
   })();
 
-  /* ── Magnetic CTAs ────────────────────────────────────── */
+  /* ── Magnetic CTAs (spring-physics, shared rAF loop) ── */
   if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-    document.querySelectorAll('[data-magnetic]').forEach((el) => {
+    document.body.classList.add('spring-mag'); // drop CSS transform transitions so the spring owns them
+    const magnets = Array.from(document.querySelectorAll('[data-magnetic]'));
+    const state = new Map();
+    let raf = null;
+    magnets.forEach((el) => {
       const strong = el.classList.contains('primary') ? 10 : 6;
+      state.set(el, { tx: 0, ty: 0, cx: 0, cy: 0, vx: 0, vy: 0, strong });
       el.addEventListener('mousemove', (ev) => {
         const r = el.getBoundingClientRect();
-        const dx = ev.clientX - (r.left + r.width / 2);
-        const dy = ev.clientY - (r.top + r.height / 2);
-        el.style.transform = `translate(${dx / strong}px, ${dy / strong}px)`;
+        const s = state.get(el);
+        s.tx = (ev.clientX - (r.left + r.width / 2)) / s.strong;
+        s.ty = (ev.clientY - (r.top + r.height / 2)) / s.strong;
+        if (!raf) raf = requestAnimationFrame(loop);
       });
-      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      el.addEventListener('mouseleave', () => {
+        const s = state.get(el);
+        s.tx = 0; s.ty = 0;
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
     });
+    function loop() {
+      raf = null;
+      let live = false;
+      state.forEach((s, el) => {
+        // critically-damped spring toward the pointer target
+        s.vx += (s.tx - s.cx) * 0.14;
+        s.vy += (s.ty - s.cy) * 0.14;
+        s.vx *= 0.62;
+        s.vy *= 0.62;
+        s.cx += s.vx;
+        s.cy += s.vy;
+        if (Math.abs(s.cx - s.tx) > 0.06 || Math.abs(s.cy - s.ty) > 0.06) live = true;
+        else { s.cx = s.tx; s.cy = s.ty; }
+        el.style.transform = `translate(${s.cx.toFixed(2)}px, ${s.cy.toFixed(2)}px)`;
+      });
+      if (live) raf = requestAnimationFrame(loop);
+    }
   }
 
   /* ── Lightbox ─────────────────────────────────────────── */
@@ -619,10 +646,104 @@
       });
     }
 
-    // hook open/close: add .open class, reset zoom, preload
+    // hook open/close: add .open class, reset zoom, preload, directional slide-in
     const origOpen = window.__origOpenLb || openLb;
-    openLb = (i) => { origOpen(i); lb.classList.add('open'); reset(); preload(i); };
+    const lbSwap = (dir) => {
+      lbImg.style.setProperty('--dir', dir);
+      lbImg.classList.remove('lb-swap');
+      void lbImg.offsetWidth; // reflow so the animation restarts
+      lbImg.classList.add('lb-swap');
+    };
+    openLb = (i) => {
+      const prev = lbIndex;
+      origOpen(i);
+      lb.classList.add('open'); reset(); preload(i);
+      lbSwap(i === prev ? 0 : (i > prev ? 1 : -1));
+    };
     const origClose = closeLb;
     closeLb = () => { origClose(); lb.classList.remove('open'); reset(); };
+  })();
+
+  /* ══════════════════════════════════════════════════════
+     KINETIC PASS (2026-08-03) — trace / spotlight / spring
+     ══════════════════════════════════════════════════════ */
+
+  /* ── Plate signal trace: scroll-linked draw + pulse ──── */
+  (function plateTrace() {
+    const line = document.querySelector('.plate-trace .trace-line');
+    const pulse = document.querySelector('.plate-trace .trace-pulse');
+    const plate = document.querySelector('.plate');
+    if (!line || !plate) return;
+    const len = line.getTotalLength();
+    line.style.strokeDasharray = String(len);
+    const draw = (p) => {
+      const q = Math.min(1, Math.max(0, p));
+      line.style.strokeDashoffset = String(len * (1 - q));
+      if (pulse) {
+        const pt = line.getPointAtLength(len * q);
+        pulse.setAttribute('cx', pt.x.toFixed(1));
+        pulse.setAttribute('cy', pt.y.toFixed(1));
+      }
+    };
+    if (reduceMotion) { draw(1); return; } // static full route, no pulse
+    const hero = document.querySelector('.hero');
+    if (!hero) { draw(1); return; }
+    let raf = null, inView = true;
+    const update = () => {
+      raf = null;
+      if (!inView) return;
+      const r = hero.getBoundingClientRect();
+      // 0 while the hero top sits at the viewport top; 1 once ~45% of the
+      // hero height has scrolled up — the packet reaches Freegle as the plate leaves.
+      const span = Math.max(1, r.height * 0.45);
+      draw((-r.top) / span);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { inView = e.isIntersecting; if (inView) update(); });
+      }, { rootMargin: '0px 0px 40% 0px' });
+      io.observe(plate);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
+
+  /* ── Cursor-follow acid spotlight (cards + art tiles) ── */
+  (function spotlight() {
+    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    const targets = Array.from(document.querySelectorAll('.card, .art-btn'));
+    if (!targets.length) return;
+    targets.forEach((el) => {
+      const s = document.createElement('span');
+      s.className = 'spot';
+      s.setAttribute('aria-hidden', 'true');
+      el.appendChild(s);
+    });
+    let raf = null, lastEl = null;
+    const grids = Array.from(document.querySelectorAll('.card-grid, .art-grid'));
+    grids.forEach((grid) => {
+      if (!grid) return;
+      grid.addEventListener('pointermove', (e) => {
+        const t = e.target.closest('.card, .art-btn');
+        if (t !== lastEl) {
+          if (lastEl) lastEl.classList.remove('spot-on');
+          lastEl = t;
+          if (t) t.classList.add('spot-on');
+        }
+        if (!t || raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = null;
+          const r = t.getBoundingClientRect();
+          t.style.setProperty('--mx', `${(e.clientX - r.left).toFixed(1)}px`);
+          t.style.setProperty('--my', `${(e.clientY - r.top).toFixed(1)}px`);
+        });
+      });
+      grid.addEventListener('pointerleave', () => {
+        if (lastEl) lastEl.classList.remove('spot-on');
+        lastEl = null;
+      });
+    });
   })();
 })();
