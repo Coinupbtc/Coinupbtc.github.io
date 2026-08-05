@@ -701,11 +701,11 @@
     stageImg.addEventListener('pointercancel', () => { dragging = false; apply(); });
     stageImg.addEventListener('dblclick', () => { if (scale > 1) reset(); else zoomBy(2); });
 
-    // preload neighbours so next/prev is instant
+    // preload neighbours so next/prev is instant (image tiles only)
     function preload(i) {
       [i + 1, i - 1, i + 2, i - 2].forEach((n) => {
         const b = artItems[((n % artItems.length) + artItems.length) % artItems.length];
-        if (b) { const im = new Image(); im.src = b.dataset.full; }
+        if (b && b.dataset.full) { const im = new Image(); im.src = b.dataset.full; }
       });
     }
 
