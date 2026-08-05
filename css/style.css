@@ -158,6 +158,35 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
   display: block;
 }
 
+/* cinematic H3 video backplate — sits behind the generative field + vignette */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  background: var(--hero-v2, #0c0e13);
+}
+.hero-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.5;
+  filter: saturate(0.84) contrast(1.04);
+  display: block;
+}
+.hero-media::after {
+  /* extra scrim so copy stays crisp over any frame */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--paper) 30%, transparent) 0%,
+      color-mix(in srgb, var(--paper) 8%, transparent) 45%,
+      color-mix(in srgb, var(--paper) 55%, transparent) 100%);
+  pointer-events: none;
+}
+
 .hero-vignette {
   position: absolute;
   inset: 0;
@@ -416,6 +445,41 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
 }
 .art-btn:hover::after { opacity: 1; box-shadow: inset 0 0 0 2px var(--acid); }
 
+/* ── H3 video tiles (hover-to-play, poster-first) ───────── */
+.art-video .tile-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1216 / 710;
+  object-fit: cover;
+  filter: saturate(0.94);
+  transition: filter 0.4s ease, transform 0.6s cubic-bezier(0.2,0.8,0.2,1);
+}
+.art-btn.art-video:hover .tile-video,
+.art-btn.art-video:focus-visible .tile-video {
+  filter: saturate(1.1);
+  transform: scale(1.035);
+}
+.art-video .reel-badge {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 4;
+  font: 600 0.62rem/1 var(--font-mono, monospace);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.55rem;
+  color: #0c0e13;
+  background: var(--acid);
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0.92;
+  transition: opacity 0.3s ease, background 0.3s ease;
+}
+.art-btn.art-video:hover .reel-badge, .art-btn.art-video:focus-visible .reel-badge,
+.art-btn.art-video .reel-badge:hover { background: var(--acid); }
+.art-video.is-playing .reel-badge { background: #12141a; color: var(--acid); }
+
 /* ── Proof ────────────────────────────────────────────────── */
 .proof { padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 3vw, 2rem); border-top: 1px solid var(--line); }
 .proof li {
@@ -479,6 +543,16 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
   background: var(--well);
   box-shadow: var(--shadow);
 }
+#lb-video {
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+#lb-video:not([hidden]) { display: block; }
 .lb-stage figcaption { font-size: 0.8rem; color: var(--mute); text-align: center; max-width: 60ch; margin: 0 auto; }
 
 .lb-close, .lb-prev, .lb-next {
@@ -526,6 +600,8 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
   .top, .brand, .lede, .ctas, .foot-meta, .reveal, .art-item { opacity: 1; transform: none; }
   .brand mark::after, .art-btn img { transform: none; }
   .art-btn:hover img { transform: none; }
+  .art-btn.art-video:hover .tile-video, .art-btn.art-video:focus-visible .tile-video { transform: none; }
+  .hero-media video { opacity: 0.35; }
 }
 
 /* ══════════════════════════════════════════════════════════════

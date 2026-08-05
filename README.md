@@ -28,13 +28,27 @@ Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/
 
 One HTML + one CSS file. Fraunces + IBM Plex Mono via Google Fonts. No trackers, no cookies, no analytics.
 The hero is an art-directed two-column composition: editorial display type + the local DGX Spark systems
-topology rendered as a framed centerpiece plate, over a lightweight generative node-field canvas.
+topology rendered as a framed centerpiece plate, over a lightweight generative node-field canvas and a
+cinematic locally-generated MiniMax-H3 clip as a muted full-bleed backplate (autoplay / muted / loop / webp
+poster fallback, degenerate gracefully under `prefers-reduced-motion`).
 
-## Art
+## Art + video
 
 `assets/art/` holds WebP exports of stills generated locally on the DGX Spark (ComfyUI).
-Curation is **explicit and by-id** in the export script — never glob the ComfyUI output folder into
-this repo. It contains prompt tests, memes, and third-party characters that must not be published.
+`assets/video/` holds web-optimized copies of curated MiniMax-H3 clips (H.264 ≤960px wide, faststart, no
+audio, tiny webp posters). The hero uses one clip as a background; the "Made on the machine" gallery mixes
+still tiles with H3 video tiles that play on hover and open in the lightbox on tap.
+
+Curation is **explicit and by-id** in the export scripts (`scripts/export-art.py`, `scripts/export-video.py`)
+— never glob the generator output folders into this repo. They contain prompt tests, memes, and third-party
+characters that must not be published.
+
+To (re)build the web video assets from the local H3 library:
+
+```bash
+python3 scripts/export-video.py
+# H3_SRC=/path/to/MiniMax-H3-2x-DGX-Spark/output python3 scripts/export-video.py
+```
 
 ## Custom domain
 
