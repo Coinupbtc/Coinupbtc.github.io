@@ -1,28 +1,30 @@
 # Coinupbtc — Portfolio Site
 
+## At a glance
+
 | | |
 |---|---|
 | **What it is** | A single-page pseudonymous landing site for Coinupbtc. |
-| **What it’s for** | The one link to hand out: GitHub, X, art made on my own hardware, public builds — no real name. |
+| **What it’s for** | The one link to hand out: GitHub, X, art made on your own hardware, public builds — no real name. |
 | **How to use it** | Open https://coinupbtc.com/ — or `./setup.sh` for a local preview. |
-
-Identity on this site is the handle **Coinupbtc** only. Live at **https://coinupbtc.com/** (GitHub Pages).
 
 ## Try it
 
+### One command
 ```bash
 git clone https://github.com/Coinupbtc/Coinupbtc.github.io.git
-cd Coinupbtc.github.io
-./setup.sh
+cd Coinupbtc.github.io && ./setup.sh
 # → http://127.0.0.1:8765/
 ```
 
 Or open `index.html` in a browser (no build step).
 
+Identity on this site is the handle **Coinupbtc** only. Live at **https://coinupbtc.com/** (GitHub Pages).
+
 ## Contact policy
 
 Pseudonymous: no real name, employer, school, phone, or street address.
-Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/coinupbtc) · [coinupbtc@gmail.com](mailto:coinupbtc@gmail.com).
+Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/coinupbtc).
 
 ## Stack
 
@@ -40,14 +42,12 @@ audio, tiny webp posters). The hero uses one clip as a background; the "Made on 
 still tiles with H3 video tiles that play on hover and open in the lightbox on tap.
 
 Curation is **explicit and by-id** in the export scripts (`scripts/export-art.py`, `scripts/export-video.py`)
-— never glob the generator output folders into this repo. They contain prompt tests, memes, and third-party
-characters that must not be published.
+— never glob the generator output folders into this repo.
 
 To (re)build the web video assets from the local H3 library:
 
 ```bash
 python3 scripts/export-video.py
-# H3_SRC=/path/to/MiniMax-H3-2x-DGX-Spark/output python3 scripts/export-video.py
 ```
 
 ## Custom domain
