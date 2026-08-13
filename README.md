@@ -2,9 +2,6 @@
 
 ![Screenshot](docs/screenshots/hero.png)
 
-
-
-
 ## At a glance
 
 | | |
@@ -33,7 +30,7 @@ Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/
 
 ## Stack
 
-One HTML + one CSS file. Fraunces + IBM Plex Mono via Google Fonts. No trackers, no cookies, no analytics.
+One HTML + CSS. Fraunces + IBM Plex Mono via Google Fonts. No trackers, no cookies, no analytics.
 The hero is an art-directed two-column composition: editorial display type + the local DGX Spark systems
 topology rendered as a framed centerpiece plate, over a lightweight generative node-field canvas and a
 cinematic locally-generated MiniMax-H3 clip as a muted full-bleed backplate (autoplay / muted / loop / webp
