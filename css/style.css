@@ -455,6 +455,11 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
   filter: saturate(0.94);
   transition: filter 0.4s ease, transform 0.6s cubic-bezier(0.2,0.8,0.2,1);
 }
+.art-item.mosaic .tile-video {
+  aspect-ratio: 8 / 3;
+  object-fit: contain;
+  background: #0c0e13;
+}
 .art-btn.art-video:hover .tile-video,
 .art-btn.art-video:focus-visible .tile-video {
   filter: saturate(1.1);

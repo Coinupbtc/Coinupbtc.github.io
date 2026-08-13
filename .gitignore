@@ -2,3 +2,12 @@
 .DS_Store
 *.bak*
 prototypes/
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+node_modules/
+*.pyc
+dogfood-output/

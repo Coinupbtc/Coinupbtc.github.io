@@ -809,4 +809,28 @@
       });
     });
   })();
+
+  /* ── Nav: mark the section you're in so the page is usable ── */
+  (function navSpy() {
+    const links = Array.from(document.querySelectorAll('.site-nav nav a[href^="#"]'));
+    if (!links.length) return;
+    const map = new Map();
+    links.forEach((a) => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) map.set(el, a);
+    });
+    const setCurrent = (link) => {
+      links.forEach((a) => a.removeAttribute('aria-current'));
+      if (link) link.setAttribute('aria-current', 'true');
+    };
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setCurrent(map.get(visible.target));
+    }, { rootMargin: '-20% 0px -55% 0px', threshold: [0.1, 0.25, 0.5] });
+    map.forEach((_, el) => io.observe(el));
+  })();
 })();

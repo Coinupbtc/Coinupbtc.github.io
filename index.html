@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Coinupbtc — local AI &amp; open builds</title>
   <meta name="description" content="Coinupbtc — local AI infrastructure, measured open projects, and art generated on my own hardware. Pseudonymous; contact via GitHub, X, or email.">
   <meta name="color-scheme" content="light dark">
@@ -22,6 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
 
   <!-- set theme before first paint to avoid flash -->
   <script>
@@ -42,7 +43,8 @@
     "email": "coinupbtc@gmail.com",
     "sameAs": [
       "https://github.com/Coinupbtc",
-      "https://x.com/coinupbtc"
+      "https://x.com/coinupbtc",
+      "https://coinupbtc.xyz/"
     ]
   }
   </script>
@@ -50,10 +52,20 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
-    <span class="theme-sun" aria-hidden="true"></span>
-    <span class="theme-moon" aria-hidden="true"></span>
-  </button>
+  <header class="site-nav" id="site-nav">
+    <a class="nav-brand" href="#top">Coinupbtc</a>
+    <nav aria-label="On this site">
+      <a href="#projects">Work</a>
+      <a href="#art">Art</a>
+      <a href="https://coinupbtc.xyz/">Lab</a>
+      <a href="#hub">Contact</a>
+    </nav>
+    <span id="telemetry" class="nav-clock telemetry" aria-hidden="true">proof over claim</span>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+      <span class="theme-sun" aria-hidden="true"></span>
+      <span class="theme-moon" aria-hidden="true"></span>
+    </button>
+  </header>
 
   <div class="grain" aria-hidden="true"></div>
 
@@ -72,20 +84,17 @@
       </div>
       <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
       <div class="hero-vignette" aria-hidden="true"></div>
-      <div class="top">
-        <strong>Coinupbtc</strong>
-        <span id="telemetry" class="telemetry" aria-hidden="true">proof over claim</span>
-      </div>
       <div class="stage" id="stage">
         <div class="stage-main">
           <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>local AI &middot; measured builds &middot; open repos</p>
           <h1 class="brand"><mark>Coinupbtc</mark></h1>
           <p class="lede">I don&#8217;t rent intelligence &#8212; I host it. <em>Local AI, measured builds, open repos.</em></p>
           <div class="ctas">
-            <a class="primary" href="https://github.com/Coinupbtc" data-magnetic>GitHub<span class="arr" aria-hidden="true">&#8599;</span></a>
-            <a href="https://x.com/coinupbtc" data-magnetic>X &middot; @coinupbtc<span class="arr" aria-hidden="true">&#8599;</span></a>
-            <a href="mailto:coinupbtc@gmail.com" data-magnetic>Email<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a class="primary" href="#projects" data-magnetic>Selected work</a>
+            <a href="https://coinupbtc.xyz/" data-magnetic>Open the lab<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a href="#art" data-magnetic>On-metal art</a>
           </div>
+          <p class="use-line">Work and art live on this page. The lab next door is three demos you can poke — no account.</p>
         </div>
         <figure class="plate" role="img" aria-label="Local DGX Spark systems topology, generated on hardware">
           <img src="assets/art/topology.webp" alt="The local DGX Spark systems topology — a node graph generated on my own hardware" width="1200" height="821" fetchpriority="high">
@@ -200,66 +209,88 @@
           </div>
         </article>
 
+        <article class="card card-lab">
+          <a class="card-top lab-field" href="https://coinupbtc.xyz/" aria-label="the lab on coinupbtc.xyz">
+            <span class="card-num" aria-hidden="true"><b>3</b> demos</span>
+          </a>
+          <div class="card-body">
+            <h3><a href="https://coinupbtc.xyz/">the lab</a></h3>
+            <p>Three interactive mechanisms in your browser — fee bands, a multi-Spark memory packer, and the moiré motif. <strong>No account. One file each.</strong></p>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <section class="gallery" aria-labelledby="art-h">
+    <section class="gallery" id="art" aria-labelledby="art-h">
       <p class="kicker">The art</p>
       <h2 id="art-h">Made on the machine</h2>
       <p class="section-note">
-        Every image and clip below was generated locally on my own DGX Spark — no cloud API, no rented GPU.
-        Stills are optical figure studies; the tiles marked <strong>H3&nbsp;&#9654;</strong> are
-        MiniMax-H3 clips rendered on the same machine — hover (or tap) to play.
-        <span class="hint">click any tile to view full-size</span>
+        Every clip below was generated locally on my own DGX Spark — MiniMax-H3, no cloud API, no rented GPU.
+        Tiles marked <strong>H3&nbsp;&#9654;</strong> play on hover; tap any tile to open it.
+        The last tile is the one still: this machine&rsquo;s own systems graph.
+        <span class="hint">tap a tile for full-size — videos play on hover, or tap to open</span>
       </p>
       <ul class="art-grid" id="art-grid">
-        <li class="art-item">
-          <button class="art-btn" type="button" data-full="assets/art/spiral.webp"
-                  data-caption="Spiral — concentric figure-ground study in black and white">
-            <img src="assets/art/spiral-t.webp" width="640" height="438" loading="lazy" decoding="async"
-                 alt="Concentric black and white spiral, an optical figure-ground study">
+        <li class="art-item art-video-item wide">
+          <button class="art-btn art-video" type="button"
+                  data-video="assets/video/astronaut.mp4" data-poster="assets/video/astronaut.webp"
+                  data-caption="A lone astronaut between two worlds — local H3 text-to-video">
+            <video class="tile-video" muted loop playsinline preload="none"
+                   poster="assets/video/astronaut.webp" width="960" height="560" data-hover>
+              <source src="assets/video/astronaut.mp4" type="video/mp4">
+            </video>
+            <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
           </button>
         </li>
-        <li class="art-item">
-          <button class="art-btn" type="button" data-full="assets/art/vortex.webp"
-                  data-caption="Vortex — curved bands of black and white flowing inward">
-            <img src="assets/art/vortex-t.webp" width="640" height="438" loading="lazy" decoding="async"
-                 alt="Black and white vortex of curved bands">
+        <li class="art-item art-video-item">
+          <button class="art-btn art-video" type="button"
+                  data-video="assets/video/koi.mp4" data-poster="assets/video/koi.webp"
+                  data-caption="Two koi in dark water — local H3 text-to-video">
+            <video class="tile-video" muted loop playsinline preload="none"
+                   poster="assets/video/koi.webp" width="960" height="560" data-hover>
+              <source src="assets/video/koi.mp4" type="video/mp4">
+            </video>
+            <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
           </button>
         </li>
-        <li class="art-item">
-          <button class="art-btn" type="button" data-full="assets/art/penrose.webp"
-                  data-caption="Penrose triangle — impossible geometry in brushed gold on white">
-            <img src="assets/art/penrose-t.webp" width="640" height="438" loading="lazy" decoding="async"
-                 alt="Impossible triangle rendered in brushed gold on white">
+        <li class="art-item art-video-item">
+          <button class="art-btn art-video" type="button"
+                  data-video="assets/video/fox.mp4" data-poster="assets/video/fox.webp"
+                  data-caption="Red fox walking into a snow forest — local H3 text-to-video">
+            <video class="tile-video" muted loop playsinline preload="none"
+                   poster="assets/video/fox.webp" width="960" height="560" data-hover>
+              <source src="assets/video/fox.mp4" type="video/mp4">
+            </video>
+            <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
           </button>
         </li>
-        <li class="art-item">
-          <button class="art-btn" type="button" data-full="assets/art/duckrabbit.webp"
-                  data-caption="Duck-rabbit — the ambiguous figure in flat black on white">
-            <img src="assets/art/duckrabbit-t.webp" width="640" height="438" loading="lazy" decoding="async"
-                 alt="The duck-rabbit ambiguous figure in flat black on white">
+        <li class="art-item art-video-item">
+          <button class="art-btn art-video" type="button"
+                  data-video="assets/video/coffee.mp4" data-poster="assets/video/coffee.webp"
+                  data-caption="Steam off a cup in morning light — local H3 text-to-video">
+            <video class="tile-video" muted loop playsinline preload="none"
+                   poster="assets/video/coffee.webp" width="960" height="560" data-hover>
+              <source src="assets/video/coffee.mp4" type="video/mp4">
+            </video>
+            <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
           </button>
         </li>
-        <li class="art-item">
-          <button class="art-btn" type="button" data-full="assets/art/grid.webp"
-                  data-caption="Grid — squares of hatching alternating their angle">
-            <img src="assets/art/grid-t.webp" width="640" height="438" loading="lazy" decoding="async"
-                 alt="Grid of squares filled with hatching at alternating angles">
+        <li class="art-item art-video-item">
+          <button class="art-btn art-video" type="button"
+                  data-video="assets/video/candle.mp4" data-poster="assets/video/candle.webp"
+                  data-caption="A single flame in the dark — local H3 text-to-video">
+            <video class="tile-video" muted loop playsinline preload="none"
+                   poster="assets/video/candle.webp" width="960" height="560" data-hover>
+              <source src="assets/video/candle.mp4" type="video/mp4">
+            </video>
+            <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
           </button>
         </li>
-        <li class="art-item">
-          <button class="art-btn" type="button" data-full="assets/art/arcs.webp"
-                  data-caption="Arcs — two identical curvatures, a study in sameness">
-            <img src="assets/art/arcs-t.webp" width="640" height="438" loading="lazy" decoding="async"
-                 alt="Two thin black arcs on white, a study in identical curvature">
-          </button>
-        </li>
-
         <li class="art-item art-video-item">
           <button class="art-btn art-video" type="button"
                   data-video="assets/video/dragon.mp4" data-poster="assets/video/dragon.webp"
-                  data-caption="Crimson dragon — tarnished gold scales, rendered locally (H3 text-to-video)">
+                  data-caption="Crimson dragon, 30s flight — four H3 shots cut locally">
             <video class="tile-video" muted loop playsinline preload="none"
                    poster="assets/video/dragon.webp" width="960" height="560" data-hover>
               <source src="assets/video/dragon.mp4" type="video/mp4">
@@ -267,19 +298,6 @@
             <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
           </button>
         </li>
-
-        <li class="art-item art-video-item">
-          <button class="art-btn art-video" type="button"
-                  data-video="assets/video/car.mp4" data-poster="assets/video/car.webp"
-                  data-caption="Sports car tearing down a luminous night road — local H3 text-to-video">
-            <video class="tile-video" muted loop playsinline preload="none"
-                   poster="assets/video/car.webp" width="960" height="560" data-hover>
-              <source src="assets/video/car.mp4" type="video/mp4">
-            </video>
-            <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
-          </button>
-        </li>
-
         <li class="art-item art-video-item">
           <button class="art-btn art-video" type="button"
                   data-video="assets/video/cat.mp4" data-poster="assets/video/cat.webp"
@@ -291,19 +309,17 @@
             <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
           </button>
         </li>
-
-        <li class="art-item art-video-item">
+        <li class="art-item art-video-item wide mosaic">
           <button class="art-btn art-video" type="button"
-                  data-video="assets/video/soundwave.mp4" data-poster="assets/video/soundwave.webp"
-                  data-caption="A glowing cyan soundwave ribbon pulsing — this machine&rsquo;s own waveform, H3 text-to-video">
+                  data-video="assets/video/fireworks.mp4" data-poster="assets/video/fireworks.webp"
+                  data-caption="Six fireworks cells — same seed, different res and steps (H3)">
             <video class="tile-video" muted loop playsinline preload="none"
-                   poster="assets/video/soundwave.webp" width="960" height="560" data-hover>
-              <source src="assets/video/soundwave.mp4" type="video/mp4">
+                   poster="assets/video/fireworks.webp" width="1600" height="600" data-hover>
+              <source src="assets/video/fireworks.mp4" type="video/mp4">
             </video>
             <span class="reel-badge" aria-hidden="true">H3 &#9654;</span>
           </button>
         </li>
-
         <li class="art-item wide">
           <button class="art-btn" type="button" data-full="assets/art/topology.webp"
                   data-caption="Topology — the local DGX Spark systems graph">
@@ -314,7 +330,7 @@
       </ul>
     </section>
 
-    <section class="hub" aria-labelledby="hub-h">
+    <section class="hub" id="hub" aria-labelledby="hub-h">
       <p class="kicker">Elsewhere</p>
       <h2 id="hub-h">Find me in the open</h2>
       <ul class="hub-list">
@@ -329,6 +345,10 @@
         <li>
           <a href="mailto:coinupbtc@gmail.com">coinupbtc@gmail.com</a>
           <span>inbound contact</span>
+        </li>
+        <li>
+          <a href="https://coinupbtc.xyz/">the lab · coinupbtc.xyz</a>
+          <span>three demos, in the browser</span>
         </li>
       </ul>
     </section>

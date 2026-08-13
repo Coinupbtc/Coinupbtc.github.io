@@ -35,14 +35,20 @@ DST = REPO / "assets" / "video"
 # A poster_ts > 0 pulls the poster frame from mid-clip (clips that fade up from black).
 PICKS = {
     "hero-street": ("h3-20260804_210351-a_slow_push_in_on_an_empty_rain-soaked_s-19263.mp4", 0),
-    "dragon":      ("h3-20260803_215318-A_huge_deep-crimson_dragon_with_tarnishe.mp4", 0),
-    "car":         ("h3-20260803_201935-A_sleek_sports_car_speeding_along_a_lumi.mp4", 0),
+    "dragon":      ("dragon-flight-30s-v2.mp4", 8),
     "cat":         ("h3-20260803_211341-A_fluffy_orange_cat_riding_on_the_back_o.mp4", 0),
-    "soundwave":   ("h3-20260804_061639-A_glowing_cyan_soundwave_ribbon_pulses_t.mp4", 3),
+    "coffee":      ("h3-20260803_200653-Soft_bokeh_coffee_steam_in_morning_light.mp4", 0.4),
+    "candle":      ("h3-20260804_190558-a_single_candle_flame_flickering_in_a_da-2378.mp4", 0.3),
+    "koi":         ("h3-20260807_233749-Photorealistic_two_koi_fish_swimming_in_-9908-faststart.mp4", 1.2),
+    "astronaut":   ("h3-20260808_093249-A_lone_astronaut_drifting_slowly_above_t-31880.mp4", 0.8),
+    "fox":         ("h3-20260808_093249-A_tiny_orange_fox_kit_pouncing_playfully-31721.mp4", 0.6),
+    "fireworks":   ("resstep-test/grid-side-by-side.mp4", 0.4),
 }
 
 WIDTH = 960
 CRF = "26"
+# Mosaic grids keep labels readable at a wider encode.
+WIDE = {"fireworks": 1600}
 
 
 def run(*args: str) -> None:
@@ -66,9 +72,10 @@ def main() -> int:
             continue
 
         mp4 = DST / f"{slug}.mp4"
+        width = WIDE.get(slug, WIDTH)
         run(
             "ffmpeg", "-v", "error", "-i", str(src),
-            "-vf", f"scale={WIDTH}:-2",
+            "-vf", f"scale={width}:-2",
             "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p",
             "-crf", CRF, "-preset", "slow", "-movflags", "+faststart",
             "-an", "-y", str(mp4),
@@ -78,7 +85,7 @@ def main() -> int:
         ss = ["-ss", str(poster_ts)] if poster_ts > 0 else []
         run(
             "ffmpeg", "-v", "error", *ss, "-i", str(src),
-            "-vf", f"scale={WIDTH}:-2", "-frames:v", "1", "-y", str(frame),
+            "-vf", f"scale={width}:-2", "-frames:v", "1", "-y", str(frame),
         )
         Image.open(frame).convert("RGB").save(
             DST / f"{slug}.webp", "WEBP", quality=72, method=6
