@@ -74,11 +74,33 @@ body {
   text-decoration: none;
   color: color-mix(in srgb, var(--ink) 82%, var(--mute));
   border-bottom: 2px solid transparent;
+  position: relative;
+}
+/* Pass 3 D-Finish D3 · nav underline sweep — acid line grows in from the
+   left on hover/focus, stays for the active section. Off for touch / reduced-motion. */
+.site-nav nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--acid);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.22, 0.9, 0.3, 1);
+}
+.site-nav nav a:hover::after,
+.site-nav nav a:focus-visible::after,
+.site-nav nav a[aria-current="true"]::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .site-nav nav a::after { display: none; }
 }
 .site-nav nav a:hover,
 .site-nav nav a[aria-current="true"] {
   color: var(--ink);
-  border-bottom-color: var(--acid);
 }
 
 .nav-clock {

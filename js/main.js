@@ -913,4 +913,42 @@
     };
     btn.addEventListener('click', crossfade, { capture: true });
   })();
+
+  /* ══════════════════════════════════════════════════════
+     PASS 3 D-FINISH (2026-08-15) — deepen micro-interactions
+     lightbox keyboard-hint · marquee breath · nav underline sweep
+     ══════════════════════════════════════════════════════ */
+
+  /* ── D1 · Lightbox keyboard-hint bar: reveal on first key use ── */
+  (function lbHint() {
+    const hint = document.getElementById('lb-hint');
+    if (!hint) return;
+    // coarse pointers (touch) don't get keyboard hints — CSS hides it too.
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    let shown = false;
+    function reveal() {
+      if (shown) return;
+      shown = true;
+      hint.classList.add('show');
+      hint.setAttribute('aria-hidden', 'false');
+    }
+    document.addEventListener('keydown', (e) => {
+      if (lb.hidden) return;
+      // reveal on any lightbox-relevant key, not just arrows
+      if (['ArrowLeft', 'ArrowRight', 'Escape', '+', '-', '=', '_'].includes(e.key)) reveal();
+    });
+    // also reveal when the focused element is inside the lightbox (Tab reached it)
+    document.addEventListener('keydown', (e) => {
+      if (lb.hidden) return;
+      if (e.key === 'Tab' && lb.contains(document.activeElement)) reveal();
+    });
+    // reset per-open so a returning visitor gets the discovery beat again
+    const origOpenHint = openLb;
+    openLb = (i) => {
+      shown = false;
+      hint.classList.remove('show');
+      hint.setAttribute('aria-hidden', 'true');
+      (origOpenHint instanceof Function ? origOpenHint : (() => {}))(i);
+    };
+  })();
 })();

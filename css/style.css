@@ -613,6 +613,35 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
   color: var(--mute);
 }
 
+/* Pass 3 D-Finish D1 · lightbox keyboard-hint bar — hidden until the first
+   keyboard interaction inside the open viewer, then it fades in so a stranger
+   discovers arrows/Esc/zoom/pan instead of it cluttering the initial open. */
+.lb-hint {
+  position: absolute;
+  left: 50%;
+  top: clamp(0.9rem, 4vw, 2rem);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--paper) 78%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.lb-hint i { color: var(--acid); font-style: normal; }
+.lb-hint.show { opacity: 1; }
+/* touch users navigate by tap — keyboard hints stay hidden (coarse/no hover) */
+@media (hover: none) { .lb-hint { display: none; } }
+@media (prefers-reduced-motion: reduce) { .lb-hint { transition: none; } }
+
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 560px) {
   .proof li, .hub-list li { grid-template-columns: 1fr; gap: 0.25rem; }
@@ -778,8 +807,24 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
 .marquee::after { bottom: -2px; transform: scaleX(0.4); transform-origin: right; }
 .marquee.marquee-hover::before,
 .marquee.marquee-hover::after { opacity: 1; transform: scaleX(1); }
+
+/* Pass 3 D-Finish D2 · marquee non-hover "breath" — the acid separators pulse
+   gently while the band scrolls untouched, so the strip feels alive at rest.
+   Hover-pause freezes the breath (full opacity) and reduced-motion disables it. */
+.marquee-track i {
+  animation: marquee-breath 4.2s ease-in-out infinite;
+}
+.marquee.marquee-hover .marquee-track i {
+  animation-play-state: paused;
+  opacity: 1;
+}
+@keyframes marquee-breath {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
 @media (prefers-reduced-motion: reduce) {
   .marquee::before, .marquee::after { display: none; }
+  .marquee-track i { animation: none; opacity: 1; }
 }
 
 /* ── Art tile 3D tilt + glare + hover caption ────────────── */
