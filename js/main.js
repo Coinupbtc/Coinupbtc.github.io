@@ -727,7 +727,7 @@
     closeLb = () => { origClose(); lb.classList.remove('open'); reset(); };
   })();
 
-  /* ── Hero setup carousel (cluster + agent lanes, no helper) ─ */
+  /* ── Hero carousel: hardware + models (names, not gateways) ─ */
   (function setupCarousel() {
     const img = document.getElementById('setup-img');
     const cap = document.getElementById('setup-cap');
@@ -738,33 +738,28 @@
     const slides = [
       {
         src: 'assets/art/setup-cluster.webp',
-        alt: 'Two DGX Spark boxes linked by a lime fabric cable',
-        html: 'the machine that renders this — <em>dual Spark cluster</em>'
+        alt: 'Two NVIDIA DGX Spark units, champagne metal bricks, linked as a cluster',
+        html: 'hosted here — <em>two DGX Sparks</em>'
       },
       {
-        src: 'assets/art/setup-fleet.webp',
-        alt: 'Four agent lanes around a dual-Spark core',
-        html: 'live chat lanes — <em>orch · dobby · smeagle · freegle · light</em>'
+        src: 'assets/art/setup-deepseek.webp',
+        alt: 'A DGX Spark in front of a cyan neural field',
+        html: 'chat — <em>DeepSeek-V4-Flash</em>'
       },
       {
-        src: 'assets/art/setup-dobby.webp',
-        alt: 'Cobalt server slab feeding a dark compute cube',
-        html: 'builder lane — <em>dobby</em>'
+        src: 'assets/art/setup-qwen.webp',
+        alt: 'A DGX Spark wrapped in jade light sheets',
+        html: 'coding — <em>Qwen 3.8 27B</em>'
       },
       {
-        src: 'assets/art/setup-smeagle.webp',
-        alt: 'Lime puzzle cube wired into a circuit cube',
-        html: 'Qwen lane — <em>smeagle</em>'
+        src: 'assets/art/setup-vision.webp',
+        alt: 'A DGX Spark with a hovering camera iris of light',
+        html: 'vision — <em>Qwen3-VL 4B</em>'
       },
       {
-        src: 'assets/art/setup-freegle.webp',
-        alt: 'Gold cloud module with a bird token wired to a cube',
-        html: 'open lane — <em>freegle</em>'
-      },
-      {
-        src: 'assets/art/setup-light.webp',
-        alt: 'Slim silver bar firing a white-cyan filament at a cube',
-        html: 'fast lane — <em>light</em>'
+        src: 'assets/art/setup-h3.webp',
+        alt: 'A DGX Spark under a warm cinematic film glow',
+        html: 'video — <em>MiniMax H3</em>'
       }
     ];
     let i = 0;
