@@ -833,4 +833,84 @@
     }, { rootMargin: '-20% 0px -55% 0px', threshold: [0.1, 0.25, 0.5] });
     map.forEach((_, el) => io.observe(el));
   })();
+
+  /* ══════════════════════════════════════════════════════
+     PASS 3 (2026-08-14) — interaction-craft upgrades
+     marquee hover-pause · card parallax · theme crossfade
+     ══════════════════════════════════════════════════════ */
+
+  /* ── U1 · Marquee micro-interaction: hover pauses + acid edge ── */
+  (function marqueeHover() {
+    const wrap = document.querySelector('.marquee');
+    if (!wrap) return;
+    const track = wrap.querySelector('.marquee-track');
+    if (!track) return;
+    // reduced-motion already disables the animation in CSS — nothing to pause.
+    if (reduceMotion) return;
+    // coarse pointers (touch) have no hover; keep auto-scroll.
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    let running = true;
+    const setPaused = (p) => {
+      running = !p;
+      wrap.classList.toggle('marquee-hover', p);
+      // Pause the CSS animation by swapping play-state; keep inline style clear.
+      track.style.animationPlayState = p ? 'paused' : 'running';
+    };
+    wrap.addEventListener('pointerenter', () => setPaused(true));
+    wrap.addEventListener('pointerleave', () => setPaused(false));
+    // Leave a stable running state if the pointer is inside on load edge cases.
+    setPaused(false);
+    void running;
+  })();
+
+  /* ── U2 · Proof-card cursor parallax (image depth under frame) ── */
+  (function cardParallax() {
+    if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    const tops = Array.from(document.querySelectorAll('.card-top'));
+    if (!tops.length) return;
+    tops.forEach((top) => {
+      const img = top.querySelector('img.card-img');
+      if (!img) return;
+      let raf = null;
+      top.addEventListener('pointermove', (e) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = null;
+          const r = top.getBoundingClientRect();
+          // normalize to -0.5..0.5 across the card frame
+          const nx = (e.clientX - r.left) / r.width - 0.5;
+          const ny = (e.clientY - r.top) / r.height - 0.5;
+          const mx = (nx * -12).toFixed(2);  // opposite the cursor
+          const my = (ny * -9).toFixed(2);
+          img.style.setProperty('--px', `${mx}px`);
+          img.style.setProperty('--py', `${my}px`);
+          top.classList.add('px');
+        });
+      });
+      top.addEventListener('pointerleave', () => {
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+        top.classList.remove('px');
+        img.style.removeProperty('--px');
+        img.style.removeProperty('--py');
+      });
+    });
+  })();
+
+  /* ── U3 · Theme crossfade polish (page-wide, momentary) ── */
+  (function themeCrossfade() {
+    if (reduceMotion) return; // instant swap for reduced-motion users
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    const FLIP_LEN = 550; // ms the crossfade class is applied
+    let timer = null;
+    const crossfade = () => {
+      root.classList.add('theme-anim');
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        root.classList.remove('theme-anim');
+        timer = null;
+      }, FLIP_LEN);
+    };
+    btn.addEventListener('click', crossfade, { capture: true });
+  })();
 })();

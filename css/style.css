@@ -29,6 +29,30 @@ html[data-theme="dark"] {
   --shadow: 0 18px 55px -22px rgba(0, 0, 0, 0.8);
 }
 
+/* Pass 3 U3 · theme crossfade — applied momentarily by JS only while toggling.
+   Targets color-ish props across the page so the dark⇄light flip crossfades
+   instead of snapping; deliberately EXCLUDES transform/layout so the kinetic
+   transforms (inline styles on CTAs/cards/art) keep their own timing. */
+html.theme-anim,
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after {
+  transition:
+    background 0.45s ease,
+    background-color 0.45s ease,
+    color 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease,
+    fill 0.45s ease,
+    stroke 0.45s ease !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-anim,
+  html.theme-anim *,
+  html.theme-anim *::before,
+  html.theme-anim *::after { transition: none !important; }
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
@@ -735,6 +759,29 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
 }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+/* Pass 3 U1 · marquee hover micro-interaction: pause + acid edge */
+.marquee { position: relative; }
+.marquee::before,
+.marquee::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--acid);
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+.marquee::before { top: -2px; transform: scaleX(0.4); transform-origin: left; }
+.marquee::after { bottom: -2px; transform: scaleX(0.4); transform-origin: right; }
+.marquee.marquee-hover::before,
+.marquee.marquee-hover::after { opacity: 1; transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .marquee::before, .marquee::after { display: none; }
+}
+
 /* ── Art tile 3D tilt + glare + hover caption ────────────── */
 .art-item {
   perspective: 900px;
@@ -1054,6 +1101,14 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.4s ease;
 }
 .card:hover .card-img { transform: scale(1.05); filter: saturate(1.05); }
+
+/* Pass 3 U2 · proof-card cursor parallax (image depth, no tilt) */
+.card-top.px .card-img {
+  will-change: transform;
+  transform:
+    translate(var(--px, 0), var(--py, 0))
+    scale(1.08); /* extra room so the parallax never exposes edges */
+}
 
 /* subtle dark scrim so the number badge pops on any art */
 .card-top::after {
