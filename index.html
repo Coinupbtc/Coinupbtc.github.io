@@ -25,7 +25,9 @@
   <meta name="twitter:image:alt" content="Coinupbtc — local AI, measured builds, open repos. GitHub, X, and email on the card.">
   <link rel="image_src" href="https://coinupbtc.com/assets/og-image.png">
   <link rel="canonical" href="https://coinupbtc.com/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312141a'/%3E%3Crect x='4' y='22' width='24' height='6' fill='%23c8f54a'/%3E%3C/svg%3E">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,22 +108,17 @@
           </div>
           <p class="use-line">Work and art live on this page. The lab next door is three demos you can poke — no account.</p>
         </div>
-        <figure class="plate" role="img" aria-label="Local DGX Spark systems topology, generated on hardware">
-          <img src="assets/art/topology.webp" alt="The local DGX Spark systems topology — a node graph generated on my own hardware" width="1200" height="821" fetchpriority="high">
-          <!-- kinetic pass: scroll-linked signal trace across the real node route (Dobby -> DGX Spark -> Freegle) -->
-          <svg class="plate-trace" viewBox="0 0 1200 821" aria-hidden="true" focusable="false">
-            <path class="trace-ghost" d="M300 205 L600 394 L900 616"/>
-            <path class="trace-line" d="M300 205 L600 394 L900 616"/>
-            <g class="trace-pulse" aria-hidden="true">
-              <circle class="trace-halo" cx="300" cy="205" r="11"/>
-              <circle class="trace-dot" cx="300" cy="205" r="4.5"/>
-            </g>
-            <circle class="trace-node" cx="300" cy="205" r="7"/>
-            <circle class="trace-node" cx="600" cy="394" r="7"/>
-            <circle class="trace-node" cx="900" cy="616" r="7"/>
-          </svg>
-          <figcaption class="plate-cap">the machine that renders this &#8212; <em>system topology, on-metal</em></figcaption>
-          <span class="plate-tag" aria-hidden="true">onmetal <i>&middot;</i> no cloud</span>
+        <figure class="plate" id="setup-plate" aria-roledescription="carousel" aria-label="Local setups, helper skipped">
+          <div class="plate-stage">
+            <img id="setup-img" src="assets/art/setup-cluster.webp" alt="Two DGX Spark boxes linked by a lime fabric cable" width="1200" height="821" fetchpriority="high">
+          </div>
+          <div class="plate-ctrl">
+            <button type="button" class="plate-prev" id="setup-prev" aria-label="Previous setup">&#8592;</button>
+            <ol class="plate-dots" id="setup-dots"></ol>
+            <button type="button" class="plate-next" id="setup-next" aria-label="Next setup">&#8594;</button>
+          </div>
+          <figcaption class="plate-cap" id="setup-cap">the machine that renders this &#8212; <em>dual Spark cluster</em></figcaption>
+          <span class="plate-tag" aria-hidden="true">onmetal <i>&middot;</i> no helper</span>
         </figure>
       </div>
       <div class="foot-meta">
@@ -331,10 +328,10 @@
           </button>
         </li>
         <li class="art-item wide">
-          <button class="art-btn" type="button" data-full="assets/art/topology.webp"
-                  data-caption="Topology — the local DGX Spark systems graph">
-            <img src="assets/art/topology.webp" width="1200" height="821" loading="lazy" decoding="async"
-                 alt="Node diagram of a local DGX Spark systems topology">
+          <button class="art-btn" type="button" data-full="assets/art/setup-fleet.webp"
+                  data-caption="Fleet — orch, dobby, smeagle, freegle, light. Helper not pictured.">
+            <img src="assets/art/setup-fleet.webp" width="1200" height="821" loading="lazy" decoding="async"
+                 alt="Four agent lanes around a dual-Spark core">
           </button>
         </li>
       </ul>

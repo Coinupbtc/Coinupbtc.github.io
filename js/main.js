@@ -727,6 +727,99 @@
     closeLb = () => { origClose(); lb.classList.remove('open'); reset(); };
   })();
 
+  /* ── Hero setup carousel (cluster + agent lanes, no helper) ─ */
+  (function setupCarousel() {
+    const img = document.getElementById('setup-img');
+    const cap = document.getElementById('setup-cap');
+    const dots = document.getElementById('setup-dots');
+    const prev = document.getElementById('setup-prev');
+    const next = document.getElementById('setup-next');
+    if (!img || !cap || !dots || !prev || !next) return;
+    const slides = [
+      {
+        src: 'assets/art/setup-cluster.webp',
+        alt: 'Two DGX Spark boxes linked by a lime fabric cable',
+        html: 'the machine that renders this — <em>dual Spark cluster</em>'
+      },
+      {
+        src: 'assets/art/setup-fleet.webp',
+        alt: 'Four agent lanes around a dual-Spark core',
+        html: 'live chat lanes — <em>orch · dobby · smeagle · freegle · light</em>'
+      },
+      {
+        src: 'assets/art/setup-dobby.webp',
+        alt: 'Cobalt server slab feeding a dark compute cube',
+        html: 'builder lane — <em>dobby</em>'
+      },
+      {
+        src: 'assets/art/setup-smeagle.webp',
+        alt: 'Lime puzzle cube wired into a circuit cube',
+        html: 'Qwen lane — <em>smeagle</em>'
+      },
+      {
+        src: 'assets/art/setup-freegle.webp',
+        alt: 'Gold cloud module with a bird token wired to a cube',
+        html: 'open lane — <em>freegle</em>'
+      },
+      {
+        src: 'assets/art/setup-light.webp',
+        alt: 'Slim silver bar firing a white-cyan filament at a cube',
+        html: 'fast lane — <em>light</em>'
+      }
+    ];
+    let i = 0;
+    let timer = null;
+    slides.forEach((s, idx) => {
+      const li = document.createElement('li');
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Show slide ' + (idx + 1));
+      b.addEventListener('click', () => go(idx, true));
+      li.appendChild(b);
+      dots.appendChild(li);
+    });
+    function paint() {
+      const s = slides[i];
+      img.classList.add('is-swap');
+      const apply = () => {
+        img.src = s.src;
+        img.alt = s.alt;
+        cap.innerHTML = s.html;
+        dots.querySelectorAll('button').forEach((b, n) => {
+          if (n === i) b.setAttribute('aria-current', 'true');
+          else b.removeAttribute('aria-current');
+        });
+        img.classList.remove('is-swap');
+      };
+      if (reduceMotion) apply();
+      else setTimeout(apply, 160);
+    }
+    function go(n, user) {
+      i = (n + slides.length) % slides.length;
+      paint();
+      if (user) arm();
+    }
+    function arm() {
+      if (timer) clearInterval(timer);
+      if (reduceMotion) return;
+      timer = setInterval(() => go(i + 1, false), 5200);
+    }
+    prev.addEventListener('click', () => go(i - 1, true));
+    next.addEventListener('click', () => go(i + 1, true));
+    const plate = document.getElementById('setup-plate');
+    plate?.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(i - 1, true); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(i + 1, true); }
+    });
+    plate?.setAttribute('tabindex', '0');
+    if (plate) {
+      plate.style.opacity = '1';
+      plate.style.transform = 'none';
+    }
+    paint();
+    arm();
+  })();
+
   /* ══════════════════════════════════════════════════════
      KINETIC PASS (2026-08-03) — trace / spotlight / spring
      ══════════════════════════════════════════════════════ */
