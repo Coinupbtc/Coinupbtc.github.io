@@ -123,11 +123,12 @@
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
         <span>Trained&nbsp;locally</span><i>&#10022;</i>
-        <span>169&nbsp;t/s&nbsp;measured</span><i>&#10022;</i>
+        <!-- Headline is clean-restart sustained decode (~35–38), not later spec-decode peaks. -->
+        <span>~35&#8211;38&nbsp;t/s&nbsp;measured</span><i>&#10022;</i>
         <span>Zero&nbsp;rented&nbsp;GPUs</span><i>&#10022;</i>
         <span>open&nbsp;repos</span><i>&#10022;</i>
         <span>Trained&nbsp;locally</span><i>&#10022;</i>
-        <span>169&nbsp;t/s&nbsp;measured</span><i>&#10022;</i>
+        <span>~35&#8211;38&nbsp;t/s&nbsp;measured</span><i>&#10022;</i>
         <span>Zero&nbsp;rented&nbsp;GPUs</span><i>&#10022;</i>
         <span>open&nbsp;repos</span><i>&#10022;</i>
       </div>
@@ -139,7 +140,11 @@
       <dl class="sys-grid" id="sys-grid">
         <div class="sys-cell"><dt>GPU memory</dt><dd class="num" data-count="121" data-suffix=" GB">121 GB</dd><dd class="sub">unified CPU+RAM, on-box</dd></div>
         <div class="sys-cell"><dt>Storage</dt><dd class="num" data-count="3.7" data-decimals="1" data-suffix=" TB">3.7 TB</dd><dd class="sub">NVMe, local weights</dd></div>
-        <div class="sys-cell"><dt>Decode</dt><dd class="num" data-count="169" data-suffix=" t/s">169 t/s</dd><dd class="sub">measured coding throughput</dd></div>
+        <!-- Range, not a count-up: primary metric is ~35–38 tok/s (thinking off),
+             from Coinupbtc/miaai35-tune RESULTS.md +
+             results/bench-original-rerun-think-off-20260709-203311.json
+             (coding 35.80, short 38.23). Do not re-promote unsourced 169 t/s. -->
+        <div class="sys-cell"><dt>Decode</dt><dd>~35&#8211;38 t/s</dd><dd class="sub">sustained decode, thinking off</dd></div>
         <div class="sys-cell"><dt>Art</dt><dd>on-metal</dd><dd class="sub">ComfyUI, no cloud API</dd></div>
       </dl>
     </section>
@@ -157,11 +162,11 @@
         <article class="card">
           <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune" aria-label="miaai35-tune on GitHub">
             <img class="card-img" src="assets/projects/miaai35-tune.webp" alt="Local LLM serving bakeoff — measured tokens and tuning curve" width="640" height="438" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>169</b> t/s</span>
+            <span class="card-num" aria-hidden="true"><b>~35&#8211;38</b> t/s</span>
           </a>
           <div class="card-body">
             <h3><a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a></h3>
-            <p>Measured llama.cpp flag/profile bakeoff for Qwen3.6-35B on DGX Spark — pick serving settings with evidence, not vibes. Coding decode measured at <strong>169 t/s</strong>, quality 9/10.</p>
+            <p>Measured llama.cpp flag/profile bakeoff for Qwen3.6-35B on DGX Spark — pick serving settings with evidence, not vibes. Headline sustained decode is <strong>~35&#8211;38 t/s</strong> (thinking off), quality 9/10. Source: <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md">RESULTS.md</a> and <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">bench-original-rerun-think-off JSON</a>. Later speculative-decode profiles in REPORT.md are not the headline metric.</p>
           </div>
         </article>
 

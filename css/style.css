@@ -1223,6 +1223,8 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   padding: 0.28rem 0.6rem;
   border-radius: 2px;
   box-shadow: 0 6px 18px -6px rgba(0,0,0,0.5);
+  /* Range badges (~35–38 t/s) must stay one line on the acid chip. */
+  white-space: nowrap;
 }
 .card-num b {
   font-size: 1.15rem;
