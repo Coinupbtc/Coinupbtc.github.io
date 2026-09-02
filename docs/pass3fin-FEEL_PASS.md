@@ -35,7 +35,7 @@ deepen (D1 keyboard-hint, D2 marquee breath, D3 nav underline sweep).
 ## Plain-English primary copy
 - Brand: **Coinupbtc** — "I don't rent intelligence — I host it."
 - Proof grid: "Built here, shipped open" — the verbs, not the stats.
-- Systems: "Hardware behind the proof" (121 GB, 3.7 TB, 169 t/s).
+- Systems: "Hardware behind the proof" (121 GB, 3.7 TB, ~35–38 t/s).
 
 ## States
 - loading: poster-first video tiles, no blank flash ✓

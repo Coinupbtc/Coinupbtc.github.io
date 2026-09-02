@@ -126,7 +126,7 @@ body {
 
 .use-line {
   margin-top: 1.1rem;
-  max-width: 42ch;
+  max-width: 54ch;
   font-size: 0.8rem;
   line-height: 1.55;
   color: var(--mute);
@@ -143,6 +143,8 @@ body {
 .lede {
   color: color-mix(in srgb, var(--ink) 82%, var(--mute));
 }
+.lede em { color: var(--ink); }
+.use-line strong { color: var(--ink); }
 
 /* The one thing to do on this page must read as a button on the video */
 .hero .ctas a.primary {

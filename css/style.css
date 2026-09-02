@@ -1154,8 +1154,8 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   max-width: 68rem;
 }
 
-/* first card (hero project) spans 2 cols on wide screens for hierarchy */
-.card-grid .card:first-child {
+/* Flagship card (miaai35-tune) spans 2 cols on wide screens for hierarchy */
+.card-grid .card-flagship {
   grid-column: span 2;
 }
 
@@ -1181,7 +1181,7 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   aspect-ratio: 16 / 8.6;
   border-bottom: 1px solid var(--line);
 }
-.card-grid .card:first-child .card-top { aspect-ratio: 16 / 6.4; }
+.card-grid .card-flagship .card-top { aspect-ratio: 16 / 6.4; }
 .card-img {
   display: block;
   width: 100%;
@@ -1223,6 +1223,8 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   padding: 0.28rem 0.6rem;
   border-radius: 2px;
   box-shadow: 0 6px 18px -6px rgba(0,0,0,0.5);
+  /* Range badges (~35–38 t/s) must stay one line on the acid chip. */
+  white-space: nowrap;
 }
 .card-num b {
   font-size: 1.15rem;
@@ -1232,6 +1234,14 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
 }
 
 .card-body { padding: 1.15rem 1.2rem 1.35rem; }
+.card-role {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 0.35rem;
+}
+.card-flagship .card-role { color: var(--ink); }
 .card-body h3 { font-family: var(--font-display); font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-weight: 600; }
 .card-body h3 a {
   text-decoration: none;
@@ -1247,6 +1257,7 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   color: var(--mute);
   max-width: 46ch;
 }
+.card-flagship .card-body p { max-width: 62ch; }
 .card-body p strong { color: var(--ink); }
 
 /* ── Refined headings for the new editorial voice ────────── */
@@ -1263,8 +1274,8 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
     gap: 2rem;
   }
   .plate { justify-self: start; max-width: 100%; }
-  .card-grid .card:first-child { grid-column: span 1; }
-  .card-grid .card:first-child .card-top { aspect-ratio: 16 / 8.6; }
+  .card-grid .card-flagship { grid-column: span 1; }
+  .card-grid .card-flagship .card-top { aspect-ratio: 16 / 8.6; }
   .proof-head { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
 
