@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Coinupbtc — local AI &amp; open builds</title>
-  <meta name="description" content="Coinupbtc — local AI infrastructure, measured open projects, and art generated on my own hardware. Pseudonymous; contact via GitHub, X, or email.">
+  <title>Coinupbtc — miaai35-tune</title>
+  <meta name="description" content="Public proof is miaai35-tune: measured llama.cpp on DGX Spark, ~35–38 t/s sourced from committed JSON. Dual-Spark occupancy is supporting. Pseudonymous; contact via GitHub, X, or email.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#e8e4dc">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Coinupbtc">
   <meta property="og:title" content="Coinupbtc">
-  <meta property="og:description" content="I don't rent intelligence — I host it. Local AI, measured builds, open repos.">
+  <meta property="og:description" content="Public proof: miaai35-tune. I don't rent intelligence — I host it.">
   <meta property="og:url" content="https://coinupbtc.com/">
   <meta property="og:image" content="https://coinupbtc.com/assets/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -98,20 +98,21 @@
       <div class="hero-vignette" aria-hidden="true"></div>
       <div class="stage" id="stage">
         <div class="stage-main">
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>local AI &middot; measured builds &middot; open repos</p>
+          <!-- Single public hero is miaai35-tune; dual-Spark occupancy is supporting. -->
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>miaai35-tune &middot; measured llama.cpp</p>
           <h1 class="brand"><mark>Coinupbtc</mark></h1>
-          <p class="lede">I don&#8217;t rent intelligence &#8212; I host it. <em>Local AI, measured builds, open repos.</em></p>
+          <p class="lede">I don&#8217;t rent intelligence &#8212; I host it. <em>Public proof: miaai35-tune.</em></p>
           <div class="ctas">
-            <a class="primary" href="#projects" data-magnetic>Selected work</a>
-            <a href="https://coinupbtc.xyz/" data-magnetic>Open the lab<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a class="primary" href="https://github.com/Coinupbtc/miaai35-tune" data-magnetic>miaai35-tune<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a href="#projects" data-magnetic>Supporting work</a>
             <a href="#art" data-magnetic>On-metal art</a>
           </div>
-          <p class="use-line">Work and art live on this page. The lab next door is three demos you can poke — no account.</p>
+          <p class="use-line">Headline decode is <strong>~35&#8211;38 t/s</strong> (thinking off), from <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">committed JSON</a>. Dual-Spark occupancy lives in dream-stack as supporting, not flagship.</p>
         </div>
-        <figure class="plate" aria-label="Two NVIDIA DGX Sparks">
+        <figure class="plate" aria-label="Two NVIDIA DGX Sparks, supporting desk">
           <img src="assets/art/setup-cluster.webp" alt="Two NVIDIA DGX Spark units, champagne metal bricks, linked as a cluster" width="1200" height="821" fetchpriority="high">
-          <figcaption class="plate-cap">hosted here &#8212; <em>two DGX Sparks</em></figcaption>
-          <span class="plate-tag" aria-hidden="true">onmetal <i>&middot;</i> local</span>
+          <figcaption class="plate-cap">supporting desk &#8212; <em>two DGX Sparks</em></figcaption>
+          <span class="plate-tag" aria-hidden="true">supporting <i>&middot;</i> occupancy</span>
         </figure>
       </div>
       <div class="foot-meta">
@@ -152,19 +153,20 @@
     <section class="proof" id="projects" aria-labelledby="proof-h">
       <div class="proof-head">
         <div>
-          <p class="kicker">Selected public work</p>
-          <h2 id="proof-h">Built here, shipped open</h2>
+          <p class="kicker">Public proof</p>
+          <h2 id="proof-h">miaai35-tune, then supporting work</h2>
         </div>
         <a class="proof-all" href="https://github.com/Coinupbtc" data-magnetic>all repos <span class="arr" aria-hidden="true">&#8599;</span></a>
       </div>
       <div class="card-grid" id="card-grid">
 
-        <article class="card">
+        <article class="card card-flagship" id="miaai35-tune">
           <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune" aria-label="miaai35-tune on GitHub">
             <img class="card-img" src="assets/projects/miaai35-tune.webp" alt="Local LLM serving bakeoff — measured tokens and tuning curve" width="640" height="438" loading="lazy" decoding="async">
             <span class="card-num" aria-hidden="true"><b>~35&#8211;38</b> t/s</span>
           </a>
           <div class="card-body">
+            <p class="card-role">Public proof</p>
             <h3><a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a></h3>
             <p>Measured llama.cpp flag/profile bakeoff for Qwen3.6-35B on DGX Spark — pick serving settings with evidence, not vibes. Headline sustained decode is <strong>~35&#8211;38 t/s</strong> (thinking off), quality 9/10. Source: <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md">RESULTS.md</a> and <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">bench-original-rerun-think-off JSON</a>. Later speculative-decode profiles in REPORT.md are not the headline metric.</p>
           </div>
@@ -189,6 +191,19 @@
           <div class="card-body">
             <h3><a href="https://github.com/Coinupbtc/spark-console">spark-console</a></h3>
             <p>Local GPU &amp; fleet dashboard for DGX Spark and any NVIDIA box — graphs, model inventory, endpoint health, read-only service board. <strong>121 GB</strong> unified memory, nothing phones home.</p>
+          </div>
+        </article>
+
+        <!-- Supporting occupancy only — dual-Spark is not the public hero. -->
+        <article class="card">
+          <a class="card-top" href="https://github.com/Coinupbtc/dream-stack" aria-label="dream-stack on GitHub">
+            <img class="card-img" src="assets/art/setup-cluster.webp" alt="Two NVIDIA DGX Sparks — supporting occupancy desk, not the public hero" width="1200" height="821" loading="lazy" decoding="async">
+            <span class="card-num" aria-hidden="true"><b>2&#215;</b> Spark</span>
+          </a>
+          <div class="card-body">
+            <p class="card-role">Supporting occupancy</p>
+            <h3><a href="https://github.com/Coinupbtc/dream-stack">dream-stack</a></h3>
+            <p>Supporting leftover-UMA occupancy on two DGX Sparks after MiaAI-Lab TP=2 is already up (Qwen roommate + baton). Not the public hero — that is <a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a>.</p>
           </div>
         </article>
 
