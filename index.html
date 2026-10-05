@@ -124,12 +124,12 @@
       <div class="marquee-track">
         <span>ISO&nbsp;13485</span><i>&#10022;</i>
         <span>fail-closed</span><i>&#10022;</i>
-        <span>19/19&nbsp;gate</span><i>&#10022;</i>
-        <span>169&nbsp;t/s&nbsp;measured</span><i>&#10022;</i>
+        <span>15-check&nbsp;gate</span><i>&#10022;</i>
+        <span>35.8&nbsp;t/s&nbsp;&middot;&nbsp;July&nbsp;2026</span><i>&#10022;</i>
         <span>ISO&nbsp;13485</span><i>&#10022;</i>
         <span>fail-closed</span><i>&#10022;</i>
-        <span>19/19&nbsp;gate</span><i>&#10022;</i>
-        <span>169&nbsp;t/s&nbsp;measured</span><i>&#10022;</i>
+        <span>15-check&nbsp;gate</span><i>&#10022;</i>
+        <span>35.8&nbsp;t/s&nbsp;&middot;&nbsp;July&nbsp;2026</span><i>&#10022;</i>
       </div>
     </div>
 
@@ -139,7 +139,7 @@
       <dl class="sys-grid" id="sys-grid">
         <div class="sys-cell"><dt>GPU memory</dt><dd class="num" data-count="121" data-suffix=" GB">121 GB</dd><dd class="sub">unified CPU+RAM, on-box</dd></div>
         <div class="sys-cell"><dt>Storage</dt><dd class="num" data-count="3.7" data-decimals="1" data-suffix=" TB">3.7 TB</dd><dd class="sub">NVMe, local weights</dd></div>
-        <div class="sys-cell"><dt>Decode</dt><dd class="num" data-count="169" data-suffix=" t/s">169 t/s</dd><dd class="sub">measured coding throughput</dd></div>
+        <div class="sys-cell"><dt>Decode</dt><dd class="num" data-count="35.8" data-decimals="1" data-suffix=" t/s">35.8 t/s</dd><dd class="sub">coding, 9 July 2026</dd></div>
         <div class="sys-cell"><dt>Art</dt><dd>on-metal</dd><dd class="sub">ComfyUI, no cloud API</dd></div>
       </dl>
     </section>
@@ -168,11 +168,11 @@
         <article class="card">
           <a class="card-top" href="https://github.com/Coinupbtc/zwell-bench" aria-label="zwell-bench on GitHub">
             <img class="card-img" src="assets/projects/zwell-bench.webp" alt="Endpoint-agnostic LLM benchmark suite — score dials and pass/fail checks" width="640" height="438" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>19</b> /19</span>
+            <span class="card-num" aria-hidden="true"><b>15</b> checks</span>
           </a>
           <div class="card-body">
             <h3><a href="https://github.com/Coinupbtc/zwell-bench">zwell-bench</a></h3>
-            <p>Release gate for local LLMs — coding, vision, tool and agentic checks. A candidate ships only at <strong>19/19</strong>. Caught a specialized build that beat the headline metric and still failed.</p>
+            <p>Release gate for local LLMs — coding, vision, tools, and agentic checks. A build ships only if every check passes. The published run from 16 July 2026 is <strong>14 of 15</strong>, one agentic miss.</p>
           </div>
         </article>
 
@@ -188,13 +188,13 @@
         </article>
 
         <article class="card">
-          <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune" aria-label="miaai35-tune on GitHub">
+          <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026" aria-label="miaai35-tune results, coding decode on 9 July 2026">
             <img class="card-img" src="assets/projects/miaai35-tune.webp" alt="Local LLM serving bakeoff — measured tokens and tuning curve" width="640" height="438" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>169</b> t/s</span>
+            <span class="card-num" aria-hidden="true"><b>35.8</b> t/s</span>
           </a>
           <div class="card-body">
-            <h3><a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a></h3>
-            <p>Flag-by-flag llama.cpp bakeoff on DGX Spark — serving settings from evidence, not vendor slides. Coding decode measured at <strong>169 t/s</strong>.</p>
+            <h3><a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026">miaai35-tune</a></h3>
+            <p>Flag-by-flag llama.cpp bakeoff on DGX Spark — serving settings from evidence, not vendor slides. Coding decode measured at <strong>35.8 tok/s</strong> on 9 July 2026, from a saved bench file.</p>
           </div>
         </article>
 
@@ -205,7 +205,7 @@
           </a>
           <div class="card-body">
             <h3><a href="https://github.com/Coinupbtc/dream-stack">dream-stack</a></h3>
-            <p>Two-node NVIDIA GB10 inference: Dockerized vLLM tensor-parallel plus a llama.cpp roommate. Clone, copy <code>.env</code>, bring the stack up.</p>
+            <p>Two DGX Sparks serve one model together, split across both machines, with a second model still resident beside it. Weights stay on the hardware.</p>
           </div>
         </article>
 
@@ -337,10 +337,6 @@
         <li>
           <a href="https://github.com/Coinupbtc">GitHub</a>
           <span>code, in the open</span>
-        </li>
-        <li>
-          <a href="https://x.com/coinupbtc">X &middot; @coinupbtc</a>
-          <span>build log, in public</span>
         </li>
         <li>
           <a href="mailto:coinupbtc@gmail.com">coinupbtc@gmail.com</a>
