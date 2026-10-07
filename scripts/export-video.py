@@ -1,104 +1,23 @@
 #!/usr/bin/env python3
-"""Export curated locally-generated MiniMax-H3 clips into web assets for the site.
+"""Conference build: do not export MiniMax-H3 clips into this site.
 
-Same law as export-art.py: curation is explicit and by-id. Every clip below was
-generated locally on the DGX Spark (MiniMax-H3) and picked by hand. Source filenames
-are the H3 prompt strings; they are self-describing.
+The hiring page keeps the generative canvas (#hero-field) and the vignette
+as the hero backplate. The art gallery is off. The share card is drawn by
+scripts/export-og.py from that node field, not from a generated clip.
 
-Produces, per pick, inside assets/video/:
-    <slug>.webp   poster frame (first frame, or a mid-clip frame for clips that
-                  fade up from black), used as the poster
-    <slug>.mp4    H.264 high, scaled to <= 960px wide, faststart, no audio, web-tuned
-
-Usage:
-    python3 scripts/export-video.py
-    H3_SRC=/path/to/MiniMax-H3-2x-DGX-Spark/output python3 scripts/export-video.py
-
-Requires ffmpeg on PATH and Pillow.
+Running this script must not recreate hero, gallery, or share-card media.
+The previous pick list (street clip, astronaut frame, and the gallery tiles)
+is intentionally gone so a later run cannot put those files back.
 """
-import os
-import shutil
-import subprocess
 import sys
-from pathlib import Path
-
-try:
-    from PIL import Image
-except ImportError:
-    sys.exit("Pillow is required:  pip install Pillow")
-
-REPO = Path(__file__).resolve().parent.parent
-SRC = Path(os.environ.get("H3_SRC", Path.home() / "Documents/projects/MiniMax-H3-2x-DGX-Spark/output"))
-DST = REPO / "assets" / "video"
-
-# Output slug -> (source filename, poster timestamp in seconds or 0)
-# A poster_ts > 0 pulls the poster frame from mid-clip (clips that fade up from black).
-PICKS = {
-    "hero-street": ("h3-20260804_210351-a_slow_push_in_on_an_empty_rain-soaked_s-19263.mp4", 0),
-    "dragon":      ("dragon-flight-30s-v2.mp4", 8),
-    "cat":         ("h3-20260803_211341-A_fluffy_orange_cat_riding_on_the_back_o.mp4", 0),
-    "coffee":      ("h3-20260803_200653-Soft_bokeh_coffee_steam_in_morning_light.mp4", 0.4),
-    "candle":      ("h3-20260804_190558-a_single_candle_flame_flickering_in_a_da-2378.mp4", 0.3),
-    "koi":         ("h3-20260807_233749-Photorealistic_two_koi_fish_swimming_in_-9908-faststart.mp4", 1.2),
-    "astronaut":   ("h3-20260808_093249-A_lone_astronaut_drifting_slowly_above_t-31880.mp4", 0.8),
-    "fox":         ("h3-20260808_093249-A_tiny_orange_fox_kit_pouncing_playfully-31721.mp4", 0.6),
-    "fireworks":   ("resstep-test/grid-side-by-side.mp4", 0.4),
-}
-
-WIDTH = 960
-CRF = "26"
-# Mosaic grids keep labels readable at a wider encode.
-WIDE = {"fireworks": 1600}
-
-
-def run(*args: str) -> None:
-    subprocess.run(args, check=True, capture_output=True)
 
 
 def main() -> int:
-    if not SRC.is_dir():
-        sys.exit(f"source folder not found: {SRC}\nSet H3_SRC to override.")
-    if not shutil.which("ffmpeg"):
-        sys.exit("ffmpeg is required and was not found on PATH")
-
-    DST.mkdir(parents=True, exist_ok=True)
-    missing = []
-
-    for slug, (srcname, poster_ts) in PICKS.items():
-        src = SRC / srcname
-        if not src.is_file():
-            missing.append(srcname)
-            print(f"!! no source for {slug}")
-            continue
-
-        mp4 = DST / f"{slug}.mp4"
-        width = WIDE.get(slug, WIDTH)
-        run(
-            "ffmpeg", "-v", "error", "-i", str(src),
-            "-vf", f"scale={width}:-2",
-            "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p",
-            "-crf", CRF, "-preset", "slow", "-movflags", "+faststart",
-            "-an", "-y", str(mp4),
-        )
-
-        frame = DST / f"{slug}.frame.png"
-        ss = ["-ss", str(poster_ts)] if poster_ts > 0 else []
-        run(
-            "ffmpeg", "-v", "error", *ss, "-i", str(src),
-            "-vf", f"scale={width}:-2", "-frames:v", "1", "-y", str(frame),
-        )
-        Image.open(frame).convert("RGB").save(
-            DST / f"{slug}.webp", "WEBP", quality=72, method=6
-        )
-        frame.unlink()
-
-        print(f"{slug} <- {srcname} : {mp4.stat().st_size // 1024}KB mp4, "
-              f"{ (DST / (slug + '.webp')).stat().st_size // 1024 }KB webp")
-
-    total = sum(p.stat().st_size for p in DST.iterdir() if p.is_file())
-    print(f"\n{len(PICKS) - len(missing)}/{len(PICKS)} clips, "
-          f"{total // 1024}KB total in {DST.relative_to(REPO)}")
-    return 1 if missing else 0
+    print(
+        "Conference build: H3 clip export is disabled. "
+        "No hero, gallery, or share-card media written."
+    )
+    return 0
 
 
 if __name__ == "__main__":

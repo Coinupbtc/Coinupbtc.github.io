@@ -135,6 +135,7 @@ body {
 
 /* First paint must show the verbs — don't hide CTAs behind entrance motion */
 .lede,
+.role-line,
 .ctas,
 .use-line {
   opacity: 1;
@@ -143,7 +144,15 @@ body {
 .lede {
   color: color-mix(in srgb, var(--ink) 82%, var(--mute));
 }
-.lede em, .use-line strong { color: var(--ink); }
+/* Recruiter line under the slogan. Wider than the lede so the role is readable on a phone. */
+.role-line {
+  margin-top: 0.85rem;
+  max-width: 58ch;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--ink) 78%, var(--mute));
+}
+.lede em, .use-line strong, .role-line strong { color: var(--ink); }
 
 /* The one thing to do on this page must read as a button on the video */
 .hero .ctas a.primary {
@@ -156,21 +165,27 @@ body {
   color: #12141a;
 }
 
-/* Lab card: CSS motif instead of a fake project still */
-.card-lab .lab-field {
+/* Cards with no local still: a motif, not a fabricated screenshot. */
+.motif-field {
   background:
     radial-gradient(120% 90% at 80% 10%, var(--glow), transparent 55%),
     repeating-radial-gradient(circle at 78% 18%, var(--ink) 0 1px, transparent 1px 11px),
     var(--well);
   min-height: 0;
 }
-.card-lab .lab-field::before {
+.motif-field::before {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-radial-gradient(circle at 78% 18%, var(--ink) 0 1px, transparent 1px 11.6px);
   opacity: 0.45;
   pointer-events: none;
+}
+.motif-b {
+  background:
+    radial-gradient(90% 80% at 12% 88%, var(--glow), transparent 50%),
+    repeating-linear-gradient(115deg, transparent 0 14px, color-mix(in srgb, var(--ink) 18%, transparent) 14px 15px),
+    var(--well);
 }
 
 /* Captions must be readable without a mouse */
@@ -211,7 +226,7 @@ body {
   .brand {
     font-size: clamp(2.4rem, 16vw, 3.4rem);
   }
-  .lede { max-width: none; }
+  .lede, .role-line { max-width: none; }
   .ctas a {
     min-height: 44px;
     display: inline-flex;
@@ -228,5 +243,5 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .use-line { opacity: 1; animation: none; }
+  .role-line, .use-line { opacity: 1; animation: none; }
 }

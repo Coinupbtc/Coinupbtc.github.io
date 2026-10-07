@@ -7,8 +7,8 @@
 | | |
 |---|---|
 | **What it is** | A single-page pseudonymous landing site for Coinupbtc. |
-| **What it’s for** | The one link to hand out: GitHub, X, art made on your own hardware, public builds — no real name. |
-| **How to use it** | Open https://coinupbtc.com/ — Work / Art / Lab / Contact in the top bar. Or `./setup.sh` for a local preview. |
+| **What it’s for** | The one link to hand out: GitHub, X @coinupbtc, email, and public measured builds. Alias only — no real name. |
+| **How to use it** | Open https://coinupbtc.com/ — Work / Contact in the top bar. Or `./setup.sh` for a local preview. |
 
 ## Try it
 
@@ -26,32 +26,19 @@ Identity on this site is the handle **Coinupbtc** only. Live at **https://coinup
 ## Contact policy
 
 Pseudonymous: no real name, employer, school, phone, or street address.
-Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/coinupbtc).
+Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/coinupbtc) · coinupbtc@gmail.com.
 
 ## Stack
 
 One HTML + CSS. Fraunces + IBM Plex Mono via Google Fonts. No trackers, no cookies, no analytics.
-The hero is an art-directed two-column composition: editorial display type + the local DGX Spark systems
-topology rendered as a framed centerpiece plate, over a lightweight generative node-field canvas and a
-cinematic locally-generated MiniMax-H3 clip as a muted full-bleed backplate (autoplay / muted / loop / webp
-poster fallback, degenerate gracefully under `prefers-reduced-motion`).
+The hero is editorial display type over a lightweight generative node-field canvas (`#hero-field`) and a vignette. There is no video backplate.
 
-## Art + video
+## Media
 
-`assets/art/` holds WebP stills generated locally on the DGX Spark (ComfyUI) — the live gallery
-keeps the systems-topology plate; optical figure studies stay in the folder, unused.
-`assets/video/` holds web-optimized copies of curated MiniMax-H3 clips (H.264 ≤960px wide, faststart, no
-audio, tiny webp posters). The hero uses one clip as a background; the "Made on the machine" gallery is
-video-first (hover to play, tap to open) plus that one still.
-
-Curation is **explicit and by-id** in the export scripts (`scripts/export-art.py`, `scripts/export-video.py`)
-— never glob the generator output folders into this repo.
-
-To (re)build the web video assets from the local H3 library:
-
-```bash
-python3 scripts/export-video.py
-```
+The conference build does not publish a clip gallery or a model-generated share card.
+`assets/og-image.png` is a still of that same node field, redrawn by `scripts/export-og.py` (Pillow, no model output).
+`scripts/export-video.py` refuses to write hero, gallery, or share-card files.
+`scripts/export-art.py` can still refresh unused stills in `assets/art/`; those stills are not mounted on the page and must not be wired into the hero or the share card.
 
 ## Custom domain
 
