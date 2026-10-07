@@ -151,7 +151,7 @@
 
         <article class="card card-flagship" id="miaai35-tune">
           <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026" aria-label="miaai35-tune results, coding decode on 9 July 2026">
-            <img class="card-img" src="assets/projects/miaai35-tune.webp" alt="Local LLM serving bakeoff — measured tokens and tuning curve" width="640" height="438" loading="lazy" decoding="async">
+            <img class="card-img" src="assets/projects/miaai35-tune.webp" alt="Terminal: jq over the committed bench JSON (9 July 2026, thinking off) prints short 38.23, coding 35.8, reasoning 35.29 and long_context 35.45 tok/s, each at quality 9.0/10" width="960" height="516" loading="lazy" decoding="async">
             <span class="card-num" aria-hidden="true"><b>35.80</b> t/s<small>baseline</small></span>
           </a>
           <div class="card-body">
@@ -176,7 +176,7 @@
 
         <article class="card">
           <a class="card-top" href="https://github.com/Coinupbtc/spark-console" aria-label="spark-console on GitHub">
-            <img class="card-img" src="assets/projects/spark-console.webp" alt="Local GPU fleet dashboard — graphs, model inventory, endpoint health" width="640" height="438" loading="lazy" decoding="async">
+            <img class="card-img" src="assets/projects/spark-console.webp" alt="spark-console Pulse tab running on localhost, hostname redacted: CPU, memory 108 of 121.69 GB, disk, power and GPU readings for one DGX Spark" width="960" height="516" loading="lazy" decoding="async">
             <span class="card-num" aria-hidden="true"><b>read-only</b><small>localhost</small></span>
           </a>
           <div class="card-body">
@@ -186,8 +186,8 @@
         </article>
 
         <article class="card">
-          <!-- No local still for this repo. Motif keeps the card frame without inventing a screenshot. -->
-          <a class="card-top motif-field motif-a" href="https://github.com/Coinupbtc/spark-pack" aria-label="spark-pack on GitHub">
+          <a class="card-top" href="https://github.com/Coinupbtc/spark-pack" aria-label="spark-pack on GitHub">
+            <img class="card-img" src="assets/projects/spark-pack.webp" alt="spark-pack verdicts captured from its own packer page: FITS at 46% (one Spark, Helper 35B), TIGHT at 91% with 10.5 GB left (two Sparks, DS4F, KV cache and Vision 4B), Won't start (H3 video on one Spark)" width="960" height="516" loading="lazy" decoding="async">
             <span class="card-num" aria-hidden="true"><b>121</b> GB<small>per Spark</small></span>
           </a>
           <div class="card-body">
@@ -197,7 +197,8 @@
         </article>
 
         <article class="card">
-          <a class="card-top motif-field motif-b" href="https://github.com/Coinupbtc/MiniMax-H3-2x-DGX-Spark" aria-label="MiniMax-H3-2x-DGX-Spark on GitHub">
+          <a class="card-top" href="https://github.com/Coinupbtc/MiniMax-H3-2x-DGX-Spark" aria-label="MiniMax-H3-2x-DGX-Spark on GitHub">
+            <img class="card-img" src="assets/projects/minimax-h3-2x-dgx-spark.webp" alt="Bar chart from the run logs: the same seed-42 clip took 90.5 s over TCP socket, 55.5 s over RoCE InfiniBand, and 58.4 s on the RoCE repeat" width="960" height="516" loading="lazy" decoding="async">
             <span class="card-num" aria-hidden="true"><b>55.5</b> s<small>RoCE, was 90.5 s</small></span>
           </a>
           <div class="card-body">
@@ -208,7 +209,7 @@
 
         <article class="card">
           <a class="card-top" href="https://github.com/Coinupbtc/stl-sandbox" aria-label="stl-sandbox on GitHub">
-            <img class="card-img" src="assets/projects/stl-sandbox.webp" alt="White ring and pin hovering over a gridded build plate" width="640" height="438" loading="lazy" decoding="async">
+            <img class="card-img" src="assets/projects/stl-sandbox.webp" alt="stl-sandbox viewer: an M10 hex nut built on the template path (no LLM), next to its ISO 2768-m inspection panel reading ACCEPT, Grade A" width="960" height="516" loading="lazy" decoding="async">
             <span class="card-num" aria-hidden="true"><b>STL + STEP</b><small>local</small></span>
           </a>
           <div class="card-body">
@@ -219,12 +220,23 @@
 
         <article class="card">
           <a class="card-top" href="https://github.com/Coinupbtc/zwell-bench" aria-label="zwell-bench on GitHub">
-            <img class="card-img" src="assets/projects/zwell-bench.webp" alt="Endpoint-agnostic LLM benchmark suite — score dials and pass/fail checks" width="640" height="438" loading="lazy" decoding="async">
+            <img class="card-img" src="assets/projects/zwell-bench.webp" alt="Terminal: jq over results/miaai35-v8-baseline.json prints score 95.0, 14/15 pass, then 14 checks marked PASS and schedule_math marked FAIL" width="960" height="516" loading="lazy" decoding="async">
             <span class="card-num" aria-hidden="true"><b>14/15</b><small>published</small></span>
           </a>
           <div class="card-body">
             <h3><a href="https://github.com/Coinupbtc/zwell-bench">zwell-bench</a></h3>
             <p>15-check gate for local LLMs: executed coding tests, web extraction, vision reads, tool choice, agentic ordering. The gate aims for all-green; the published baseline (16 July 2026) is <strong>14/15</strong>, weighted 95.0, one agentic miss (<code>schedule_math</code>). None of the four committed runs is 15/15, and the README says so.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="card-top" href="https://github.com/Coinupbtc/secom-spc-vs-ai" aria-label="secom-spc-vs-ai on GitHub">
+            <img class="card-img" src="assets/projects/secom-spc-vs-ai.webp" alt="Committed T² control chart cropped to the 627-run time-ordered test block: all 28 failed runs, marked with red crosses, sit under the dashed 1% alarm limit" width="960" height="516" loading="lazy" decoding="async">
+            <span class="card-num" aria-hidden="true"><b>0/28</b><small>T&#178; and SPE, 1% FAR</small></span>
+          </a>
+          <div class="card-body">
+            <h3><a href="https://github.com/Coinupbtc/secom-spc-vs-ai">secom-spc-vs-ai</a></h3>
+            <p>On real fab data (UCI SECOM) at a 1% false-alarm budget, no method reliably beat chance. Time-ordered test block: 627 runs, 28 fails. Fails caught: T&#178; <strong>0/28</strong>, SPE <strong>0/28</strong>, Isolation Forest <strong>2/28</strong>, autoencoder <strong>0/28</strong>, a supervised reference 1/28. Every AUROC 95% CI includes 0.5. The analysis plan was tagged before the test block was scored; numbers are in the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">committed JSON</a>.</p>
           </div>
         </article>
 
