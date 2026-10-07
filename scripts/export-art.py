@@ -5,6 +5,10 @@ Curation is explicit and by-id. Never glob the generator's output folder into
 this repo — it holds prompt tests, throwaway memes, and third-party characters
 that must not be published.
 
+Conference build: these stills are not the hero backplate and not the share
+card. Do not point export output at the hero or at assets/og-image.png.
+The share card is scripts/export-og.py (generative node field, no model output).
+
 Usage:
     python3 scripts/export-art.py
     ART_SRC=/path/to/output python3 scripts/export-art.py

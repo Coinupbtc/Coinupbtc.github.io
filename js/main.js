@@ -22,20 +22,6 @@
   });
   syncTheme();
 
-  /* ── Prefers-reduced-motion: freezes the hero backplate video ─ */
-  if (reduceMotion) {
-    const heroVideo = document.querySelector('.hero-media video');
-    if (heroVideo) { heroVideo.pause(); heroVideo.removeAttribute('autoplay'); heroVideo.src = ''; }
-  } else {
-    /* reliability: kick the muted loop if the HTML autoplay attribute was deferred */
-    const heroVideo = document.querySelector('.hero-media video');
-    if (heroVideo) {
-      const kick = () => { if (heroVideo.paused) heroVideo.play().catch(() => {}); };
-      if (document.readyState === 'complete') kick();
-      else window.addEventListener('load', kick, { once: true });
-    }
-  }
-
   /* ── Hero brand: staggered char entrance ─────────────── */
   const brandMark = document.querySelector('.brand mark');
   if (brandMark && !reduceMotion) {
@@ -176,7 +162,7 @@
     }
   }
 
-  /* ── Lightbox (images + H3 video) ───────────────────── */
+  /* Lightbox stays inert while the gallery is off the conference page. */
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lb-img');
   const lbVideo = document.getElementById('lb-video');
@@ -227,21 +213,23 @@
     document.body.style.overflow = '';
     lastFocus?.focus();
   }
-  artItems.forEach((btn, i) => btn.addEventListener('click', () => openLb(i)));
-  lbClose.addEventListener('click', closeLb);
-  lbPrev.addEventListener('click', () => openLb(lbIndex - 1));
-  lbNext.addEventListener('click', () => openLb(lbIndex + 1));
-  lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
-  document.addEventListener('keydown', (e) => {
-    if (lb.hidden) return;
-    if (e.key === 'Escape') closeLb();
-    else if (e.key === 'ArrowLeft') { e.preventDefault(); openLb(lbIndex - 1); }
-    else if (e.key === 'ArrowRight') { e.preventDefault(); openLb(lbIndex + 1); }
-  });
+  if (lb && lbClose && lbPrev && lbNext && artItems.length) {
+    artItems.forEach((btn, i) => btn.addEventListener('click', () => openLb(i)));
+    lbClose.addEventListener('click', closeLb);
+    lbPrev.addEventListener('click', () => openLb(lbIndex - 1));
+    lbNext.addEventListener('click', () => openLb(lbIndex + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', (e) => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') closeLb();
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); openLb(lbIndex - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); openLb(lbIndex + 1); }
+    });
+  }
 
-  /* ── H3 gallery tiles: hover-to-play, poster-first, lazy ─ */
+  /* No video tiles on the conference page. Hook is a no-op until a gallery returns. */
   (function wireHover() {
-    if (reduceMotion) return;
+    if (reduceMotion || !artItems.length) return;
     const io = new IntersectionObserver((entries) => {
       entries.forEach((en) => {
         const v = en.target;
@@ -489,20 +477,9 @@
     window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   });
 
-  /* ── Telemetry readout: live local time ─────────────── */
+  /* Nav readout is static. A ticking visitor clock read as the owner's local time. */
   const tele = document.getElementById('telemetry');
-  if (tele) {
-    const base = 'coinupbtc / local';
-    const tickT = () => {
-      const d = new Date();
-      const hh = String(d.getHours()).padStart(2, '0');
-      const mm = String(d.getMinutes()).padStart(2, '0');
-      const ss = String(d.getSeconds()).padStart(2, '0');
-      tele.textContent = `${base} · ${hh}:${mm}:${ss}`;
-    };
-    tickT();
-    setInterval(tickT, 1000);
-  }
+  if (tele) tele.textContent = 'measured, not claimed';
 
   /* ── Generative cursor spark trail ──────────────────── */
   (function sparks() {
@@ -652,7 +629,7 @@
     const stageImg = document.getElementById('lb-img');
     const zIn = document.getElementById('lb-zoom-in');
     const zOut = document.getElementById('lb-zoom-out');
-    if (!stageImg) return;
+    if (!lb || !stageImg) return;
     let scale = 1, tx = 0, ty = 0;
     let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
 
@@ -922,7 +899,7 @@
   /* ── D1 · Lightbox keyboard-hint bar: reveal on first key use ── */
   (function lbHint() {
     const hint = document.getElementById('lb-hint');
-    if (!hint) return;
+    if (!hint || !lb) return;
     // coarse pointers (touch) don't get keyboard hints — CSS hides it too.
     if (!window.matchMedia('(hover: hover)').matches) return;
     let shown = false;

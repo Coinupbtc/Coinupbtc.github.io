@@ -177,44 +177,18 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
 .hero-field {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  /* Above the vignette, below the type. The field is the backplate; the wash is only the ground. */
+  z-index: -1;
   width: 100%; height: 100%;
   display: block;
 }
 
-/* cinematic H3 video backplate — sits behind the generative field + vignette */
-.hero-media {
-  position: absolute;
-  inset: 0;
-  z-index: -3;
-  overflow: hidden;
-  background: var(--hero-v2, #0c0e13);
-}
-.hero-media video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.5;
-  filter: saturate(0.84) contrast(1.04);
-  display: block;
-}
-.hero-media::after {
-  /* extra scrim so copy stays crisp over any frame */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg,
-      color-mix(in srgb, var(--paper) 30%, transparent) 0%,
-      color-mix(in srgb, var(--paper) 8%, transparent) 45%,
-      color-mix(in srgb, var(--paper) 55%, transparent) 100%);
-  pointer-events: none;
-}
+/* Conference build: no video backplate. #hero-field and .hero-vignette are the hero. */
 
 .hero-vignette {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   background:
     radial-gradient(120% 90% at 78% 8%, var(--glow), transparent 55%),
     linear-gradient(165deg, var(--hero-1) 0%, var(--hero-2) 100%);
@@ -659,7 +633,6 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
   .brand mark::after, .art-btn img { transform: none; }
   .art-btn:hover img { transform: none; }
   .art-btn.art-video:hover .tile-video, .art-btn.art-video:focus-visible .tile-video { transform: none; }
-  .hero-media video { opacity: 0.35; }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1133,6 +1106,10 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   margin-bottom: 1.75rem;
 }
 .proof-head h2 { margin-bottom: 0; }
+.proof-head .section-note {
+  margin: 0.7rem 0 0;
+  max-width: 46ch;
+}
 .proof-all {
   font-size: 0.72rem;
   letter-spacing: 0.12em;
@@ -1229,6 +1206,18 @@ html[data-theme="dark"] .plate-tag { background: #1a1d22; }
   font-weight: 600;
   letter-spacing: -0.02em;
   margin-right: 0.15em;
+}
+/* Caption under the badge (baseline, published, localhost) — the number is not the whole claim. */
+.card-num small {
+  display: block;
+  max-width: 9.5rem;
+  margin-left: auto;
+  margin-top: 0.12rem;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  text-transform: none;
 }
 
 .card-body { padding: 1.15rem 1.2rem 1.35rem; }
