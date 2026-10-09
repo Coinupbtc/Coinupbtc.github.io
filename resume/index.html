@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Coinupbtc: proof sheet</title>
+  <meta name="description" content="My proof sheet. Each row is a method I use, with one public file you can open and check. No job history here, just the work.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#e8e4dc">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Coinupbtc">
+  <meta property="og:title" content="Coinupbtc: proof sheet">
+  <meta property="og:description" content="Each row is a method I use, with one public file you can open and check. No job history here, just the work.">
+  <meta property="og:url" content="https://coinupbtc.com/resume/">
+  <meta property="og:image" content="https://coinupbtc.com/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Coinupbtc — quality systems, on-prem AI, measured builds. GitHub, X @coinupbtc, and email on the card.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@coinupbtc">
+  <meta name="twitter:creator" content="@coinupbtc">
+  <meta name="twitter:image" content="https://coinupbtc.com/assets/og-image.png">
+  <meta name="twitter:image:alt" content="Coinupbtc — quality systems, on-prem AI, measured builds. GitHub, X @coinupbtc, and email on the card.">
+  <link rel="image_src" href="https://coinupbtc.com/assets/og-image.png">
+  <link rel="canonical" href="https://coinupbtc.com/resume/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+
+  <!-- set theme before first paint to avoid flash -->
+  <script>
+    (function () {
+      var t;
+      try { t = localStorage.getItem('coinupbtc-theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-nav" id="site-nav">
+    <a class="nav-brand" href="../">Coinupbtc</a>
+    <nav aria-label="On this site">
+      <a href="../#measure">Work</a>
+      <a href="./" aria-current="page">Resume</a>
+      <a href="#hub">Contact</a>
+    </nav>
+    <!-- Static hiring readout. The visitor clock implied a local time this page does not have. -->
+    <span id="telemetry" class="nav-clock telemetry" aria-hidden="true">measured, not claimed</span>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+      <span class="theme-sun" aria-hidden="true"></span>
+      <span class="theme-moon" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top" hidden>&uarr;</button>
+
+  <main id="main">
+
+    <section class="proof" id="define" data-dmaic="define" aria-labelledby="define-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Define</p>
+          <h1 class="brand" id="define-h">I measure AI the way I measure parts</h1>
+        </div>
+      </div>
+      <p class="lede">This is my proof sheet. Each row is a method I use, with one public file you can open and check. No job history here, just the work.</p>
+    </section>
+
+    <section class="proof" id="measure" data-dmaic="measure" aria-labelledby="measure-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Measure</p>
+          <h2 id="measure-h">Baseline before anything else</h2>
+        </div>
+      </div>
+      <ul class="hub-list">
+        <li>
+          <strong>Baseline-first performance testing: local LLM serving on DGX Spark</strong>
+          <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026">miaai35-tune results</a>
+          <span>My clean-restart baseline is 35.80 tok/s coding decode, read straight from the committed file.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="proof" id="analyze" data-dmaic="analyze" aria-labelledby="analyze-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Analyze</p>
+          <h2 id="analyze-h">Statistics on real data</h2>
+        </div>
+      </div>
+      <ul class="hub-list">
+        <li>
+          <strong>Statistical process control: I-MR charts, Phase I limits, a fixed false-alarm budget</strong>
+          <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">secom-spc-vs-ai results</a>
+          <span>I compared control charts and ML on real UCI SECOM fab data: 1,567 production runs, 590 sensors. At a 1% false-alarm budget, no method reliably beat chance (every AUROC 95% interval includes 0.5).</span>
+        </li>
+        <li>
+          <strong>Preregistered comparison on real data</strong>
+          <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/PREREGISTRATION.md">preregistration</a>
+          <span>I wrote the analysis plan before scoring the test block and logged every deviation in the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/DEVIATIONS.md">deviations log</a>.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="proof" id="improve" data-dmaic="improve" aria-labelledby="improve-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Improve</p>
+          <h2 id="improve-h">One change at a time</h2>
+        </div>
+      </div>
+      <ul class="hub-list">
+        <li>
+          <strong>Controlled one-variable tuning against the baseline</strong>
+          <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">committed pass table</a>
+          <span>Turning thinking off cut wall-clock from up to 98 s to 15 s or less with no drop on my 4-prompt quality suite, though that suite tops out at 9/10, so it can't see small losses; a speed-for-reasoning trade-off. Serving flags each moved decode under 2%.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="proof" id="control" data-dmaic="control" aria-labelledby="control-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Control</p>
+          <h2 id="control-h">Tools that cannot break things</h2>
+        </div>
+      </div>
+      <ul class="hub-list">
+        <li>
+          <strong>Read-only local tooling with security limits</strong>
+          <a href="https://github.com/Coinupbtc/spark-console">spark-console</a>
+          <span>My console binds 127.0.0.1, rejects foreign Host and Origin requests, has no start, stop or kill routes, and nothing phones home.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="hub" id="hub" aria-labelledby="hub-h">
+      <p class="kicker">Elsewhere</p>
+      <h2 id="hub-h">Find me in the open</h2>
+      <ul class="hub-list">
+        <li>
+          <a href="https://github.com/Coinupbtc">GitHub</a>
+          <span>code, in the open</span>
+        </li>
+        <li>
+          <a href="mailto:coinupbtc@gmail.com">coinupbtc@gmail.com</a>
+          <span>best for hiring conversations</span>
+        </li>
+        <li>
+          <a href="https://x.com/coinupbtc">X &middot; @coinupbtc</a>
+          <span>short updates</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <p>&copy; Coinupbtc &middot; <a href="https://github.com/Coinupbtc">GitHub</a> &middot; <a href="https://x.com/coinupbtc">X</a></p>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
