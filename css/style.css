@@ -732,74 +732,6 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
   pointer-events: none;
 }
 
-/* ── Marquee band ────────────────────────────────────────── */
-.marquee {
-  overflow: hidden;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, var(--acid) 6%, transparent);
-  padding: 0.9rem 0;
-  white-space: nowrap;
-}
-.marquee-track {
-  display: inline-flex;
-  align-items: center;
-  will-change: transform;
-  animation: marquee 26s linear infinite;
-}
-.marquee-track span {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 3vw, 1.7rem);
-  font-style: italic;
-  letter-spacing: 0.01em;
-  padding: 0 1.1rem;
-}
-.marquee-track i {
-  color: var(--acid);
-  font-style: normal;
-  font-size: 0.9rem;
-}
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* Pass 3 U1 · marquee hover micro-interaction: pause + acid edge */
-.marquee { position: relative; }
-.marquee::before,
-.marquee::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--acid);
-  opacity: 0;
-  transition: opacity 0.35s ease, transform 0.35s ease;
-  z-index: 1;
-  pointer-events: none;
-}
-.marquee::before { top: -2px; transform: scaleX(0.4); transform-origin: left; }
-.marquee::after { bottom: -2px; transform: scaleX(0.4); transform-origin: right; }
-.marquee.marquee-hover::before,
-.marquee.marquee-hover::after { opacity: 1; transform: scaleX(1); }
-
-/* Pass 3 D-Finish D2 · marquee non-hover "breath" — the acid separators pulse
-   gently while the band scrolls untouched, so the strip feels alive at rest.
-   Hover-pause freezes the breath (full opacity) and reduced-motion disables it. */
-.marquee-track i {
-  animation: marquee-breath 4.2s ease-in-out infinite;
-}
-.marquee.marquee-hover .marquee-track i {
-  animation-play-state: paused;
-  opacity: 1;
-}
-@keyframes marquee-breath {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee::before, .marquee::after { display: none; }
-  .marquee-track i { animation: none; opacity: 1; }
-}
-
 /* ── Art tile 3D tilt + glare + hover caption ────────────── */
 .art-item {
   perspective: 900px;
@@ -905,7 +837,6 @@ html[data-theme="dark"] .theme-moon { opacity: 0; transform: scale(0.4) rotate(9
 
 @media (prefers-reduced-motion: reduce) {
   .progress { transform: none; width: 0; }
-  .marquee-track { animation: none; }
   .telemetry::before { animation: none; }
   .art-btn::before { display: none; }
   .art-cap { opacity: 1; transform: none; }

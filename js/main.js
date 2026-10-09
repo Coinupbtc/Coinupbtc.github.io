@@ -813,32 +813,8 @@
 
   /* ══════════════════════════════════════════════════════
      PASS 3 (2026-08-14) — interaction-craft upgrades
-     marquee hover-pause · card parallax · theme crossfade
+     card parallax · theme crossfade
      ══════════════════════════════════════════════════════ */
-
-  /* ── U1 · Marquee micro-interaction: hover pauses + acid edge ── */
-  (function marqueeHover() {
-    const wrap = document.querySelector('.marquee');
-    if (!wrap) return;
-    const track = wrap.querySelector('.marquee-track');
-    if (!track) return;
-    // reduced-motion already disables the animation in CSS — nothing to pause.
-    if (reduceMotion) return;
-    // coarse pointers (touch) have no hover; keep auto-scroll.
-    if (!window.matchMedia('(hover: hover)').matches) return;
-    let running = true;
-    const setPaused = (p) => {
-      running = !p;
-      wrap.classList.toggle('marquee-hover', p);
-      // Pause the CSS animation by swapping play-state; keep inline style clear.
-      track.style.animationPlayState = p ? 'paused' : 'running';
-    };
-    wrap.addEventListener('pointerenter', () => setPaused(true));
-    wrap.addEventListener('pointerleave', () => setPaused(false));
-    // Leave a stable running state if the pointer is inside on load edge cases.
-    setPaused(false);
-    void running;
-  })();
 
   /* ── U2 · Proof-card cursor parallax (image depth under frame) ── */
   (function cardParallax() {
@@ -893,7 +869,7 @@
 
   /* ══════════════════════════════════════════════════════
      PASS 3 D-FINISH (2026-08-15) — deepen micro-interactions
-     lightbox keyboard-hint · marquee breath · nav underline sweep
+     lightbox keyboard-hint · nav underline sweep
      ══════════════════════════════════════════════════════ */
 
   /* ── D1 · Lightbox keyboard-hint bar: reveal on first key use ── */
