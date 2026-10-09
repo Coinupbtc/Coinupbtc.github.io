@@ -165,7 +165,13 @@
         </article>
 
       </div>
-      <div id="gauge-3d" class="gauge-3d" hidden aria-hidden="true"></div>
+      <figure class="fig fig-solo gauge" id="gauge-3d">
+        <div class="gauge-stage" id="gauge-stage">
+          <img class="gauge-poster" src="assets/gauge/gauge-poster-1200.webp" srcset="assets/gauge/gauge-poster-600.webp 600w, assets/gauge/gauge-poster-1200.webp 1200w" sizes="(max-width: 600px) 100vw, 36rem" width="1200" height="1200" loading="lazy" decoding="async" alt="A ring-shaped 3D control chart of one SECOM sensor over the test block: grey bars are passing runs inside the limits, orange bars are passing runs that set off an alarm, red bars are failing runs the limits caught, black bars with white rings are failing runs the limits missed, and two glass bands mark the upper and lower control limits.">
+          <button type="button" class="gauge-spin" id="gauge-spin" data-src="assets/gauge/gauge.glb" data-viewer="assets/vendor/model-viewer-4.4.0.min.js">Spin it</button>
+        </div>
+        <figcaption class="fig-cap"><b>Fig. 3</b> The Gauge: sensor_000 on an I-MR individuals chart over the test block of <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/README.md">627 runs</a> of real UCI SECOM data. This one sensor's control limits (mean &#177; 3 sigma from early passing runs) caught <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/imr_top_sensors.csv">4 of the 28 fails (14%)</a>; the other 24 fails sat inside the limits and were missed. It also alarmed on <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/scores.csv">24 of the 599 passes (4.0%)</a>, where 3-sigma limits on an in-control process would alarm on about <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/PREREGISTRATION.md">0.27%</a>. Counts come from the committed per-run z-scores and run labels. I picked this sensor for display: it is one of the project's <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/results.json">10 pre-ranked sensors</a>, chosen because it crosses its limits in the test block. So this chart is not evidence that the sensor works. Bar heights are in anonymized sensor units, with the axis starting above zero. <span class="gauge-credit">Model: @coinupbtc. Data: <a href="https://archive.ics.uci.edu/dataset/179/secom">UCI SECOM</a> (CC BY 4.0).</span></figcaption>
+      </figure>
     </section>
 
     <section class="proof" id="improve" data-dmaic="improve" aria-labelledby="improve-h">
@@ -210,7 +216,7 @@
               <text class="muted" x="160" y="280" text-anchor="middle">50 s</text>
               <text class="muted" x="320" y="280" text-anchor="end">100 s</text>
             </svg>
-            <figcaption class="fig-cap"><b>Fig. 3</b> Total wall-clock per prompt, one run each, thinking on vs off, from <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#3-baseline-clean-original-after-restart-think-off">REPORT &#167;3</a>. Every prompt scored 9.0/10 both ways, which is the suite ceiling.</figcaption>
+            <figcaption class="fig-cap"><b>Fig. 4</b> Total wall-clock per prompt, one run each, thinking on vs off, from <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#3-baseline-clean-original-after-restart-think-off">REPORT &#167;3</a>. Every prompt scored 9.0/10 both ways, which is the suite ceiling.</figcaption>
           </figure>
           <div class="card-body">
             <p>I turned thinking off on the client (<code>enable_thinking=false</code>) and cut wall-clock per request from up to 98 s to 15 s or less, with no drop on my <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#3-baseline-clean-original-after-restart-think-off">4-prompt quality suite</a> &#8212; though that suite <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/bench_miaai35.py">tops out at 9/10</a>, so it can't see small losses. It was a speed-for-reasoning trade-off I chose for interactive use, not a pure improvement &#8212; see <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">the committed pass table</a>. The serving flags I tried after (flash attention, KV q8_0, context size, slot count) each moved decode under 2%, also in <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">the committed pass table</a>.</p>
@@ -234,7 +240,7 @@
               <img class="card-img" src="assets/projects/spark-console.webp" alt="spark-console Pulse tab running on localhost, hostname redacted: CPU, memory 108 of 121.69 GB, disk, power and GPU readings for one DGX Spark" width="960" height="516" loading="lazy" decoding="async">
               <span class="card-num" aria-hidden="true"><b>read-only</b><small>localhost</small></span>
             </a>
-            <figcaption class="fig-cap"><b>Fig. 4</b> The Pulse tab of my <a href="https://github.com/Coinupbtc/spark-console">spark-console</a> on localhost, hostname redacted.</figcaption>
+            <figcaption class="fig-cap"><b>Fig. 5</b> The Pulse tab of my <a href="https://github.com/Coinupbtc/spark-console">spark-console</a> on localhost, hostname redacted.</figcaption>
           </figure>
           <div class="media-slot" id="spark-console-shot" data-media="pending" hidden aria-hidden="true"></div>
           <div class="card-body">
@@ -271,5 +277,6 @@
   </footer>
 
   <script src="js/main.js" defer></script>
+  <script src="js/gauge.js" defer></script>
 </body>
 </html>
