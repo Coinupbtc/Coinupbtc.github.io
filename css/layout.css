@@ -245,3 +245,77 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .role-line, .use-line { opacity: 1; animation: none; }
 }
+
+/* Wave 1: control-chart layout (define > measure > analyze > improve > control) and /resume/ proof sheet */
+
+/* 1. Homepage hero: keep the brand line to 2–3 lines on desktop, no overlap */
+.hero .brand {
+  font-size: clamp(2.6rem, 7.2vw, 5.4rem);
+  line-height: 0.95;
+  max-width: 16ch;
+}
+.hero .stage-main {
+  grid-column: 1 / -1;
+  max-width: 62rem;
+}
+.hero .lede {
+  max-width: 46ch;
+  margin-top: 1.5rem;
+}
+
+/* 2. Lone cards in Analyze / Improve / Control span the full grid row */
+.card-grid > .card:only-child {
+  grid-column: 1 / -1;
+  max-width: 52rem;
+}
+.card-grid > .card:only-child .card-body p {
+  max-width: 62ch;
+}
+
+/* 3. Reserved 3D gauge slot stays hidden */
+#gauge-3d[hidden] {
+  display: none !important;
+}
+
+/* 4. /resume/ proof sheet: Define headline */
+.proof .brand {
+  font-size: clamp(2.4rem, 6.5vw, 5rem);
+  line-height: 0.95;
+  max-width: 16ch;
+  opacity: 1;
+  animation: none;
+}
+.proof .lede {
+  max-width: 52ch;
+  color: var(--mute);
+}
+
+/* 5. /resume/ method rows stack vertically inside DMAIC sections */
+.proof[data-dmaic] .hub-list {
+  max-width: 56rem;
+}
+.proof[data-dmaic] .hub-list li {
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+}
+.proof[data-dmaic] .hub-list li strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  font-weight: 500;
+  color: var(--ink);
+}
+.proof[data-dmaic] .hub-list li a {
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--acid);
+  width: fit-content;
+}
+.proof[data-dmaic] .hub-list li span {
+  text-align: left;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  max-width: 64ch;
+}
+.proof[data-dmaic] .hub-list li span a {
+  font-size: inherit;
+  text-decoration: underline;
+}

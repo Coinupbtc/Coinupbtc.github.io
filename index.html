@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Coinupbtc — quality systems engineer, on-prem AI inference</title>
-  <meta name="description" content="Quality systems engineer (ISO 13485, CAPA, metrology) who runs and measures LLM inference on local DGX Sparks. Every number links to the committed file it came from. Pseudonymous; contact via GitHub, X @coinupbtc, or email.">
+  <title>Coinupbtc: I measure AI the way I measure parts</title>
+  <meta name="description" content="I test AI with the same tools I use on a production line: control charts, baselines, and files you can check. Every number on this page links to the committed file it came from.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#e8e4dc">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Coinupbtc">
-  <meta property="og:title" content="Coinupbtc — quality systems &amp; on-prem AI">
-  <meta property="og:description" content="Quality systems engineer. On-prem inference. Measured, not claimed.">
+  <meta property="og:title" content="Coinupbtc: I measure AI the way I measure parts">
+  <meta property="og:description" content="I test AI with the same tools I use on a production line: control charts, baselines, and files you can check.">
   <meta property="og:url" content="https://coinupbtc.com/">
   <meta property="og:image" content="https://coinupbtc.com/assets/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -67,7 +67,8 @@
   <header class="site-nav" id="site-nav">
     <a class="nav-brand" href="#top">Coinupbtc</a>
     <nav aria-label="On this site">
-      <a href="#projects">Work</a>
+      <a href="#measure">Work</a>
+      <a href="resume/">Resume</a>
       <a href="#hub">Contact</a>
     </nav>
     <!-- Static hiring readout. The visitor clock implied a local time this page does not have. -->
@@ -89,19 +90,18 @@
       <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
       <div class="hero-vignette" aria-hidden="true"></div>
       <div class="stage" id="stage">
-        <div class="stage-main">
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Quality systems engineer &middot; on-prem AI inference</p>
-          <h1 class="brand"><mark>Coinupbtc</mark></h1>
-          <p class="lede">I don&#8217;t rent intelligence &#8212; I host it.</p>
-          <p class="role-line">Quality systems engineer by trade &#8212; ISO 13485, CAPA, metrology. I run LLMs on two DGX Sparks under the same rule I use at work: if it isn&#8217;t in a committed file, I don&#8217;t claim it.</p>
+        <div class="stage-main" id="define" data-dmaic="define">
+          <p class="kicker">Define</p>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Quality engineer &middot; local AI, measured</p>
+          <h1 class="brand">I measure AI the way I measure parts</h1>
+          <p class="lede">Quality engineer. I test AI with the same tools I use on a production line: control charts, baselines, and files you can check.</p>
           <div class="ctas">
-            <a class="primary" href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026" data-magnetic>miaai35-tune results<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a class="primary" href="resume/" data-magnetic>Resume<span class="arr" aria-hidden="true">&#8599;</span></a>
             <!-- hidden until helix-qms-desk is recreated and re-scanned
             <a href="https://coinupbtc.github.io/helix-qms-desk/" data-magnetic>Helix QMS desk &middot; 90 s<span class="arr" aria-hidden="true">&#8599;</span></a>
             -->
             <a href="mailto:coinupbtc@gmail.com" data-magnetic>Email<span class="arr" aria-hidden="true">&#8599;</span></a>
           </div>
-          <p class="use-line">Baseline: <strong>35.80 tok/s</strong> coding decode &#8212; Qwen3.6-35B-A3B on llama.cpp, thinking off, 9 July 2026 (<a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">committed JSON</a>). Six serving-flag passes after it moved decode less than 2% either way. The repo says so instead of hiding it.</p>
         </div>
       </div>
       <div class="foot-meta">
@@ -110,39 +110,11 @@
       </div>
     </section>
 
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>ISO&nbsp;13485</span><i>&#10022;</i>
-        <span>CAPA&nbsp;8D</span><i>&#10022;</i>
-        <span>IQ/OQ/PQ</span><i>&#10022;</i>
-        <span>llama.cpp&nbsp;on&nbsp;DGX&nbsp;Spark</span><i>&#10022;</i>
-        <span>35.80&nbsp;tok/s&nbsp;baseline</span><i>&#10022;</i>
-        <span>zwell&nbsp;14/15&nbsp;published</span><i>&#10022;</i>
-        <span>ISO&nbsp;13485</span><i>&#10022;</i>
-        <span>CAPA&nbsp;8D</span><i>&#10022;</i>
-        <span>IQ/OQ/PQ</span><i>&#10022;</i>
-        <span>llama.cpp&nbsp;on&nbsp;DGX&nbsp;Spark</span><i>&#10022;</i>
-        <span>35.80&nbsp;tok/s&nbsp;baseline</span><i>&#10022;</i>
-        <span>zwell&nbsp;14/15&nbsp;published</span><i>&#10022;</i>
-      </div>
-    </div>
-
-    <section class="systems" aria-labelledby="systems-h">
-      <p class="kicker">The machine</p>
-      <h2 id="systems-h">Hardware behind the proof</h2>
-      <dl class="sys-grid" id="sys-grid">
-        <div class="sys-cell"><dt>Nodes</dt><dd class="num" data-count="2">2</dd><dd class="sub">NVIDIA DGX Spark (GB10)</dd></div>
-        <div class="sys-cell"><dt>Unified memory</dt><dd class="num" data-count="121" data-suffix=" GiB">121 GiB</dd><dd class="sub">per node; CPU and GPU share it</dd></div>
-        <div class="sys-cell"><dt>Storage</dt><dd class="num" data-count="3.7" data-decimals="1" data-suffix=" TB">3.7 TB</dd><dd class="sub">NVMe; weights stay local</dd></div>
-        <div class="sys-cell"><dt>Baseline decode</dt><dd class="num" data-count="35.80" data-decimals="2" data-suffix=" t/s">35.80 t/s</dd><dd class="sub">coding, 9 July 2026</dd></div>
-      </dl>
-    </section>
-
-    <section class="proof" id="projects" aria-labelledby="proof-h">
+    <section class="proof" id="measure" data-dmaic="measure" aria-labelledby="measure-h">
       <div class="proof-head">
         <div>
-          <p class="kicker">Public proof</p>
-          <h2 id="proof-h">Measured work, in the open</h2>
+          <p class="kicker">Measure</p>
+          <h2 id="measure-h">Baseline first</h2>
           <p class="section-note">Every number below links to the file it came from.</p>
         </div>
         <a class="proof-all" href="https://github.com/Coinupbtc" data-magnetic>all repos <span class="arr" aria-hidden="true">&#8599;</span></a>
@@ -157,86 +129,76 @@
           <div class="card-body">
             <p class="card-role">Flagship</p>
             <h3><a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026">miaai35-tune</a></h3>
-            <p>Flag-by-flag llama.cpp bakeoff for Qwen3.6-35B-A3B on DGX Spark. The clean-restart baseline is <strong>35.80 tok/s</strong> coding decode (thinking off, speculative decode off, quality 9/10) from the <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">committed JSON</a>. Flash attention, KV quantization, context size and slot flags each moved it less than 2%. Turning thinking off cut wall-clock from up to 98 s to under 15 s. Numbers with no saved file are named and not quoted.</p>
+            <p>My clean-restart baseline is <strong>35.80 tok/s</strong> coding decode: Qwen3.6-35B-A3B on llama.cpp, one DGX Spark, thinking off, speculative decode off, 9 July 2026, coding quality 9/10. I take it from the <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026">results file</a>, and the number sits in the <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">committed JSON</a> I can re-run any day.</p>
           </div>
         </article>
 
-        <!-- hidden until helix-qms-desk is recreated and re-scanned
-        <article class="card">
-          <a class="card-top" href="https://coinupbtc.github.io/helix-qms-desk/" aria-label="Helix QMS Desk — open the live desk">
-            <img class="card-img" src="assets/projects/helix-qms-desk.webp" alt="Helix QMS Desk Monday war-room — sticker versus certificate mismatch, CAPA, training gaps" width="640" height="438" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>90</b> s<small>Monday path</small></span>
+      </div>
+      <dl class="sys-grid" id="sys-grid">
+        <div class="sys-cell"><dt>Nodes</dt><dd class="num" data-count="2">2</dd><dd class="sub"><a href="https://github.com/Coinupbtc/MiniMax-H3-2x-DGX-Spark">NVIDIA DGX Spark (GB10) nodes</a></dd></div>
+        <div class="sys-cell"><dt>Unified memory</dt><dd class="num" data-count="121" data-suffix=" GiB">121 GiB</dd><dd class="sub"><a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#1-system-inventory">per node; CPU and GPU share it</a></dd></div>
+        <div class="sys-cell"><dt>Storage</dt><dd class="num" data-count="3.7" data-decimals="1" data-suffix=" TB">3.7 TB</dd><dd class="sub"><a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#1-system-inventory">NVMe; weights stay local</a></dd></div>
+      </dl>
+    </section>
+
+    <section class="proof" id="analyze" data-dmaic="analyze" aria-labelledby="analyze-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Analyze</p>
+          <h2 id="analyze-h">Control charts vs ML on real fab data</h2>
+        </div>
+      </div>
+      <div class="card-grid">
+
+        <article class="card" id="secom-spc-vs-ai">
+          <a class="card-top" href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md" aria-label="secom-spc-vs-ai on GitHub">
+            <img class="card-img" src="assets/projects/secom-spc-vs-ai.webp" alt="Committed T² control chart cropped to the 627-run time-ordered test block: all 28 failed runs, marked with red crosses, sit under the dashed 1% alarm limit set on Phase I data. The purple dotted line is the textbook parametric (F-distribution) 99% limit, which 579 of the 627 runs exceed" width="960" height="516" loading="lazy" decoding="async">
+            <span class="card-num" aria-hidden="true"><b>1.8&#8211;4.2&#215;</b><small>over-alarm</small></span>
           </a>
           <div class="card-body">
-            <h3><a href="https://coinupbtc.github.io/helix-qms-desk/">helix-qms-desk</a></h3>
-            <p>ISO 13485 quality desk for a fictional biomedical plant. Walk Monday in 90 seconds: calibration sticker ≠ certificate, CAPA 8D, supplier SCARs, an ISO 14971 residual that got worse after a &#8220;control&#8221;. Then run IQ/OQ/PQ against the desk <strong>and</strong> a local assist model, where HTTP 200 with empty content counts as a failure. <strong>All records synthetic.</strong></p>
+            <h3><a href="https://github.com/Coinupbtc/secom-spc-vs-ai">secom-spc-vs-ai</a></h3>
+            <p>I ran control charts and ML against each other on real fab data: 1,567 production runs and 590 sensor signals from UCI SECOM, per the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a> and the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">committed JSON</a>. At a calibrated 1% false-alarm budget on a time-ordered holdout, neither control charts nor ML caught failing runs better than doing nothing. Phase I limits over-alarmed <strong>1.8&#8211;4.2&#215;</strong> their 1% target on later passes, as I wrote up in the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a>.</p>
+            <p>Numbers are in the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">results JSON</a>, the write-up is the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a>, and the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/PREREGISTRATION.md">preregistration</a> was written before the test block was scored.</p>
           </div>
         </article>
-        -->
 
+      </div>
+      <div id="gauge-3d" class="gauge-3d" hidden aria-hidden="true"></div>
+    </section>
+
+    <section class="proof" id="improve" data-dmaic="improve" aria-labelledby="improve-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Improve</p>
+          <h2 id="improve-h">One change, measured</h2>
+        </div>
+      </div>
+      <div class="card-grid">
         <article class="card">
+          <div class="card-body">
+            <p>I turned thinking off on the client (<code>enable_thinking=false</code>) and cut wall-clock per request from up to 98 s to 15 s or less, with coding quality holding at 9/10 &#8212; see <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">the committed pass table</a>. The serving flags I tried after (flash attention, KV q8_0, context size, slot count) each moved decode under 2%, also in <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">the committed pass table</a>.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="proof" id="control" data-dmaic="control" aria-labelledby="control-h">
+      <div class="proof-head">
+        <div>
+          <p class="kicker">Control</p>
+          <h2 id="control-h">Read-only by design</h2>
+        </div>
+      </div>
+      <div class="card-grid">
+
+        <article class="card" id="spark-console">
           <a class="card-top" href="https://github.com/Coinupbtc/spark-console" aria-label="spark-console on GitHub">
             <img class="card-img" src="assets/projects/spark-console.webp" alt="spark-console Pulse tab running on localhost, hostname redacted: CPU, memory 108 of 121.69 GB, disk, power and GPU readings for one DGX Spark" width="960" height="516" loading="lazy" decoding="async">
             <span class="card-num" aria-hidden="true"><b>read-only</b><small>localhost</small></span>
           </a>
           <div class="card-body">
             <h3><a href="https://github.com/Coinupbtc/spark-console">spark-console</a></h3>
-            <p>One local pane for DGX Spark GPU, memory, model inventory and endpoint health, with an optional second node over SSH. Binds 127.0.0.1, rejects foreign <code>Host</code> headers (DNS rebinding) and foreign <code>Origin</code> writes. No start, stop or kill routes. Nothing phones home.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-top" href="https://github.com/Coinupbtc/spark-pack" aria-label="spark-pack on GitHub">
-            <img class="card-img" src="assets/projects/spark-pack.webp" alt="spark-pack verdicts captured from its own packer page: FITS at 46% (one Spark, Helper 35B), TIGHT at 91% with 10.5 GB left (two Sparks, DS4F, KV cache and Vision 4B), Won't start (H3 video on one Spark)" width="960" height="516" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>121</b> GB<small>per Spark</small></span>
-          </a>
-          <div class="card-body">
-            <h3><a href="https://github.com/Coinupbtc/spark-pack">spark-pack</a></h3>
-            <p>Pack models onto 1&#8211;3 DGX Sparks before you start them: <strong>FITS</strong>, <strong>TIGHT</strong>, or <strong>won&#8217;t start</strong>. 121 GB is per Spark, not a pooled cluster, which is the mistake that hard-reboots a box. Catalog sizes are measured and dated; the live probe only reads, never starts anything.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-top" href="https://github.com/Coinupbtc/MiniMax-H3-2x-DGX-Spark" aria-label="MiniMax-H3-2x-DGX-Spark on GitHub">
-            <img class="card-img" src="assets/projects/minimax-h3-2x-dgx-spark.webp" alt="Bar chart from the committed quality-speed doc: the same seed-42 clip took 90.5 s warm over Socket TCP and 55.5 s over RoCE InfiniBand on two Sparks" width="960" height="516" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>55.5</b> s<small>RoCE, was 90.5 s</small></span>
-          </a>
-          <div class="card-body">
-            <h3><a href="https://github.com/Coinupbtc/MiniMax-H3-2x-DGX-Spark">MiniMax-H3-2x-DGX-Spark</a></h3>
-            <p>A fork of <a href="https://github.com/joeynyc/MiniMax-H3-2x-DGX-Spark">Joey Rodriguez&#8217;s</a> two-Spark MiniMax H3 recipe; the recipe is his. My part: GB10 CX7 RoCE bring-up so the two nodes talk over InfiniBand instead of TCP (GID index 3, matched MTU, unlimited memlock). Same seed-42 clip: 90.5 s over TCP, 55.5 s over RoCE (repeat 58.4 s), output identical. Code is Apache-2.0. <strong>MiniMax H3 weights and outputs fall under MiniMax&#8217;s own Community License, which has territory limits.</strong> The repo ships no weights and no media.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-top" href="https://github.com/Coinupbtc/stl-sandbox" aria-label="stl-sandbox on GitHub">
-            <img class="card-img" src="assets/projects/stl-sandbox.webp" alt="stl-sandbox viewer: an M10 hex nut built on the template path (no LLM), next to the header of its ISO 2768-m inspection panel reading ACCEPT, Grade A" width="960" height="516" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>STL + STEP</b><small>local</small></span>
-          </a>
-          <div class="card-body">
-            <h3><a href="https://github.com/Coinupbtc/stl-sandbox">stl-sandbox</a></h3>
-            <p>Plain-English prompt to printable STL and STEP, fully local (CadQuery plus an optional local LLM). Checks bed fit and mesh health before you slice, and writes an ISO 2768-style inspection report per part. Honest boundary: prototype geometry control, not AS9100 or flight qualification.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-top" href="https://github.com/Coinupbtc/zwell-bench" aria-label="zwell-bench on GitHub">
-            <img class="card-img" src="assets/projects/zwell-bench.webp" alt="Terminal: jq over results/miaai35-v8-baseline.json prints score 95.0, 14/15 pass, then 14 checks marked PASS and schedule_math marked FAIL" width="960" height="516" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>14/15</b><small>published</small></span>
-          </a>
-          <div class="card-body">
-            <h3><a href="https://github.com/Coinupbtc/zwell-bench">zwell-bench</a></h3>
-            <p>15-check gate for local LLMs: executed coding tests, web extraction, vision reads, tool choice, agentic ordering. The gate aims for all-green; the published baseline (16 July 2026) is <strong>14/15</strong>, weighted 95.0, one agentic miss (<code>schedule_math</code>). None of the four committed runs is 15/15, and the README says so.</p>
-          </div>
-        </article>
-
-        <article class="card">
-          <a class="card-top" href="https://github.com/Coinupbtc/secom-spc-vs-ai" aria-label="secom-spc-vs-ai on GitHub">
-            <img class="card-img" src="assets/projects/secom-spc-vs-ai.webp" alt="Committed T² control chart cropped to the 627-run time-ordered test block: all 28 failed runs, marked with red crosses, sit under the dashed 1% alarm limit set on Phase I data. The purple dotted line is the textbook parametric (F-distribution) 99% limit, which 579 of the 627 runs exceed" width="960" height="516" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>0/28</b><small>T&#178; and SPE, 1% FAR</small></span>
-          </a>
-          <div class="card-body">
-            <h3><a href="https://github.com/Coinupbtc/secom-spc-vs-ai">secom-spc-vs-ai</a></h3>
-            <p>On real fab data (UCI SECOM) at a 1% false-alarm budget, no method reliably beat chance. Time-ordered test block: 627 runs, 28 fails. Fails caught: T&#178; <strong>0/28</strong>, SPE <strong>0/28</strong>, Isolation Forest <strong>2/28</strong>, autoencoder <strong>0/28</strong>, a supervised reference 1/28. Every AUROC 95% CI includes 0.5. The analysis plan was tagged before the test block was scored; numbers are in the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">committed JSON</a>.</p>
+            <p>My read-only local pane for DGX Spark GPU, memory, model inventory and endpoint health. It binds 127.0.0.1, rejects foreign <code>Host</code> headers (DNS rebinding) and foreign <code>Origin</code> writes, has no start/stop/kill routes, and nothing phones home. Details in the <a href="https://github.com/Coinupbtc/spark-console">repo</a>.</p>
           </div>
         </article>
 
