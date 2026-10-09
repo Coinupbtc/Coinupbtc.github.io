@@ -107,7 +107,7 @@
         <li>
           <strong>Statistical process control: I-MR charts, Phase I limits, a fixed false-alarm budget</strong>
           <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">secom-spc-vs-ai results</a>
-          <span>I compared control charts and ML on real UCI SECOM fab data: 1,567 production runs, 590 sensors. At a 1% false-alarm budget, nothing beat doing nothing.</span>
+          <span>I compared control charts and ML on real UCI SECOM fab data: 1,567 production runs, 590 sensors. At a 1% false-alarm budget, no method reliably beat chance (every AUROC 95% interval includes 0.5).</span>
         </li>
         <li>
           <strong>Preregistered comparison on real data</strong>
@@ -128,7 +128,7 @@
         <li>
           <strong>Controlled one-variable tuning against the baseline</strong>
           <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">committed pass table</a>
-          <span>Turning thinking off cut wall-clock from up to 98 s to 15 s or less with quality held at 9/10; serving flags each moved decode under 2%.</span>
+          <span>Turning thinking off cut wall-clock from up to 98 s to 15 s or less with no drop on my 4-prompt quality suite, though that suite tops out at 9/10, so it can't see small losses; a speed-for-reasoning trade-off. Serving flags each moved decode under 2%.</span>
         </li>
       </ul>
     </section>
