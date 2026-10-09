@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Coinupbtc: proof sheet</title>
   <meta name="description" content="My proof sheet. Each row is a method I use, with one public file you can open and check. No job history here, just the work.">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#e8e4dc">
+  <meta name="theme-color" content="#0c0e13">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Coinupbtc">
@@ -34,13 +34,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/polish.css">
 
   <!-- set theme before first paint to avoid flash -->
   <script>
     (function () {
       var t;
       try { t = localStorage.getItem('coinupbtc-theme'); } catch (e) {}
-      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (t !== 'light' && t !== 'dark') t = 'dark';
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
@@ -63,9 +64,6 @@
     </button>
   </header>
 
-  <div class="grain" aria-hidden="true"></div>
-
-  <div class="progress" id="progress" aria-hidden="true"></div>
   <button class="to-top" id="to-top" type="button" aria-label="Back to top" hidden>&uarr;</button>
 
   <main id="main">
