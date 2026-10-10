@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Coinupbtc: I measure AI the way I measure parts</title>
   <meta name="description" content="I test AI with the same tools I use on a production line: control charts, baselines, and files you can check. Every number on this page links to the committed file it came from.">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#e8e4dc">
+  <meta name="theme-color" content="#0c0e13">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Coinupbtc">
@@ -34,13 +34,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/polish.css">
 
   <!-- set theme before first paint to avoid flash -->
   <script>
     (function () {
       var t;
       try { t = localStorage.getItem('coinupbtc-theme'); } catch (e) {}
-      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (t !== 'light' && t !== 'dark') t = 'dark';
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
@@ -79,9 +80,6 @@
     </button>
   </header>
 
-  <div class="grain" aria-hidden="true"></div>
-
-  <div class="progress" id="progress" aria-hidden="true"></div>
   <button class="to-top" id="to-top" type="button" aria-label="Back to top" hidden>&uarr;</button>
 
   <main id="main">
@@ -89,6 +87,7 @@
       <!-- Conference build: generative canvas and vignette only. No clip backplate. -->
       <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
       <div class="hero-vignette" aria-hidden="true"></div>
+      <div class="media-slot" id="hero-reel" data-media="pending" hidden aria-hidden="true"></div>
       <div class="stage" id="stage">
         <div class="stage-main" id="define" data-dmaic="define">
           <p class="kicker">Define</p>
@@ -96,8 +95,8 @@
           <h1 class="brand">I measure AI the way I measure parts</h1>
           <p class="lede">Quality engineer. I test AI with the same tools I use on a production line: control charts, baselines, and files you can check.</p>
           <div class="ctas">
-            <a class="primary" href="resume/" data-magnetic>Resume<span class="arr" aria-hidden="true">&#8599;</span></a>
-            <a href="mailto:coinupbtc@gmail.com" data-magnetic>Email<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a class="primary" href="resume/">Resume<span class="arr" aria-hidden="true">&#8599;</span></a>
+            <a href="mailto:coinupbtc@gmail.com">Email<span class="arr" aria-hidden="true">&#8599;</span></a>
           </div>
         </div>
       </div>
@@ -114,15 +113,18 @@
           <h2 id="measure-h">Baseline first</h2>
           <p class="section-note">Every number below links to the file it came from.</p>
         </div>
-        <a class="proof-all" href="https://github.com/Coinupbtc" data-magnetic>all repos <span class="arr" aria-hidden="true">&#8599;</span></a>
+        <a class="proof-all" href="https://github.com/Coinupbtc">all repos <span class="arr" aria-hidden="true">&#8599;</span></a>
       </div>
       <div class="card-grid" id="card-grid">
 
         <article class="card card-flagship" id="miaai35-tune">
-          <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026" aria-label="miaai35-tune results, coding decode on 9 July 2026">
-            <img class="card-img" src="assets/projects/miaai35-tune.webp" alt="Terminal: jq over the committed bench JSON (9 July 2026, thinking off) prints short 38.23, coding 35.8, reasoning 35.29 and long_context 35.45 tok/s, each at quality 9.0/10" width="960" height="516" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>35.80</b> t/s<small>baseline</small></span>
-          </a>
+          <figure class="fig">
+            <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026" aria-label="miaai35-tune results, coding decode on 9 July 2026">
+              <img class="card-img" src="assets/projects/miaai35-tune.webp" alt="Terminal: jq over the committed bench JSON (9 July 2026, thinking off) prints short 38.23, coding 35.8, reasoning 35.29 and long_context 35.45 tok/s, each at quality 9.0/10" width="960" height="516" loading="lazy" decoding="async">
+              <span class="card-num" aria-hidden="true"><b>35.80</b> t/s<small>baseline</small></span>
+            </a>
+            <figcaption class="fig-cap"><b>Fig. 1</b> My clean-restart baseline, printed straight from the <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">committed bench JSON</a>.</figcaption>
+          </figure>
           <div class="card-body">
             <p class="card-role">Flagship</p>
             <h3><a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026">miaai35-tune</a></h3>
@@ -148,10 +150,13 @@
       <div class="card-grid">
 
         <article class="card" id="secom-spc-vs-ai">
-          <a class="card-top" href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md" aria-label="secom-spc-vs-ai on GitHub">
-            <img class="card-img" src="assets/projects/secom-spc-vs-ai.webp" alt="Committed T² control chart cropped to the 627-run time-ordered test block: all 28 failed runs, marked with red crosses, sit under the dashed 1% alarm limit set on Phase I data. The purple dotted line is the textbook parametric (F-distribution) 99% limit, which 579 of the 627 runs exceed" width="960" height="516" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>1.8&#8211;4.2&#215;</b><small>over-alarm</small></span>
-          </a>
+          <figure class="fig">
+            <a class="card-top" href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md" aria-label="secom-spc-vs-ai on GitHub">
+              <img class="card-img" src="assets/projects/secom-spc-vs-ai.webp" alt="Committed T² control chart cropped to the 627-run time-ordered test block: all 28 failed runs, marked with red crosses, sit under the dashed 1% alarm limit set on Phase I data. The purple dotted line is the textbook parametric (F-distribution) 99% limit, which 579 of the 627 runs exceed" width="960" height="516" loading="lazy" decoding="async">
+              <span class="card-num" aria-hidden="true"><b>1.8&#8211;4.2&#215;</b><small>over-alarm</small></span>
+            </a>
+            <figcaption class="fig-cap"><b>Fig. 2</b> The committed T&#178; chart on the time-ordered test block, from the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a>.</figcaption>
+          </figure>
           <div class="card-body">
             <h3><a href="https://github.com/Coinupbtc/secom-spc-vs-ai">secom-spc-vs-ai</a></h3>
             <p>I ran control charts and ML against each other on real fab data: 1,567 production runs and 590 sensor signals from UCI SECOM, per the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a> and the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">committed JSON</a>. At a calibrated 1% false-alarm budget on a time-ordered holdout, no method reliably beat chance (every AUROC 95% interval includes 0.5). Phase I limits over-alarmed <strong>1.8&#8211;4.2&#215;</strong> their 1% target on later passes, as I wrote up in the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a>.</p>
@@ -160,7 +165,20 @@
         </article>
 
       </div>
-      <div id="gauge-3d" class="gauge-3d" hidden aria-hidden="true"></div>
+      <figure class="fig fig-solo gauge" id="gauge-3d">
+        <div class="gauge-stage" id="gauge-stage">
+          <img class="gauge-poster" src="assets/gauge/gauge-poster-1200.webp" srcset="assets/gauge/gauge-poster-600.webp 600w, assets/gauge/gauge-poster-1200.webp 1200w" sizes="(max-width: 600px) 100vw, 36rem" width="1200" height="1200" loading="lazy" decoding="async" alt="A ring-shaped 3D control chart of one SECOM sensor over the test block: grey bars are passing runs inside the limits, orange bars are passing runs that set off an alarm, red bars are failing runs the limits caught, black bars with white rings are failing runs the limits missed, and two glass bands mark the upper and lower control limits.">
+          <button type="button" class="gauge-spin" id="gauge-spin" data-src="assets/gauge/gauge.glb" data-viewer="assets/vendor/model-viewer-4.4.0.min.js">Spin it</button>
+        </div>
+        <ul class="gauge-key" aria-label="Colour key for Fig. 3">
+          <li><span class="gauge-sw gauge-sw-pass" aria-hidden="true"></span> grey: pass inside limits (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/scores.csv">575</a>)</li>
+          <li><span class="gauge-sw gauge-sw-false" aria-hidden="true"></span> amber: pass outside limits, false alarm (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/scores.csv">24</a>)</li>
+          <li><span class="gauge-sw gauge-sw-caught" aria-hidden="true"></span> red: fail caught (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/imr_top_sensors.csv">4</a>)</li>
+          <li><span class="gauge-sw gauge-sw-missed" aria-hidden="true"></span> white ring: fail missed (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/imr_top_sensors.csv">24</a>)</li>
+          <li><span class="gauge-sw gauge-sw-glass" aria-hidden="true"></span> glass: control limits (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/PREREGISTRATION.md">mean &#177; 3&#963;</a>)</li>
+        </ul>
+        <figcaption class="fig-cap"><b>Fig. 3</b> The Gauge: sensor_000 on an I-MR individuals chart over the test block of <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/README.md">627 runs</a> of real UCI SECOM data. This one sensor's control limits (mean &#177; 3 sigma from early passing runs) caught <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/imr_top_sensors.csv">4 of the 28 fails (14%)</a>; the other 24 fails sat inside the limits and were missed. It also alarmed on <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/scores.csv">24 of the 599 passes (4.0%)</a>, where 3-sigma limits on an in-control process would alarm on about <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/PREREGISTRATION.md">0.27%</a>. Counts come from the committed per-run z-scores and run labels. I picked this sensor for display: it is one of the project's <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/results.json">10 pre-ranked sensors</a>, chosen because it crosses its limits in the test block. So this chart is not evidence that the sensor works. Bar heights are in anonymized sensor units, with the axis starting above zero. <span class="gauge-credit">Model: @coinupbtc. Data: <a href="https://archive.ics.uci.edu/dataset/179/secom">UCI SECOM</a> (CC BY 4.0).</span></figcaption>
+      </figure>
     </section>
 
     <section class="proof" id="improve" data-dmaic="improve" aria-labelledby="improve-h">
@@ -172,6 +190,41 @@
       </div>
       <div class="card-grid">
         <article class="card">
+          <figure class="fig">
+            <svg class="chart" viewBox="0 0 400 290" role="img" aria-labelledby="improve-chart-title improve-chart-desc">
+              <title id="improve-chart-title">Wall-clock per prompt, thinking on vs off</title>
+              <desc id="improve-chart-desc">Short: 46.5 s with thinking on, 0.988 s with thinking off. Coding: 98.0 s with thinking on, 13.387 s with thinking off. Reasoning: 69.0 s with thinking on, 14.772 s with thinking off. Long-context: 21.4 s with thinking on, 8.289 s with thinking off.</desc>
+              <rect class="key-on" x="0" y="4" width="12" height="12"/>
+              <text x="18" y="14">thinking on</text>
+              <rect class="key-off" x="130" y="4" width="12" height="12"/>
+              <text x="148" y="14">thinking off</text>
+              <text x="0" y="42">Short</text>
+              <rect class="bar-on" x="0" y="48" width="148.8" height="12"/>
+              <text class="muted" x="153.8" y="58">46.5 s</text>
+              <rect class="bar-off" x="0" y="63" width="3.2" height="12"/>
+              <text class="muted" x="8.2" y="73">0.988 s</text>
+              <text x="0" y="102">Coding</text>
+              <rect class="bar-on" x="0" y="108" width="313.6" height="12"/>
+              <text class="muted" x="318.6" y="118">98.0 s</text>
+              <rect class="bar-off" x="0" y="123" width="42.8" height="12"/>
+              <text class="muted" x="47.8" y="133">13.387 s</text>
+              <text x="0" y="162">Reasoning</text>
+              <rect class="bar-on" x="0" y="168" width="220.8" height="12"/>
+              <text class="muted" x="225.8" y="178">69.0 s</text>
+              <rect class="bar-off" x="0" y="183" width="47.3" height="12"/>
+              <text class="muted" x="52.3" y="193">14.772 s</text>
+              <text x="0" y="222">Long-context</text>
+              <rect class="bar-on" x="0" y="228" width="68.5" height="12"/>
+              <text class="muted" x="73.5" y="238">21.4 s</text>
+              <rect class="bar-off" x="0" y="243" width="26.5" height="12"/>
+              <text class="muted" x="31.5" y="253">8.289 s</text>
+              <line class="axis" x1="0" y1="262" x2="320" y2="262"/>
+              <text class="muted" x="0" y="280">0 s</text>
+              <text class="muted" x="160" y="280" text-anchor="middle">50 s</text>
+              <text class="muted" x="320" y="280" text-anchor="end">100 s</text>
+            </svg>
+            <figcaption class="fig-cap"><b>Fig. 4</b> Total wall-clock per prompt, one run each, thinking on vs off, from <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#3-baseline-clean-original-after-restart-think-off">REPORT &#167;3</a>. Every prompt scored 9.0/10 both ways, which is the suite ceiling.</figcaption>
+          </figure>
           <div class="card-body">
             <p>I turned thinking off on the client (<code>enable_thinking=false</code>) and cut wall-clock per request from up to 98 s to 15 s or less, with no drop on my <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#3-baseline-clean-original-after-restart-think-off">4-prompt quality suite</a> &#8212; though that suite <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/bench_miaai35.py">tops out at 9/10</a>, so it can't see small losses. It was a speed-for-reasoning trade-off I chose for interactive use, not a pure improvement &#8212; see <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">the committed pass table</a>. The serving flags I tried after (flash attention, KV q8_0, context size, slot count) each moved decode under 2%, also in <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">the committed pass table</a>.</p>
           </div>
@@ -189,10 +242,14 @@
       <div class="card-grid">
 
         <article class="card" id="spark-console">
-          <a class="card-top" href="https://github.com/Coinupbtc/spark-console" aria-label="spark-console on GitHub">
-            <img class="card-img" src="assets/projects/spark-console.webp" alt="spark-console Pulse tab running on localhost, hostname redacted: CPU, memory 108 of 121.69 GB, disk, power and GPU readings for one DGX Spark" width="960" height="516" loading="lazy" decoding="async">
-            <span class="card-num" aria-hidden="true"><b>read-only</b><small>localhost</small></span>
-          </a>
+          <figure class="fig">
+            <a class="card-top" href="https://github.com/Coinupbtc/spark-console" aria-label="spark-console on GitHub">
+              <img class="card-img" src="assets/projects/spark-console.webp" alt="spark-console Pulse tab running on localhost, hostname redacted: CPU, memory 108 of 121.69 GB, disk, power and GPU readings for one DGX Spark" width="960" height="516" loading="lazy" decoding="async">
+              <span class="card-num" aria-hidden="true"><b>read-only</b><small>localhost</small></span>
+            </a>
+            <figcaption class="fig-cap"><b>Fig. 5</b> The Pulse tab of my <a href="https://github.com/Coinupbtc/spark-console">spark-console</a> on localhost, hostname redacted.</figcaption>
+          </figure>
+          <div class="media-slot" id="spark-console-shot" data-media="pending" hidden aria-hidden="true"></div>
           <div class="card-body">
             <h3><a href="https://github.com/Coinupbtc/spark-console">spark-console</a></h3>
             <p>My read-only local pane for DGX Spark GPU, memory, model inventory and endpoint health. It binds 127.0.0.1, rejects foreign <code>Host</code> headers (DNS rebinding) and foreign <code>Origin</code> writes, has no start/stop/kill routes, and nothing phones home. Details in the <a href="https://github.com/Coinupbtc/spark-console">repo</a>.</p>
@@ -227,5 +284,6 @@
   </footer>
 
   <script src="js/main.js" defer></script>
+  <script src="js/gauge.js" defer></script>
 </body>
 </html>
