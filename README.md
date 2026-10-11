@@ -8,7 +8,7 @@
 |---|---|
 | **What it is** | A single-page pseudonymous landing site for Coinupbtc. |
 | **What it’s for** | The one link to hand out: GitHub, X @coinupbtc, email, and public measured builds. Alias only — no real name. |
-| **How to use it** | Open https://coinupbtc.com/ — Work / Contact in the top bar. Or `./setup.sh` for a local preview. |
+| **How to use it** | Open https://coinupbtc.com/ — Work / Resume / Scenes / Contact in the top bar. Or `./setup.sh` for a local preview. |
 
 ## Try it
 
@@ -35,10 +35,11 @@ The hero is editorial display type over a lightweight generative node-field canv
 
 ## Media
 
-The conference build does not publish a clip gallery or a model-generated share card.
-`assets/og-image.png` is a still of that same node field, redrawn by `scripts/export-og.py` (Pillow, no model output).
-`scripts/export-video.py` refuses to write hero, gallery, or share-card files.
+The hero has no video backplate. `assets/og-image.png` is a still of the node field, redrawn by `scripts/export-og.py` (Pillow, no model output).
+`scripts/export-video.py` still refuses to write hero, gallery, or share-card files.
 `scripts/export-art.py` can still refresh unused stills in `assets/art/`; those stills are not mounted on the page and must not be wired into the hero or the share card.
+
+Two Blender scenes are mounted by hand under **Made on the machine**: `assets/video/trex.mp4` (9 s turntable) and `assets/video/rocket.mp4` (6 s liftoff). H.264, 960 px wide, faststart, no audio. The local model wrote the scenes. Blender rendered them on this machine.
 
 ## Custom domain
 

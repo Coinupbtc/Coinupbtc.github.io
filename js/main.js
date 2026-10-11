@@ -163,4 +163,14 @@
       spy.observe(document.getElementById(a.getAttribute('href').slice(1)));
     });
   }
+
+  /* Scenes play muted. Reduced motion leaves them on the poster until play. */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  Array.prototype.forEach.call(document.querySelectorAll('#scenes video'), function (clip) {
+    clip.muted = true;
+    if (reduceMotion) {
+      clip.removeAttribute('autoplay');
+      clip.pause();
+    }
+  });
 })();
