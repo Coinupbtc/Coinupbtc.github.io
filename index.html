@@ -1,343 +1,466 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Coinupbtc: I measure AI the way I measure parts</title>
-  <meta name="description" content="I test AI the way I test parts: a baseline first, one change at a time, and files you can check. Every number on this page links to the committed file it came from.">
+  <title>Coinupbtc · Quality Engineer</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <meta name="description" content="Quality engineer in ISO 13485 medical-device manufacturing. Case files: a backup that passed for 15 days while saving one file, a metric that could not fail, a release gate that rejected the better build.">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#0c0e13">
-
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Coinupbtc">
-  <meta property="og:title" content="Coinupbtc: I measure AI the way I measure parts">
-  <meta property="og:description" content="I test AI the way I test parts: a baseline first, one change at a time, and files you can check.">
+  <meta property="og:title" content="Coinupbtc · Quality Engineer">
+  <meta property="og:description" content="I find the checks that pass when they shouldn't. ISO 13485 quality engineering, plus software and local AI I validate the same way.">
   <meta property="og:url" content="https://coinupbtc.com/">
   <meta property="og:image" content="https://coinupbtc.com/assets/og-image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Coinupbtc — quality systems, on-prem AI, measured builds. GitHub, X @coinupbtc, and email on the card.">
+  <meta property="og:image:alt" content="Coinupbtc: quality systems, on-prem AI, measured. GitHub, X and email.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@coinupbtc">
-  <meta name="twitter:creator" content="@coinupbtc">
   <meta name="twitter:image" content="https://coinupbtc.com/assets/og-image.png">
-  <meta name="twitter:image:alt" content="Coinupbtc — quality systems, on-prem AI, measured builds. GitHub, X @coinupbtc, and email on the card.">
-  <link rel="image_src" href="https://coinupbtc.com/assets/og-image.png">
   <link rel="canonical" href="https://coinupbtc.com/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/polish.css">
-
-  <!-- set theme before first paint to avoid flash -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script>
     (function () {
-      var t;
+      var t = null;
       try { t = localStorage.getItem('coinupbtc-theme'); } catch (e) {}
-      if (t !== 'light' && t !== 'dark') t = 'dark';
-      document.documentElement.setAttribute('data-theme', t);
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Coinupbtc",
-    "jobTitle": "Quality systems engineer",
+    "jobTitle": "Quality Engineer",
     "url": "https://coinupbtc.com/",
     "email": "coinupbtc@gmail.com",
-    "image": "https://coinupbtc.com/assets/og-image.png",
-    "sameAs": [
-      "https://github.com/Coinupbtc",
-      "https://x.com/coinupbtc"
-    ]
+    "address": { "@type": "PostalAddress", "addressLocality": "St. Louis", "addressRegion": "MO", "addressCountry": "US" },
+    "sameAs": ["https://github.com/Coinupbtc", "https://x.com/coinupbtc"]
   }
   </script>
+  <style>
+    /* Layout: one reading column for the story; each case file is a corrective-action
+       record (label rail + entries), the way a CAPA reads in a quality system. */
+    :root {
+      --paper: #f5f7f6;      /* cool lab-bench white, tinted toward the accent */
+      --surface: #ffffff;
+      --ink: #14191a;
+      --mute: #56625f;
+      --rule: #d5dcda;
+      --accent: #0b6b52;     /* calibrated-label green */
+      --accent-soft: #e2efea;
+      --flag: #a6411a;       /* a failed reading */
+      --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      --font-body: "IBM Plex Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      --step--1: 0.8125rem;
+      --step-0: 1.0625rem;
+      --step-1: 1.25rem;
+      --step-2: 1.625rem;
+      --step-3: clamp(2.1rem, 1.4rem + 3.2vw, 3.4rem);
+      --measure: 66ch;
+      --wrap: 72rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #0e1312; --surface: #141b19; --ink: #e6ebe9; --mute: #9aa8a3; --rule: #27322f;
+        --accent: #5ccaa0; --accent-soft: #15261f; --flag: #f08c62; color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --paper: #0e1312; --surface: #141b19; --ink: #e6ebe9; --mute: #9aa8a3; --rule: #27322f;
+      --accent: #5ccaa0; --accent-soft: #15261f; --flag: #f08c62; color-scheme: dark;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 var(--step-0)/1.6 var(--font-body);
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+    p { margin: 0; }
+    .wrap { max-width: var(--wrap); margin-inline: auto; }
+    .label {
+      font: 500 var(--step--1)/1.3 var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mute);
+    }
+    .skip { position: absolute; left: -999px; }
+    .skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); top: 8px; background: var(--surface); padding: 6px 10px; z-index: 5; }
+
+    /* Header */
+    .top {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      padding-block: 1.1rem; border-bottom: 1px solid var(--rule);
+    }
+    .brand { font: 600 1.125rem/1 var(--font-display); color: var(--ink); text-decoration: none; margin-right: auto; }
+    .top nav { display: flex; gap: 0.25rem 1.25rem; flex-wrap: wrap; }
+    .top nav a { color: var(--ink); text-decoration: none; font-size: 0.95rem; padding-block: 0.4rem; }
+    .top nav a:hover { color: var(--accent); }
+    .theme {
+      font: 500 var(--step--1)/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--mute); background: none; border: 1px solid var(--rule); border-radius: 999px;
+      padding: 0.45rem 0.75rem; cursor: pointer;
+    }
+    .theme:hover { color: var(--ink); border-color: var(--mute); }
+
+    /* Hero */
+    .hero { padding-block: clamp(2.5rem, 6vw, 5rem) 2.5rem; display: grid; gap: 1.5rem; }
+    .hero h1 { font-size: var(--step-3); max-width: 18ch; }
+    .hero .lede { font-size: clamp(var(--step-0), 1rem + 0.5vw, var(--step-1)); line-height: 1.55; max-width: 58ch; color: var(--ink); }
+    .facts {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0;
+      border-block: 1px solid var(--rule); margin: 0.5rem 0 0;
+    }
+    .facts div { padding: 0.9rem 1rem 0.9rem 0; min-width: 0; }
+    .facts div + div { padding-left: 1rem; border-left: 1px solid var(--rule); }
+    .facts dt { margin-bottom: 0.25rem; }
+    .facts dd { margin: 0; font-size: 0.98rem; }
+    .ctas { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px;
+      padding: 0.7rem 1.1rem; border-radius: 6px; font-weight: 600; text-decoration: none;
+      background: var(--accent); color: var(--paper);
+    }
+    .btn:hover { filter: brightness(1.08); }
+    .mail { font-family: var(--font-mono); font-size: 0.95rem; }
+
+    /* Sections */
+    section { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--rule); }
+    .sec-head { display: grid; gap: 0.6rem; margin-bottom: 2rem; max-width: var(--measure); }
+    .sec-head h2 { font-size: var(--step-2); }
+    .sec-head p { color: var(--mute); }
+
+    /* Helix feature */
+    .feature { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+    .shot { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--surface); }
+    .shot img { width: 100%; aspect-ratio: 960 / 516; object-fit: cover; object-position: top; }
+    .feature .body { display: grid; gap: 1rem; min-width: 0; }
+    .feature h3 { font-size: var(--step-2); }
+    .feature ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; }
+
+    /* Case files */
+    .cases { display: grid; gap: 1.25rem; }
+    .case {
+      display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 1rem 2.5rem;
+      background: var(--surface); border: 1px solid var(--rule); border-radius: 8px;
+      padding: clamp(1.25rem, 3vw, 2rem);
+    }
+    .case-id { display: grid; gap: 0.6rem; align-content: start; }
+    .case h3 { font-size: var(--step-1); line-height: 1.25; }
+    .record { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.75rem 1.25rem; margin: 0; }
+    .record dt { padding-top: 0.2rem; }
+    .record dd { margin: 0; max-width: var(--measure); }
+    .record dt.found { color: var(--flag); }
+    .num { font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .case-body { display: grid; gap: 1.1rem; min-width: 0; }
+    .evidence {
+      justify-self: start;
+      display: inline-flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; align-items: baseline;
+      border: 1px dashed var(--accent); border-radius: 4px; padding: 0.45rem 0.7rem;
+      background: var(--accent-soft); font-size: 0.95rem;
+    }
+    .evidence .label { color: var(--accent); }
+    .evidence.private { border-color: var(--rule); background: transparent; }
+    .evidence.private .label { color: var(--mute); }
+
+    /* Principles */
+    .principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 2.5rem; }
+    .principles div { display: grid; gap: 0.5rem; align-content: start; }
+    .principles h3 { font-size: var(--step-1); }
+    .principles p { color: var(--mute); }
+
+    /* Lab */
+    .lab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 3rem; align-items: start; }
+    .lab-list { list-style: none; margin: 0; padding: 0; display: grid; }
+    .lab-list li { display: grid; gap: 0.25rem; padding-block: 1rem; border-top: 1px solid var(--rule); }
+    .lab-list li:last-child { border-bottom: 1px solid var(--rule); }
+    .lab-list a { font-weight: 600; }
+    .lab-list p { color: var(--mute); font-size: 0.98rem; }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 3rem; margin: 0; }
+    .skills div { display: grid; gap: 0.4rem; min-width: 0; }
+    .skills dd { margin: 0; }
+
+    /* Contact + footer */
+    .contact { display: grid; gap: 1rem; max-width: var(--measure); }
+    .contact h2 { font-size: var(--step-2); }
+    .contact .mail-big { font: 500 var(--step-1)/1.3 var(--font-mono); word-break: break-all; }
+    .contact .row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+    footer { padding-block: 2rem 3rem; border-top: 1px solid var(--rule); color: var(--mute); font-size: 0.9rem; }
+
+    @media (max-width: 860px) {
+      .feature, .lab { grid-template-columns: minmax(0, 1fr); }
+      .case { grid-template-columns: minmax(0, 1fr); }
+      .principles { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .facts { grid-template-columns: minmax(0, 1fr); }
+      .facts div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+      .record { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
+      .record dd + dt { margin-top: 0.7rem; }
+      .skills { grid-template-columns: minmax(0, 1fr); }
+      .top nav { order: 3; width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="#main">Coinupbtc</a>
+      <nav aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#lab">Lab</a>
+        <a href="https://github.com/Coinupbtc">GitHub</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="theme" id="theme-toggle" type="button" aria-label="Switch light or dark theme">Theme</button>
+    </header>
 
-  <header class="site-nav" id="site-nav">
-    <a class="nav-brand" href="#top">Coinupbtc</a>
-    <nav aria-label="On this site">
-      <a href="#quality">Work</a>
-      <a href="resume/">Proof</a>
-      <a class="nav-optional" href="#scenes">Scenes</a>
-      <a href="#hub">Contact</a>
-    </nav>
-    <!-- Static hiring readout. The visitor clock implied a local time this page does not have. -->
-    <span id="telemetry" class="nav-clock telemetry" aria-hidden="true">measured, not claimed</span>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
-      <span class="theme-sun" aria-hidden="true"></span>
-      <span class="theme-moon" aria-hidden="true"></span>
-    </button>
-  </header>
+    <main id="main">
+      <div class="hero">
+        <p class="label">Quality engineer · ISO 13485 medical devices</p>
+        <h1>I find the checks that pass when they shouldn't.</h1>
+        <p class="lede">A calibration sticker that disagrees with its certificate. A backup that reports success while saving one file. A score that can't come out wrong. I've spent nine years in engineering and manufacturing quality, most recently in FDA-regulated medical-device manufacturing, and I validate the software and AI systems I build the same way.</p>
+        <dl class="facts">
+          <div><dt class="label">Work</dt><dd>Quality systems, CAPA, calibration and supplier quality under ISO 13485 and ISO 9001</dd></div>
+          <div><dt class="label">Looking for</dt><dd>Quality systems, software quality and validation roles</dd></div>
+          <div><dt class="label">Based in</dt><dd>St. Louis, MO · open to remote (US)</dd></div>
+        </dl>
+        <div class="ctas">
+          <a class="btn" href="https://coinupbtc.com/helix-qms-desk/">Open the 90-second demo <span aria-hidden="true">↗</span></a>
+          <span class="mail">coinupbtc@gmail.com</span>
+        </div>
+      </div>
 
-  <button class="to-top" id="to-top" type="button" aria-label="Back to top" hidden>&uarr;</button>
-
-  <main id="main">
-    <section class="hero" id="top" aria-label="Introduction">
-      <!-- Conference build: generative canvas and vignette only. No clip backplate. -->
-      <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
-      <div class="hero-vignette" aria-hidden="true"></div>
-      <div class="media-slot" id="hero-reel" data-media="pending" hidden aria-hidden="true"></div>
-      <div class="stage" id="stage">
-        <div class="stage-main" id="define" data-dmaic="define">
-          <p class="kicker">Define</p>
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Quality engineer &middot; local AI, measured</p>
-          <h1 class="brand">I measure AI the way I measure parts</h1>
-          <p class="lede">Quality engineer. I test AI the way I test parts: a baseline first, one change at a time, and files you can check.</p>
-          <div class="ctas">
-            <a class="primary" href="resume/">Proof sheet<span class="arr" aria-hidden="true">&#8599;</span></a>
-            <a href="mailto:coinupbtc@gmail.com">Email<span class="arr" aria-hidden="true">&#8599;</span></a>
+      <section id="work" aria-labelledby="helix-h">
+        <div class="feature">
+          <a class="shot" href="https://coinupbtc.com/helix-qms-desk/" aria-label="Open Helix QMS Desk">
+            <img src="assets/projects/helix-qms-desk.webp" width="960" height="516" alt="Helix QMS Desk, Monday screen: the voltage standard whose sticker says due 2026-09-01 while its certificate says 2026-07-31, then a CAPA 8D and an overdue CAPA">
+          </a>
+          <div class="body">
+            <p class="label">Start here · runs in your browser</p>
+            <h3 id="helix-h">Helix QMS Desk</h3>
+            <p>A working quality desk for a fictional biomedical plant. In 90 seconds you walk a Monday morning:</p>
+            <ul>
+              <li>a voltage standard whose calibration sticker disagrees with its certificate,</li>
+              <li>a CAPA 8D that repeats a closed one,</li>
+              <li>supplier SCARs and a training gap,</li>
+              <li>then IQ/OQ/PQ on the desk itself and on its AI assistant, where an empty answer counts as a failure.</li>
+            </ul>
+            <p>Every record is synthetic. The failure it's built around is real: a status label that stopped tracking the record it claims to show.</p>
+            <p><a href="https://coinupbtc.com/helix-qms-desk/">Open the desk</a> · <a href="https://github.com/Coinupbtc/helix-qms-desk">Source</a></p>
           </div>
         </div>
-      </div>
-      <div class="foot-meta">
-        <span>Pseudonymous by design</span>
-        <span>coinupbtc.com</span>
-      </div>
-    </section>
+      </section>
 
-    <section class="proof" id="quality" aria-labelledby="quality-h">
-      <div class="proof-head">
-        <div>
-          <p class="kicker">Quality</p>
-          <h2 id="quality-h">A quality desk you can walk in 90 seconds</h2>
-          <p class="section-note">Open it in the browser. Every record is synthetic.</p>
+      <section aria-labelledby="cases-h">
+        <div class="sec-head">
+          <p class="label">Case files</p>
+          <h2 id="cases-h">Problems I found, and how I proved the fix</h2>
+          <p>Each one is written the way a corrective action reads. Where there's a public file, the evidence links to it.</p>
         </div>
-        <a class="proof-all" href="https://github.com/Coinupbtc/helix-qms-desk">source <span class="arr" aria-hidden="true">&#8599;</span></a>
-      </div>
-      <div class="card-grid">
+        <div class="cases">
 
-        <article class="card card-flagship" id="helix-qms-desk">
-          <figure class="fig">
-            <a class="card-top" href="https://coinupbtc.com/helix-qms-desk/" aria-label="Helix QMS Desk, open the live desk">
-              <img class="card-img" src="assets/projects/helix-qms-desk.webp" alt="Helix QMS Desk Monday screen: five steps starting with a voltage standard whose calibration sticker disagrees with its certificate, then a CAPA 8D, an overdue CAPA and IQ/OQ/PQ" width="960" height="516" loading="lazy" decoding="async">
-              <span class="card-num" aria-hidden="true"><b>90</b> s<small>Monday path</small></span>
-            </a>
-            <figcaption class="fig-cap"><b>Fig. 1</b> The Monday screen of the <a href="https://coinupbtc.com/helix-qms-desk/">live desk</a>. A fictional plant; no real company, supplier or customer records.</figcaption>
-          </figure>
-          <div class="card-body">
-            <p class="card-role">Start here</p>
-            <h3><a href="https://coinupbtc.com/helix-qms-desk/">Helix QMS Desk</a></h3>
-            <p>An ISO 13485 quality desk for a fictional biomedical plant. Walk Monday in 90 seconds: a calibration sticker that disagrees with its certificate, a CAPA 8D, supplier SCARs and a training gap. Then run IQ/OQ/PQ against the desk <strong>and</strong> a local assist model, where HTTP 200 with empty content counts as a failure. The failure class is one I look for on the job: a status label that stopped tracking the record it claims to show.</p>
+          <article class="case">
+            <div class="case-id">
+              <p class="label">Data integrity</p>
+              <h3>A backup that passed for 15 days while saving one file</h3>
+            </div>
+            <div class="case-body">
+            <dl class="record">
+              <dt class="label found">Found</dt>
+              <dd>A nightly backup reported success for <span class="num">15</span> days in a row. Each archive held <span class="num">1</span> file instead of the full configuration set.</dd>
+              <dt class="label">Root cause</dt>
+              <dd>The check confirmed the archive existed. It never looked inside.</dd>
+              <dt class="label">Fix</dt>
+              <dd>Replaced presence checks with entry-count verification on every backup tier.</dd>
+              <dt class="label">Lesson</dt>
+              <dd>The same failure as a calibration sticker that no longer matches its certificate: the indicator kept saying "good" after it stopped measuring anything.</dd></dl>
+            <p class="evidence private"><span class="label">Evidence</span> My home lab. I'll walk through it in an interview.</p>
+            </div>
+          </article>
+
+          <article class="case">
+            <div class="case-id">
+              <p class="label">Metrics</p>
+              <h3>A score that could not come out wrong</h3>
+            </div>
+            <div class="case-body">
+            <dl class="record">
+              <dt class="label found">Found</dt>
+              <dd>A reporting tool's headline accuracy metric could never come out wrong, and its results board included <span class="num">118</span> of <span class="num">144</span> events that had already finished.</dd>
+              <dt class="label">Root cause</dt>
+              <dd>The baseline was derived from the same data it graded, so the metric agreed with itself by construction.</dd>
+              <dt class="label">Fix</dt>
+              <dd>Rebuilt it with leave-one-out baselines and an independent scoring harness.</dd>
+              <dt class="label">Verified</dt>
+              <dd>The metric can now fail, which is the only way a passing score means anything.</dd></dl>
+            <p class="evidence private"><span class="label">Evidence</span> Private project. I'll walk through it in an interview.</p>
+            </div>
+          </article>
+
+          <article class="case">
+            <div class="case-id">
+              <p class="label">Release gate</p>
+              <h3>A release gate that rejected the better build</h3>
+            </div>
+            <div class="case-body">
+            <dl class="record">
+              <dt class="label found">Found</dt>
+              <dd>A fine-tuned AI model scored better on its target task but failed <span class="num">4</span> unrelated checks: <span class="num">15/19</span> on the release gate.</dd>
+              <dt class="label">Rule</dt>
+              <dd>A build ships only at <span class="num">19/19</span>. No exceptions for a better headline number.</dd>
+              <dt class="label">Fix</dt>
+              <dd>Rejected it and rebuilt the training set: <span class="num">2,883</span> pairs generated by two independent models and graded on their agreement.</dd>
+              <dt class="label">Verified</dt>
+              <dd><span class="num">19/19</span> on the gate. On <span class="num">104</span> held-out records: <span class="num">96.2%</span> field-level accuracy against <span class="num">89.2%</span> for the base model, and <span class="num">71%</span> fully correct against <span class="num">34%</span>.</dd></dl>
+            <p class="evidence"><span class="label">Evidence</span> <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/bench_v5.py">The 19-check gate</a> <a href="https://github.com/Coinupbtc/spark-training-lab">Training scripts</a></p>
+            </div>
+          </article>
+
+          <article class="case">
+            <div class="case-id">
+              <p class="label">Performance</p>
+              <h3>From 13 seconds to 7.5 milliseconds</h3>
+            </div>
+            <div class="case-body">
+            <dl class="record">
+              <dt class="label found">Found</dt>
+              <dd>Selecting one row in a <span class="num">516</span>-record list took <span class="num">13</span> seconds.</dd>
+              <dt class="label">Root cause</dt>
+              <dd>Every filter pass rebuilt every row and parsed the same files again.</dd>
+              <dt class="label">Fix</dt>
+              <dd>Stopped rebuilding rows that hadn't changed and removed the repeated parsing.</dd>
+              <dt class="label">Verified</dt>
+              <dd>A flat <span class="num">7.5</span> ms, measured before and after.</dd></dl>
+            <p class="evidence"><span class="label">Evidence</span> <a href="https://coinupbtc.xyz/demos/render-cost.html">The bug and the fix, timed in your browser</a></p>
+            </div>
+          </article>
+
+          <article class="case">
+            <div class="case-id">
+              <p class="label">Study</p>
+              <h3>Control charts against machine learning on real factory data</h3>
+            </div>
+            <div class="case-body">
+            <dl class="record">
+              <dt class="label">Question</dt>
+              <dd>Do machine-learning alarms catch failing production runs better than classic control charts?</dd>
+              <dt class="label">Method</dt>
+              <dd>Public UCI SECOM data: <span class="num">1,567</span> production runs, <span class="num">590</span> sensors. Same <span class="num">1%</span> false-alarm budget for every method, tested on later runs only. I committed the analysis plan before scoring the test data.</dd>
+              <dt class="label">Result</dt>
+              <dd>No method reliably beat chance. Control limits set on early runs over-alarmed <span class="num">1.8–4.2×</span> their 1% target on later runs.</dd></dl>
+            <p class="evidence"><span class="label">Evidence</span> <a href="https://github.com/Coinupbtc/secom-spc-vs-ai">Repo with plan, deviations log and results</a></p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section aria-labelledby="how-h">
+        <div class="sec-head">
+          <p class="label">How I work</p>
+          <h2 id="how-h">Three rules I use on the floor and in code</h2>
+        </div>
+        <div class="principles">
+          <div>
+            <h3>Presence is not integrity</h3>
+            <p>A file that exists, a 200 response, a sticker on a meter. None of them prove the contents are right, so I check the contents.</p>
           </div>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="proof" id="measure" data-dmaic="measure" aria-labelledby="measure-h">
-      <div class="proof-head">
-        <div>
-          <p class="kicker">Measure</p>
-          <h2 id="measure-h">Baseline first</h2>
-          <p class="section-note">Every number below links to the file it came from.</p>
-        </div>
-        <a class="proof-all" href="https://github.com/Coinupbtc">all repos <span class="arr" aria-hidden="true">&#8599;</span></a>
-      </div>
-      <div class="card-grid" id="card-grid">
-
-        <article class="card card-flagship" id="miaai35-tune">
-          <figure class="fig">
-            <a class="card-top" href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026" aria-label="miaai35-tune results, coding decode on 9 July 2026">
-              <img class="card-img" src="assets/projects/miaai35-tune.webp" alt="Terminal: jq over the committed bench JSON (9 July 2026, thinking off) prints short 38.23, coding 35.8, reasoning 35.29 and long_context 35.45 tok/s, each at quality 9.0/10" width="960" height="516" loading="lazy" decoding="async">
-              <span class="card-num" aria-hidden="true"><b>35.80</b> t/s<small>baseline</small></span>
-            </a>
-            <figcaption class="fig-cap"><b>Fig. 2</b> My clean-restart baseline, printed straight from the <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">committed bench JSON</a>.</figcaption>
-          </figure>
-          <div class="card-body">
-            <p class="card-role">Flagship</p>
-            <h3><a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026">miaai35-tune</a></h3>
-            <p>My clean-restart baseline is <strong>35.80 tok/s</strong> coding decode: Qwen3.6-35B-A3B on llama.cpp, one DGX Spark, thinking off, speculative decode off, 9 July 2026, coding quality 9/10. I take it from the <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/RESULTS.md#primary-coding-decode-9-july-2026">results file</a>, and the number sits in the <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/results/bench-original-rerun-think-off-20260709-203311.json">committed JSON</a> I can re-run any day.</p>
+          <div>
+            <h3>Baseline first</h3>
+            <p>Record how a system behaves before changing it. Without a baseline, an improvement is just a claim.</p>
           </div>
-        </article>
-
-      </div>
-      <dl class="sys-grid" id="sys-grid">
-        <div class="sys-cell"><dt>Nodes</dt><dd class="num" data-count="2">2</dd><dd class="sub"><a href="https://github.com/Coinupbtc/MiniMax-H3-2x-DGX-Spark">NVIDIA DGX Spark (GB10) nodes</a></dd></div>
-        <div class="sys-cell"><dt>Unified memory</dt><dd class="num" data-count="121" data-suffix=" GiB">121 GiB</dd><dd class="sub"><a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#1-system-inventory">per node; CPU and GPU share it</a></dd></div>
-        <div class="sys-cell"><dt>Storage</dt><dd class="num" data-count="3.7" data-decimals="1" data-suffix=" TB">3.7 TB</dd><dd class="sub"><a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#1-system-inventory">NVMe; weights stay local</a></dd></div>
-      </dl>
-    </section>
-
-    <section class="proof" id="analyze" data-dmaic="analyze" aria-labelledby="analyze-h">
-      <div class="proof-head">
-        <div>
-          <p class="kicker">Analyze</p>
-          <h2 id="analyze-h">Control charts vs ML on real fab data</h2>
-        </div>
-      </div>
-      <div class="card-grid">
-
-        <article class="card" id="secom-spc-vs-ai">
-          <figure class="fig">
-            <a class="card-top" href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md" aria-label="secom-spc-vs-ai on GitHub">
-              <img class="card-img" src="assets/projects/secom-spc-vs-ai.webp" alt="Committed T² control chart cropped to the 627-run time-ordered test block: all 28 failed runs, marked with red crosses, sit under the dashed 1% alarm limit set on Phase I data. The purple dotted line is the textbook parametric (F-distribution) 99% limit, which 579 of the 627 runs exceed" width="960" height="516" loading="lazy" decoding="async">
-              <span class="card-num" aria-hidden="true"><b>1.8&#8211;4.2&#215;</b><small>over-alarm</small></span>
-            </a>
-            <figcaption class="fig-cap"><b>Fig. 3</b> The committed T&#178; chart on the time-ordered test block, from the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a>.</figcaption>
-          </figure>
-          <div class="card-body">
-            <h3><a href="https://github.com/Coinupbtc/secom-spc-vs-ai">secom-spc-vs-ai</a></h3>
-            <p>I ran control charts and ML against each other on real fab data: 1,567 production runs and 590 sensor signals from UCI SECOM, per the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a> and the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">committed JSON</a>. At a calibrated 1% false-alarm budget on a time-ordered holdout, no method reliably beat chance (every AUROC 95% interval includes 0.5). Phase I limits over-alarmed <strong>1.8&#8211;4.2&#215;</strong> their 1% target on later passes, as I wrote up in the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a>.</p>
-            <p>Numbers are in the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/results/results.json">results JSON</a>, the write-up is the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/README.md">README</a>, and the <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/main/PREREGISTRATION.md">preregistration</a> was written before the test block was scored.</p>
+          <div>
+            <h3>One change at a time</h3>
+            <p>Change one setting, measure again, and keep it only if the evidence says so.</p>
           </div>
-        </article>
-
-      </div>
-      <figure class="fig fig-solo gauge" id="gauge-3d">
-        <div class="gauge-stage" id="gauge-stage">
-          <img class="gauge-poster" src="assets/gauge/gauge-poster-1200.webp" srcset="assets/gauge/gauge-poster-600.webp 600w, assets/gauge/gauge-poster-1200.webp 1200w" sizes="(max-width: 600px) 100vw, 36rem" width="1200" height="1200" loading="lazy" decoding="async" alt="A ring-shaped 3D control chart of one SECOM sensor over the test block: grey bars are passing runs inside the limits, orange bars are passing runs that set off an alarm, red bars are failing runs the limits caught, black bars with white rings are failing runs the limits missed, and two glass bands mark the upper and lower control limits.">
-          <button type="button" class="gauge-spin" id="gauge-spin" data-src="assets/gauge/gauge.glb" data-viewer="assets/vendor/model-viewer-4.4.0.min.js">Spin it</button>
         </div>
-        <ul class="gauge-key" aria-label="Colour key for Fig. 4">
-          <li><span class="gauge-sw gauge-sw-pass" aria-hidden="true"></span> grey: pass inside limits (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/scores.csv">575</a>)</li>
-          <li><span class="gauge-sw gauge-sw-false" aria-hidden="true"></span> amber: pass outside limits, false alarm (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/scores.csv">24</a>)</li>
-          <li><span class="gauge-sw gauge-sw-caught" aria-hidden="true"></span> red: fail caught (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/imr_top_sensors.csv">4</a>)</li>
-          <li><span class="gauge-sw gauge-sw-missed" aria-hidden="true"></span> white ring: fail missed (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/imr_top_sensors.csv">24</a>)</li>
-          <li><span class="gauge-sw gauge-sw-glass" aria-hidden="true"></span> glass: control limits (<a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/PREREGISTRATION.md">mean &#177; 3&#963;</a>)</li>
-        </ul>
-        <figcaption class="fig-cap"><b>Fig. 4</b> The Gauge: sensor_000 on an I-MR individuals chart over the test block of <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/README.md">627 runs</a> of real UCI SECOM data. This one sensor's control limits (mean &#177; 3 sigma from early passing runs) caught <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/imr_top_sensors.csv">4 of the 28 fails (14%)</a>; the other 24 fails sat inside the limits and were missed. It also alarmed on <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/scores.csv">24 of the 599 passes (4.0%)</a>, where 3-sigma limits on an in-control process would alarm on about <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/PREREGISTRATION.md">0.27%</a>. Counts come from the committed per-run z-scores and run labels. I picked this sensor for display: it is one of the project's <a href="https://github.com/Coinupbtc/secom-spc-vs-ai/blob/c93ba3c3da959deba8dfdf041e0d6b47d6c49298/results/results.json">10 pre-ranked sensors</a>, chosen because it crosses its limits in the test block. So this chart is not evidence that the sensor works. Bar heights are in anonymized sensor units, with the axis starting above zero. <span class="gauge-credit">Model: @coinupbtc. Data: <a href="https://archive.ics.uci.edu/dataset/179/secom">UCI SECOM</a> (CC BY 4.0).</span></figcaption>
-      </figure>
-    </section>
+      </section>
 
-    <section class="proof" id="improve" data-dmaic="improve" aria-labelledby="improve-h">
-      <div class="proof-head">
-        <div>
-          <p class="kicker">Improve</p>
-          <h2 id="improve-h">One change, measured</h2>
-        </div>
-      </div>
-      <div class="card-grid">
-        <article class="card">
-          <figure class="fig">
-            <svg class="chart" viewBox="0 0 400 290" role="img" aria-labelledby="improve-chart-title improve-chart-desc">
-              <title id="improve-chart-title">Wall-clock per prompt, thinking on vs off</title>
-              <desc id="improve-chart-desc">Short: 46.5 s with thinking on, 0.988 s with thinking off. Coding: 98.0 s with thinking on, 13.387 s with thinking off. Reasoning: 69.0 s with thinking on, 14.772 s with thinking off. Long-context: 21.4 s with thinking on, 8.289 s with thinking off.</desc>
-              <rect class="key-on" x="0" y="4" width="12" height="12"/>
-              <text x="18" y="14">thinking on</text>
-              <rect class="key-off" x="130" y="4" width="12" height="12"/>
-              <text x="148" y="14">thinking off</text>
-              <text x="0" y="42">Short</text>
-              <rect class="bar-on" x="0" y="48" width="148.8" height="12"/>
-              <text class="muted" x="153.8" y="58">46.5 s</text>
-              <rect class="bar-off" x="0" y="63" width="3.2" height="12"/>
-              <text class="muted" x="8.2" y="73">0.988 s</text>
-              <text x="0" y="102">Coding</text>
-              <rect class="bar-on" x="0" y="108" width="313.6" height="12"/>
-              <text class="muted" x="318.6" y="118">98.0 s</text>
-              <rect class="bar-off" x="0" y="123" width="42.8" height="12"/>
-              <text class="muted" x="47.8" y="133">13.387 s</text>
-              <text x="0" y="162">Reasoning</text>
-              <rect class="bar-on" x="0" y="168" width="220.8" height="12"/>
-              <text class="muted" x="225.8" y="178">69.0 s</text>
-              <rect class="bar-off" x="0" y="183" width="47.3" height="12"/>
-              <text class="muted" x="52.3" y="193">14.772 s</text>
-              <text x="0" y="222">Long-context</text>
-              <rect class="bar-on" x="0" y="228" width="68.5" height="12"/>
-              <text class="muted" x="73.5" y="238">21.4 s</text>
-              <rect class="bar-off" x="0" y="243" width="26.5" height="12"/>
-              <text class="muted" x="31.5" y="253">8.289 s</text>
-              <line class="axis" x1="0" y1="262" x2="320" y2="262"/>
-              <text class="muted" x="0" y="280">0 s</text>
-              <text class="muted" x="160" y="280" text-anchor="middle">50 s</text>
-              <text class="muted" x="320" y="280" text-anchor="end">100 s</text>
-            </svg>
-            <figcaption class="fig-cap"><b>Fig. 5</b> Total wall-clock per prompt, one run each, thinking on vs off, from <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#3-baseline-clean-original-after-restart-think-off">REPORT &#167;3</a>. Every prompt scored 9.0/10 both ways, which is the suite ceiling.</figcaption>
-          </figure>
-          <div class="card-body">
-            <p>I turned thinking off on the client (<code>enable_thinking=false</code>) and cut wall-clock per request from up to 98 s to 15 s or less, with no drop on my <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#3-baseline-clean-original-after-restart-think-off">4-prompt quality suite</a> &#8212; though that suite <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/bench_miaai35.py">tops out at 9/10</a>, so it can't see small losses. It was a speed-for-reasoning trade-off I chose for interactive use, not a pure improvement &#8212; see <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">the committed pass table</a>. The serving flags I tried after (flash attention, KV q8_0, context size, slot count) each moved decode under 2%, also in <a href="https://github.com/Coinupbtc/miaai35-tune/blob/main/REPORT.md#4-optimization-passes-coding-ts--primary-speed-metric">the committed pass table</a>.</p>
+      <section id="lab" aria-labelledby="lab-h">
+        <div class="lab">
+          <div class="sec-head">
+            <p class="label">The lab</p>
+            <h2 id="lab-h">Two AI machines at home, run like a test bench</h2>
+            <p>Two NVIDIA DGX Spark computers with <span class="num">121</span> GB of memory each run AI models locally. Nothing is rented in the cloud. I tune them the way I'd qualify equipment: record a baseline, change one thing, measure again.</p>
+            <p>One example: turning off the model's step-by-step "thinking" cut response time from up to <span class="num">98</span> s to <span class="num">15</span> s or less, with no drop on a four-prompt quality check. That check tops out at 9/10, so it can't see small losses, and I treat the result as a trade-off rather than a free win.</p>
           </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="proof" id="control" data-dmaic="control" aria-labelledby="control-h">
-      <div class="proof-head">
-        <div>
-          <p class="kicker">Control</p>
-          <h2 id="control-h">Read-only by design</h2>
+          <ul class="lab-list">
+            <li><a href="https://coinupbtc.xyz/">coinupbtc.xyz</a><p>Small demos you can run in the browser: speculative decoding, memory packing, the 13-second render bug.</p></li>
+            <li><a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a><p>A setting-by-setting tuning study with a recorded baseline, plus the 19-check release gate.</p></li>
+            <li><a href="https://github.com/Coinupbtc/spark-console">spark-console</a><p>A read-only health dashboard for the machines. It only listens on the machine itself and has no start, stop or kill buttons.</p></li>
+            <li><a href="https://github.com/Coinupbtc">All public code on GitHub</a><p>Each repo says how to run it.</p></li>
+          </ul>
         </div>
-      </div>
-      <div class="card-grid">
+      </section>
 
-        <article class="card" id="spark-console">
-          <figure class="fig">
-            <a class="card-top" href="https://github.com/Coinupbtc/spark-console" aria-label="spark-console on GitHub">
-              <img class="card-img" src="assets/projects/spark-console.webp" alt="spark-console Pulse tab running on localhost, hostname redacted: CPU, memory 108 of 121.69 GB, disk, power and GPU readings for one DGX Spark" width="960" height="516" loading="lazy" decoding="async">
-              <span class="card-num" aria-hidden="true"><b>read-only</b><small>localhost</small></span>
-            </a>
-            <figcaption class="fig-cap"><b>Fig. 6</b> The Pulse tab of my <a href="https://github.com/Coinupbtc/spark-console">spark-console</a> on localhost, hostname redacted.</figcaption>
-          </figure>
-          <div class="media-slot" id="spark-console-shot" data-media="pending" hidden aria-hidden="true"></div>
-          <div class="card-body">
-            <h3><a href="https://github.com/Coinupbtc/spark-console">spark-console</a></h3>
-            <p>My read-only local pane for DGX Spark GPU, memory, model inventory and endpoint health. It binds 127.0.0.1, rejects foreign <code>Host</code> headers (DNS rebinding) and foreign <code>Origin</code> writes, has no start/stop/kill routes, and nothing phones home. Details in the <a href="https://github.com/Coinupbtc/spark-console">repo</a>.</p>
-          </div>
-        </article>
+      <section aria-labelledby="skills-h">
+        <div class="sec-head">
+          <p class="label">Skills</p>
+          <h2 id="skills-h">What I work with</h2>
+        </div>
+        <dl class="skills">
+          <div><dt class="label">Quality systems</dt><dd>ISO 13485, ISO 9001:2015, CAPA, nonconformance and MRB, complaint investigation, 5-Why and fishbone, internal and third-party audit readiness, document and change control</dd></div>
+          <div><dt class="label">Metrology and suppliers</dt><dd>ISO/IEC 17025 calibration vendors, NIST-traceable standards, calibration records, supplier certification, incoming and final inspection to drawing</dd></div>
+          <div><dt class="label">Software quality</dt><dd>Validation of electronic quality records, risk-based test scoping, acceptance criteria before execution, requirements-to-test traceability, regression gates, data-integrity checks</dd></div>
+          <div><dt class="label">Tools</dt><dd>Python, Linux, Git, FastAPI, Docker, llama.cpp, vLLM, AutoCAD, SolidWorks (working knowledge)</dd></div>
+        </dl>
+      </section>
 
-      </div>
-    </section>
+      <section id="contact" aria-labelledby="contact-h">
+        <div class="contact">
+          <p class="label">Contact</p>
+          <h2 id="contact-h">Hiring for quality or validation? Email me.</h2>
+          <p class="mail-big"><a href="mailto:coinupbtc@gmail.com">coinupbtc@gmail.com</a></p>
+          <p class="row"><a href="https://github.com/Coinupbtc">GitHub</a><a href="https://x.com/coinupbtc">X · @coinupbtc</a><a href="https://coinupbtc.xyz/">The lab</a></p>
+        </div>
+      </section>
+    </main>
 
-    <section class="gallery" id="scenes" aria-labelledby="scenes-h">
-      <p class="kicker">Made on the machine</p>
-      <h2 id="scenes-h">Two scenes</h2>
-      <p class="section-note">A museum T. rex and a rocket on the pad. The local model wrote the scenes. Blender rendered them here.</p>
-      <ul class="scene-grid">
-        <li>
-          <figure>
-            <video muted loop playsinline controls autoplay poster="assets/video/trex.webp" width="960" height="540" preload="metadata">
-              <source src="assets/video/trex.mp4" type="video/mp4">
-            </video>
-            <figcaption>T. rex museum mount. Nine-second turntable.</figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure>
-            <video muted loop playsinline controls autoplay poster="assets/video/rocket.webp" width="960" height="540" preload="metadata">
-              <source src="assets/video/rocket.mp4" type="video/mp4">
-            </video>
-            <figcaption>Rocket on the pad. Six-second liftoff.</figcaption>
-          </figure>
-        </li>
-      </ul>
-    </section>
+    <footer>© 2026 Coinupbtc · St. Louis, MO</footer>
+  </div>
 
-    <section class="hub" id="hub" aria-labelledby="hub-h">
-      <p class="kicker">Elsewhere</p>
-      <h2 id="hub-h">Find me in the open</h2>
-      <ul class="hub-list">
-        <li>
-          <a href="https://github.com/Coinupbtc">GitHub</a>
-          <span>code, in the open</span>
-        </li>
-        <li>
-          <a href="mailto:coinupbtc@gmail.com">coinupbtc@gmail.com</a>
-          <span>best for hiring conversations</span>
-        </li>
-        <li>
-          <a href="https://x.com/coinupbtc">X &middot; @coinupbtc</a>
-          <span>short updates</span>
-        </li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="site-foot">
-    <p>&copy; Coinupbtc &middot; <a href="https://github.com/Coinupbtc">GitHub</a> &middot; <a href="https://x.com/coinupbtc">X</a></p>
-  </footer>
-
-  <script src="js/main.js" defer></script>
-  <script src="js/gauge.js" defer></script>
+  <script>
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      var root = document.documentElement;
+      function current() {
+        var t = root.getAttribute('data-theme');
+        if (t) return t;
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function label() { btn.textContent = current() === 'dark' ? 'Light' : 'Dark'; }
+      btn.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('coinupbtc-theme', next); } catch (e) {}
+        label();
+      });
+      label();
+    })();
+  </script>
 </body>
 </html>
