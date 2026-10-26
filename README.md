@@ -1,50 +1,34 @@
-# Coinupbtc — Portfolio Site
+# coinupbtc.com
 
-![Screenshot](docs/screenshots/hero.png)
+![coinupbtc.com homepage](docs/screenshots/hero.webp)
 
-## At a glance
+Source for **[coinupbtc.com](https://coinupbtc.com/)**, the hiring homepage for Coinupbtc: a quality engineer in ISO 13485 medical-device manufacturing who validates software and local AI systems the same way.
 
-| | |
-|---|---|
-| **What it is** | A single-page pseudonymous landing site for Coinupbtc. |
-| **What it’s for** | The one link to hand out: GitHub, X @coinupbtc, email, and public measured builds. Alias only — no real name. |
-| **How to use it** | Open https://coinupbtc.com/ — Work / Resume / Scenes / Contact in the top bar. Or `./setup.sh` for a local preview. |
+## What's on the page
 
-## Try it
+- **Helix QMS Desk** first, the 90-second browser demo ([repo](https://github.com/Coinupbtc/helix-qms-desk)).
+- **Case files** written like corrective actions (found, root cause, fix, verified). Each links its public evidence, or says plainly when the evidence is private.
+- **The lab**: two NVIDIA DGX Spark machines, with links to [coinupbtc.xyz](https://coinupbtc.xyz/) and the public repos.
+- Skills and contact.
 
-### One command
+## Run it locally
+
 ```bash
 git clone https://github.com/Coinupbtc/Coinupbtc.github.io.git
 cd Coinupbtc.github.io && ./setup.sh
-# → http://127.0.0.1:8765/
 ```
 
-Or open `index.html` in a browser (no build step).
+Or open `index.html` in a browser. There is no build step.
 
-Identity on this site is the handle **Coinupbtc** only. Live at **https://coinupbtc.com/** (GitHub Pages).
+## How it's built
 
-## Contact policy
+- One HTML file with inline CSS and a few lines of JavaScript for the theme toggle.
+- Fonts: Fraunces (headings), IBM Plex Sans (body), IBM Plex Mono (labels), from Google Fonts.
+- Follows the visitor's light or dark setting. No trackers, cookies or analytics.
+- `.github/workflows/` publishes only the site files (`index.html`, `resume/`, `assets/`, `CNAME`, `robots.txt`, `sitemap.xml`) to GitHub Pages on every push to `main`.
+- Share card: `scripts/og-card.html`, rendered to `assets/og-image.png` by `scripts/export-og.sh`.
 
-Pseudonymous: no real name, employer, school, phone, or street address.
-Inbound: [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/coinupbtc) · coinupbtc@gmail.com.
+## Identity
 
-## Stack
-
-One HTML + CSS. Fraunces + IBM Plex Mono via Google Fonts. No trackers, no cookies, no analytics.
-The hero is editorial display type over a lightweight generative node-field canvas (`#hero-field`) and a vignette. There is no video backplate.
-
-## Media
-
-The hero has no video backplate. `assets/og-image.png` is a still of the node field, redrawn by `scripts/export-og.py` (Pillow, no model output).
-`scripts/export-video.py` still refuses to write hero, gallery, or share-card files.
-`scripts/export-art.py` can still refresh unused stills in `assets/art/`; those stills are not mounted on the page and must not be wired into the hero or the share card.
-
-Two Blender scenes are mounted by hand under **Made on the machine**: `assets/video/trex.mp4` (9 s turntable) and `assets/video/rocket.mp4` (6 s liftoff). H.264, 960 px wide, faststart, no audio. The local model wrote the scenes. Blender rendered them on this machine.
-
-## Custom domain
-
-`CNAME` file → `coinupbtc.com`. At Porkbun, point apex A records to GitHub Pages IPs and `www` CNAME to `Coinupbtc.github.io`.
-
-## License
-
-MIT — see `LICENSE`.
+The site uses the handle **Coinupbtc** only: no real name, employer, phone or street address.
+Contact: coinupbtc@gmail.com · [GitHub](https://github.com/Coinupbtc) · [X @coinupbtc](https://x.com/coinupbtc).
