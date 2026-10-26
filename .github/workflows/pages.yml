@@ -1,5 +1,5 @@
 # Deploys the static site to GitHub Pages on every push to main.
-# No build step — the repo root is the site.
+# No build step. The deploy copies the site files into _site and publishes that.
 name: Deploy to Pages
 
 on:
@@ -25,8 +25,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # Publish the site files only; README, scripts and ops notes stay in the repo.
+      - name: Stage site files
+        run: |
+          mkdir -p _site/assets/projects
+          cp index.html CNAME robots.txt sitemap.xml .nojekyll _site/
+          cp -r resume _site/
+          cp assets/favicon.svg assets/favicon-32.png assets/apple-touch-icon.png assets/og-image.png _site/assets/
+          cp assets/projects/*.webp _site/assets/projects/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

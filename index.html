@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Coinupbtc · Quality Engineer</title>
-  <meta name="claude:viewport-fit-sides" content="cover">
   <meta name="description" content="Quality engineer in ISO 13485 medical-device manufacturing. Case files: a backup that passed for 15 days while saving one file, a metric that could not fail, a release gate that rejected the better build.">
   <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f5f7f6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1312" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Coinupbtc">
   <meta property="og:title" content="Coinupbtc · Quality Engineer">
@@ -16,7 +17,7 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Coinupbtc: quality systems, on-prem AI, measured. GitHub, X and email.">
+  <meta property="og:image:alt" content="I find the checks that pass when they shouldn’t. Quality engineer, ISO 13485 medical devices. coinupbtc.com">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@coinupbtc">
   <meta name="twitter:image" content="https://coinupbtc.com/assets/og-image.png">
@@ -26,7 +27,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=IBM+Plex+Sans:wght@400..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script>
     (function () {
       var t = null;
@@ -154,7 +155,7 @@
     .shot { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--surface); }
     .shot img { width: 100%; aspect-ratio: 960 / 516; object-fit: cover; object-position: top; }
     .feature .body { display: grid; gap: 1rem; min-width: 0; }
-    .feature h3 { font-size: var(--step-2); }
+    .feature h2 { font-size: var(--step-2); }
     .feature ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; }
 
     /* Case files */
@@ -241,8 +242,8 @@
     <main id="main">
       <div class="hero">
         <p class="label">Quality engineer · ISO 13485 medical devices</p>
-        <h1>I find the checks that pass when they shouldn't.</h1>
-        <p class="lede">A calibration sticker that disagrees with its certificate. A backup that reports success while saving one file. A score that can't come out wrong. I've spent nine years in engineering and manufacturing quality, most recently in FDA-regulated medical-device manufacturing, and I validate the software and AI systems I build the same way.</p>
+        <h1>I find the checks that pass when they shouldn’t.</h1>
+        <p class="lede">A calibration sticker that disagrees with its certificate. A backup that reports success while saving one file. A score that can’t come out wrong. I’ve spent nine years in engineering and manufacturing quality, most recently in FDA-regulated medical-device manufacturing, and I validate the software and AI systems I build the same way.</p>
         <dl class="facts">
           <div><dt class="label">Work</dt><dd>Quality systems, CAPA, calibration and supplier quality under ISO 13485 and ISO 9001</dd></div>
           <div><dt class="label">Looking for</dt><dd>Quality systems, software quality and validation roles</dd></div>
@@ -261,7 +262,7 @@
           </a>
           <div class="body">
             <p class="label">Start here · runs in your browser</p>
-            <h3 id="helix-h">Helix QMS Desk</h3>
+            <h2 id="helix-h">Helix QMS Desk</h2>
             <p>A working quality desk for a fictional biomedical plant. In 90 seconds you walk a Monday morning:</p>
             <ul>
               <li>a voltage standard whose calibration sticker disagrees with its certificate,</li>
@@ -269,7 +270,7 @@
               <li>supplier SCARs and a training gap,</li>
               <li>then IQ/OQ/PQ on the desk itself and on its AI assistant, where an empty answer counts as a failure.</li>
             </ul>
-            <p>Every record is synthetic. The failure it's built around is real: a status label that stopped tracking the record it claims to show.</p>
+            <p>Every record is synthetic. The failure it’s built around is real: a status label that stopped tracking the record it claims to show.</p>
             <p><a href="https://coinupbtc.com/helix-qms-desk/">Open the desk</a> · <a href="https://github.com/Coinupbtc/helix-qms-desk">Source</a></p>
           </div>
         </div>
@@ -279,7 +280,7 @@
         <div class="sec-head">
           <p class="label">Case files</p>
           <h2 id="cases-h">Problems I found, and how I proved the fix</h2>
-          <p>Each one is written the way a corrective action reads. Where there's a public file, the evidence links to it.</p>
+          <p>Each one is written the way a corrective action reads. Where there’s a public file, the evidence links to it.</p>
         </div>
         <div class="cases">
 
@@ -298,7 +299,7 @@
               <dd>Replaced presence checks with entry-count verification on every backup tier.</dd>
               <dt class="label">Lesson</dt>
               <dd>The same failure as a calibration sticker that no longer matches its certificate: the indicator kept saying "good" after it stopped measuring anything.</dd></dl>
-            <p class="evidence private"><span class="label">Evidence</span> My home lab. I'll walk through it in an interview.</p>
+            <p class="evidence private"><span class="label">Evidence</span> My home lab. I’ll walk through it in an interview.</p>
             </div>
           </article>
 
@@ -310,14 +311,14 @@
             <div class="case-body">
             <dl class="record">
               <dt class="label found">Found</dt>
-              <dd>A reporting tool's headline accuracy metric could never come out wrong, and its results board included <span class="num">118</span> of <span class="num">144</span> events that had already finished.</dd>
+              <dd>A reporting tool’s headline accuracy metric could never come out wrong, and its results board included <span class="num">118</span> of <span class="num">144</span> events that had already finished.</dd>
               <dt class="label">Root cause</dt>
               <dd>The baseline was derived from the same data it graded, so the metric agreed with itself by construction.</dd>
               <dt class="label">Fix</dt>
               <dd>Rebuilt it with leave-one-out baselines and an independent scoring harness.</dd>
               <dt class="label">Verified</dt>
               <dd>The metric can now fail, which is the only way a passing score means anything.</dd></dl>
-            <p class="evidence private"><span class="label">Evidence</span> Private project. I'll walk through it in an interview.</p>
+            <p class="evidence private"><span class="label">Evidence</span> Private project. I’ll walk through it in an interview.</p>
             </div>
           </article>
 
@@ -352,7 +353,7 @@
               <dt class="label">Root cause</dt>
               <dd>Every filter pass rebuilt every row and parsed the same files again.</dd>
               <dt class="label">Fix</dt>
-              <dd>Stopped rebuilding rows that hadn't changed and removed the repeated parsing.</dd>
+              <dd>Stopped rebuilding rows that hadn’t changed and removed the repeated parsing.</dd>
               <dt class="label">Verified</dt>
               <dd>A flat <span class="num">7.5</span> ms, measured before and after.</dd></dl>
             <p class="evidence"><span class="label">Evidence</span> <a href="https://coinupbtc.xyz/demos/render-cost.html">The bug and the fix, timed in your browser</a></p>
@@ -405,8 +406,8 @@
           <div class="sec-head">
             <p class="label">The lab</p>
             <h2 id="lab-h">Two AI machines at home, run like a test bench</h2>
-            <p>Two NVIDIA DGX Spark computers with <span class="num">121</span> GB of memory each run AI models locally. Nothing is rented in the cloud. I tune them the way I'd qualify equipment: record a baseline, change one thing, measure again.</p>
-            <p>One example: turning off the model's step-by-step "thinking" cut response time from up to <span class="num">98</span> s to <span class="num">15</span> s or less, with no drop on a four-prompt quality check. That check tops out at 9/10, so it can't see small losses, and I treat the result as a trade-off rather than a free win.</p>
+            <p>Two NVIDIA DGX Spark computers with <span class="num">121</span> GB of memory each run AI models locally. Nothing is rented in the cloud. I tune them the way I’d qualify equipment: record a baseline, change one thing, measure again.</p>
+            <p>One example: turning off the model’s step-by-step "thinking" cut response time from up to <span class="num">98</span> s to <span class="num">15</span> s or less, with no drop on a four-prompt quality check. That check tops out at 9/10, so it can’t see small losses, and I treat the result as a trade-off rather than a free win.</p>
           </div>
           <ul class="lab-list">
             <li><a href="https://coinupbtc.xyz/">coinupbtc.xyz</a><p>Small demos you can run in the browser: speculative decoding, memory packing, the 13-second render bug.</p></li>
