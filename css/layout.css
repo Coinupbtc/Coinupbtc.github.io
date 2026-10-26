@@ -319,3 +319,12 @@ body {
   font-size: inherit;
   text-decoration: underline;
 }
+/* Four nav links do not fit beside the brand and toggle on a 390px phone;
+   Scenes is the one to drop (the page still scrolls to it). */
+@media (max-width: 430px) {
+  .site-nav nav a.nav-optional { display: none; }
+}
+
+/* The Helix screenshot reads from the top (banner, title, Monday steps);
+   the flagship crop would otherwise cut its header. */
+#helix-qms-desk .card-img { object-position: top; }
