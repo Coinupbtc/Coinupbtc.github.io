@@ -143,6 +143,7 @@
     }
     .btn:hover { filter: brightness(1.08); }
     .mail { font-family: var(--font-mono); font-size: 0.95rem; }
+    .hero .aside { margin: 0; font-size: 0.95rem; color: var(--mute); max-width: 58ch; }
 
     /* Sections */
     section { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--rule); }
@@ -253,6 +254,7 @@
           <a class="btn" href="https://coinupbtc.com/helix-qms-desk/">Open the 90-second demo <span aria-hidden="true">↗</span></a>
           <span class="mail">coinupbtc@gmail.com</span>
         </div>
+        <p class="aside">Off the clock: Hermes Agent and local AI on two DGX Sparks. <a href="#lab">The lab</a> · <a href="https://coinupbtc.xyz/notes/hermes-agent-two-sparks.html">Field notes</a></p>
       </div>
 
       <section id="work" aria-labelledby="helix-h">
@@ -407,9 +409,11 @@
             <p class="label">The lab</p>
             <h2 id="lab-h">Two AI machines at home, run like a test bench</h2>
             <p>Two NVIDIA DGX Spark computers with <span class="num">121</span> GB of memory each run AI models locally. Nothing is rented in the cloud. I tune them the way I’d qualify equipment: record a baseline, change one thing, measure again.</p>
-            <p>One example: turning off the model’s step-by-step "thinking" cut response time from up to <span class="num">98</span> s to <span class="num">15</span> s or less, with no drop on a four-prompt quality check. That check tops out at 9/10, so it can’t see small losses, and I treat the result as a trade-off rather than a free win.</p>
+            <p>Since June they’ve run Hermes Agent, Nous Research’s open-source AI agent, around the clock against a DeepSeek-V4.1 model split across both machines. Three of my fixes to that model’s serving engine are now upstream, including one that stops text in a fetched web page from posing as a command to the model.</p>
+            <p>Speed isn’t the test. Turning off the model’s step-by-step "thinking" made replies much faster, so I turned it off. A blind comparison on my own questions then preferred thinking on <span class="num">8</span> times out of <span class="num">9</span>, and <span class="num">9</span> of <span class="num">10</span> on a re-test, so it’s back on.</p>
           </div>
           <ul class="lab-list">
+            <li><a href="https://coinupbtc.xyz/notes/hermes-agent-two-sparks.html">Hermes Agent on two DGX Sparks</a><p>Field notes: what runs, the engine fixes now upstream, and what broke in the agent and how I found it.</p></li>
             <li><a href="https://coinupbtc.xyz/">coinupbtc.xyz</a><p>Small demos you can run in the browser: speculative decoding, memory packing, the 13-second render bug.</p></li>
             <li><a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a><p>A setting-by-setting tuning study with a recorded baseline, plus the 19-check release gate.</p></li>
             <li><a href="https://github.com/Coinupbtc/spark-console">spark-console</a><p>A read-only health dashboard for the machines. It only listens on the machine itself and has no start, stop or kill buttons.</p></li>
@@ -427,7 +431,7 @@
           <div><dt class="label">Quality systems</dt><dd>ISO 13485, ISO 9001:2015, CAPA, nonconformance and MRB, complaint investigation, 5-Why and fishbone, internal and third-party audit readiness, document and change control</dd></div>
           <div><dt class="label">Metrology and suppliers</dt><dd>ISO/IEC 17025 calibration vendors, NIST-traceable standards, calibration records, supplier certification, incoming and final inspection to drawing</dd></div>
           <div><dt class="label">Software quality</dt><dd>Validation of electronic quality records, risk-based test scoping, acceptance criteria before execution, requirements-to-test traceability, regression gates, data-integrity checks</dd></div>
-          <div><dt class="label">Tools</dt><dd>Python, Linux, Git, FastAPI, Docker, llama.cpp, vLLM, AutoCAD, SolidWorks (working knowledge)</dd></div>
+          <div><dt class="label">Tools</dt><dd>Python, Linux, Git, FastAPI, Docker, llama.cpp, vLLM, Hermes Agent, AutoCAD, SolidWorks (working knowledge)</dd></div>
         </dl>
       </section>
 
