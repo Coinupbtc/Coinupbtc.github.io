@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Coinupbtc">
   <meta property="og:title" content="Coinupbtc · Quality Engineer">
-  <meta property="og:description" content="I find the checks that pass when they shouldn't. ISO 13485 quality engineering, plus software and local AI I validate the same way.">
+  <meta property="og:description" content="I find the checks that pass when they shouldn't. ISO 13485 quality engineering, plus the software and games I build off the clock, validated the same way.">
   <meta property="og:url" content="https://coinupbtc.com/">
   <meta property="og:image" content="https://coinupbtc.com/assets/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -407,16 +407,15 @@
         <div class="lab">
           <div class="sec-head">
             <p class="label">The lab</p>
-            <h2 id="lab-h">Two AI machines at home, run like a test bench</h2>
-            <p>Two NVIDIA DGX Spark computers with <span class="num">121</span> GB of memory each run AI models locally. Nothing is rented in the cloud. I tune them the way I’d qualify equipment: record a baseline, change one thing, measure again.</p>
-            <p>Since June they’ve run Hermes Agent, Nous Research’s open-source AI agent, around the clock against a DeepSeek-V4.1 model split across both machines. Three of my fixes to that model’s serving engine are now upstream, including one that stops text in a fetched web page from posing as a command to the model.</p>
-            <p>Speed isn’t the test. Turning off the model’s step-by-step "thinking" made replies much faster, so I turned it off. A blind comparison on my own questions then preferred thinking on <span class="num">8</span> times out of <span class="num">9</span>, and <span class="num">9</span> of <span class="num">10</span> on a re-test, so it’s back on.</p>
+            <h2 id="lab-h">Things I build at home, tested like parts</h2>
+            <p>I build things people can play with: browser games, a live Bitcoin block war, a falling-sand chemistry set. Every game goes through the same public quality checklist before it reaches the shelf, and one that hasn’t passed yet says so on its card.</p>
+            <p>I also run AI models on two NVIDIA DGX Spark computers at home and tune them the way I’d qualify equipment: record a baseline, change one thing, measure again. Three of my fixes to the serving engine are now upstream. Speed isn’t the test: turning off the model’s step-by-step "thinking" made replies much faster, but a blind comparison on my own questions preferred thinking on <span class="num">8</span> times out of <span class="num">9</span>, so it’s back on.</p>
           </div>
           <ul class="lab-list">
             <li><a href="https://coinupbtc.com/arcade/">The Arcade</a><p>Fourteen browser games, phone-first, each run through the same quality checklist before it ships. The checklist is public.</p></li>
-            <li><a href="https://coinupbtc.xyz/">Play</a><p>Blockfield, falling sand, a lunar lander and a moiré bench. Browser toys, phone-first.</p></li>
+            <li><a href="https://coinupbtc.xyz/#play">Play</a><p>Blockfield, falling sand, a lunar lander and a moiré bench. Browser toys, phone-first.</p></li>
+            <li><a href="https://coinupbtc.xyz/#bench">The bench</a><p>The 13-second render bug, speculative decoding, memory packing, context carry. Each one timed in your browser.</p></li>
             <li><a href="https://coinupbtc.xyz/notes/lean-ai.html">Lean AI</a><p>Lean manufacturing’s wastes, measured on an AI agent the way I’d measure a line. One idea from the day job, applied off the clock.</p></li>
-            <li><a href="https://coinupbtc.xyz/">coinupbtc.xyz</a><p>The bench: the 13-second render bug, speculative decoding, memory packing, context carry. Each one timed in your browser.</p></li>
             <li><a href="https://github.com/Coinupbtc/miaai35-tune">miaai35-tune</a><p>A setting-by-setting tuning study with a recorded baseline, plus the 19-check release gate.</p></li>
             <li><a href="https://github.com/Coinupbtc/spark-console">spark-console</a><p>A read-only health dashboard for the machines. It only listens on the machine itself and has no start, stop or kill buttons.</p></li>
             <li><a href="https://github.com/Coinupbtc">All public code on GitHub</a><p>Each repo says how to run it.</p></li>
