@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://coinupbtc.com/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://coinupbtc.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://coinupbtc.com/helix-qms-desk/</loc><priority>0.9</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/</loc><priority>0.9</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/checklist/</loc><priority>0.7</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/bone-tide/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/bridgewright/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/gloamkeep/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/archer-keep/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/fishy/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/pulse/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/orbital-decay/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/tank-duel/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/phone-blackjack/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/zombie-breach/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/rocket-run/</loc><priority>0.6</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/grave-lantern/</loc><priority>0.5</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/slice-party/</loc><priority>0.5</priority></url>
+  <url><loc>https://coinupbtc.com/arcade/game/bubble-bay/</loc><priority>0.5</priority></url>
+  <url><loc>https://coinupbtc.com/bitcoin-blockfield/</loc><priority>0.8</priority></url>
+  <url><loc>https://coinupbtc.com/falling-sand/</loc><priority>0.8</priority></url>
+  <url><loc>https://coinupbtc.com/gravity-lander/</loc><priority>0.8</priority></url>
 </urlset>
